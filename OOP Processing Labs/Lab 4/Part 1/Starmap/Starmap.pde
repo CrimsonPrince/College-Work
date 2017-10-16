@@ -1,6 +1,6 @@
 void setup()
 {
-  size(500, 500);
+  size(800, 800);
   
   loadData();
 }
@@ -87,4 +87,19 @@ void draw()
   stroke(0, 255, 0);
   fill(255);
   drawGrid();
+  drawstar();
+}
+
+void drawstar()
+{
+  stroke(0, 0, 255);
+  for(int i=0; i < stars.size(); i++)
+  {
+   Star star = stars.get(i); 
+   float x = star.xg;
+   float y = star.yg;
+   line(x + 2, y, x - 2, y);
+   ellipse(x, y, 10, 10);
+  }
+  
 }
