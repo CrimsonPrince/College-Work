@@ -2,7 +2,6 @@ int game;
 PFont f;   
 ArrayList<ship> ships = new ArrayList<ship>(); 
 int level = 1;
-int[] bug = new int[101];
 
 void setup()
 {
