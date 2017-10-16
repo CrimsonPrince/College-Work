@@ -56,10 +56,12 @@ void game()
     {
 
       float shipx;
+      
       for (int i = 0; i < ships.size(); i++)
       {
         alien = ships.get(i);
         shipx = alien.shipx;
+        
         if ((playerx+pwidth/2) >= shipx && (playerx + pwidth/2) <= shipx + bugwidth)
         {
           score++;
@@ -83,7 +85,15 @@ void game()
 
   for (int i = 0; i < ships.size(); i++)
   {  
-    alien = ships.get(i);
+    alien = ships.get(0);
+    float shipy;
+    shipy = alien.shipy;
+    
+    if(shipy > height - 50)
+     {
+        game=3;
+     }
+     
     alien.drawship();
   }
 
@@ -128,7 +138,7 @@ void gameover()
     if (key == ENTER || key == RETURN || keyCode == 49 || key == ' ')
     {
       score = 0;
-      level = 0;
+      level = 1;
       newlevel();
       game = 1;
     }
