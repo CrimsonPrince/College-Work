@@ -41,6 +41,14 @@ void game()
 {
   drawplayer();
   ship alien;
+  
+  int fontsize = 20;
+  fill(255);
+  textFont(f, fontsize);
+  text("Score:", 150, 50);
+  text("Level:", width - 225, 50);
+  text(score, 225, 50);
+  text(level, width - 150, 50);
 
   if (keyPressed)
   {
@@ -85,7 +93,7 @@ void game()
 
   for (int i = 0; i < ships.size(); i++)
   {  
-    alien = ships.get(0);
+    alien = ships.get(i);
     float shipy;
     shipy = alien.shipy;
     
@@ -123,7 +131,7 @@ void newlevel()
 void gameover()
 {
   float linespace = height * 0.15;
-  float space = width * 0.15;
+  float space = width * 0.25;
   float fontsize2;
   fontsize2 = (((height + width) /2) * 0.1);
   textFont(f, fontsize2);                  // STEP 3 Specify font to be used
