@@ -1,6 +1,6 @@
 int game = 1;
 PFont f;   
-ArrayList<ship> ships = new ArrayList<ship>(); 
+ArrayList<ship> ships = new ArrayList<ship>(); //Array of ship objects
 int level = 1;
 int score;
 int playerx;
@@ -140,6 +140,11 @@ void gameover()
   text("GAME OVER", width/2, height/2); 
   text("Score:", width/2, height/2 + linespace);// STEP 5 Display Text
   text(score, width/2 + space, height/2 + linespace);
+  
+  for(int i = ships.size() -1;i >= 0;i--)
+  {
+    ships.remove(i);  
+  }
 
   if (keyPressed)
   {
@@ -149,6 +154,8 @@ void gameover()
       level = 1;
       newlevel();
       game = 1;
+      ships.remove(0);
+      
     }
   }
 }
@@ -158,15 +165,17 @@ void menu()
   float linespace = height * 0.15;
   float space = width * 0.15;
   float fontsize2;
-  fontsize2 = (((height + width) /2) * 0.1);
+  fontsize2 = (((height + width) /2) * 0.08);
   textFont(f, fontsize2);                  // STEP 3 Specify font to be used
+  drawship();
   fill(255);
-
   textAlign(CENTER);// STEP 4 Specify font color 
-  text("Bug Splat", width/2, height/2);
-  text("Arthur Coll", width/2, height/2 + linespace);
+  text("Alien Invaders", width/2, height/2);
   textFont(f, fontsize2 * 0.2);
-  text("Ready Player One", width/2, height/2 + linespace * 2);
+  if(frame % 60 == 0)
+  {
+    text("Ready Player One", width/2, height/2 + linespace * 2);
+  }
 
 
 
@@ -179,3 +188,15 @@ void menu()
     }
   }
 }
+
+void drawship()
+  {
+      float shipx = width/2;
+      float shipy = 200;
+      stroke(0);
+      //rect(bugX, bugY,40,40);
+      fill(255);
+      arc(shipx, shipy - 3, 200, 100, PI, TWO_PI);
+      fill(0,0,255);
+      ellipse(shipx, shipy, 400, 50);
+  }
