@@ -2,6 +2,13 @@ int game;
 PFont f;   
 ArrayList<ship> ships = new ArrayList<ship>(); 
 int level = 1;
+int score;
+int playerx;
+int pwidth = 30;
+int pheight = 10;
+int frame = 60;
+int playerspeed = 10;
+int bugwidth = 80;
 
 void setup()
 {
@@ -9,11 +16,7 @@ void setup()
   background(0);
   noCursor();
   f = createFont("PressStart2P.ttf",16,true);
-  
-  for(int i =0; i < bug.size; i++)
-  {
-    bug[i] = i;
-  }
+  playerx = width/2;
 }
 
 void draw()
@@ -52,13 +55,16 @@ void game()
         }
         if(keyCode == UP)
         {
-          float spacex;
+          ship alien;
+          float shipx;
           for(int i = 0; i < level;i++)
           {
-            spacex = ships.get(i.spacex);
-            if((playerx+pwidth/2) >= spacex && (playerx + pwidth/2) <= spacex+ bugwidth)
+            alien = ships.get(i);
+            shipx = alien.shipx;
+            if((playerx+pwidth/2) >= shipx && (playerx + pwidth/2) <= shipx + bugwidth)
             {
               score++;
+              ships.remove(i);
             }
           }
           stroke(255);
@@ -69,7 +75,13 @@ void game()
   
     if (frameCount % frame == 0)
          {
-           
+          ship alien;
+          float shipx;
+           for(int i = 0; i < level;i++)
+            {  
+              alien = ships.get(i);
+              alien.shipmove();
+            }
          }
 }
 
@@ -84,7 +96,7 @@ void newlevel()
 {
   for(int i = 0; i < level; i++)
   {
-    ships.add(new ship(bugid[i]));
+    ships.add(new ship());
   }
   
 }
@@ -108,7 +120,9 @@ void gameover()
   {
     if(key == ENTER || key == RETURN || keyCode == 49 || key == ' ')
     {
-    reset();
+    score = 0;
+    level = 0;
+    newlevel();
     game = 1;
     }
     
