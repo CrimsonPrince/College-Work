@@ -1,7 +1,7 @@
-int game;
+int game = 1;
 PFont f;   
 ArrayList<ship> ships = new ArrayList<ship>(); 
-int level = 1;
+int level = 4;
 int score;
 int playerx;
 int pwidth = 30;
@@ -73,16 +73,18 @@ void game()
          
   }
   
-    if (frameCount % frame == 0)
-         {
+     if (frameCount % frame == 0)
+     {
           ship alien;
           float shipx;
            for(int i = 0; i < level;i++)
             {  
               alien = ships.get(i);
               alien.shipmove();
+              alien.drawship();
             }
-         }
+     }
+         
 }
 
 void drawplayer(){
