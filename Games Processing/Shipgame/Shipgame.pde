@@ -43,6 +43,15 @@ void game()
 {
   drawplayer();
   
+          ship alien;
+          
+           for(int i = 0; i < ships.size();i++)
+            {  
+              alien = ships.get(i);
+              alien.drawship();
+              
+            }
+  
   if(keyPressed)
   {
         if(keyCode == LEFT)
@@ -55,9 +64,9 @@ void game()
         }
         if(keyCode == UP)
         {
-          ship alien;
+          
           float shipx;
-          for(int i = 0; i < level;i++)
+          for(int i = 0; i < ships.size();i++)
           {
             alien = ships.get(i);
             shipx = alien.shipx;
@@ -75,13 +84,13 @@ void game()
   
      if (frameCount % frame == 0)
      {
-          ship alien;
+          
           float shipx;
-           for(int i = 0; i < level;i++)
+           for(int i = 0; i < ships.size();i++)
             {  
               alien = ships.get(i);
               alien.shipmove();
-              alien.drawship();
+              
             }
      }
          

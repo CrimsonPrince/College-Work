@@ -3,11 +3,14 @@ class ship
   float shipx = random(0, width);
   float shipy = 60;
   int bugwidth = 80;
+  float frame = 60;
   
   void shipmove()
   {
-    shipx += random(-200,200);
-    shipy += 30;  
+    
+      shipx += random(-200,200);
+      shipy += 30;  
+    
     
      if(shipx < 0)
         {
