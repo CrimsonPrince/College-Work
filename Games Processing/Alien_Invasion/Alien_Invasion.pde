@@ -19,7 +19,7 @@ void setup()
   playerx = width/2;
 }
 
-void draw()
+void draw() 
 {
   background(0); //Transition Background
   switch(game)

@@ -9,7 +9,7 @@ class ship
   {
     
       shipx += random(-200,200);
-      shipy += 300;  
+      shipy += 60;  
     
     
      if(shipx < 0)
