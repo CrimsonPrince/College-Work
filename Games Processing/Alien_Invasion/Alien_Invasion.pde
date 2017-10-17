@@ -113,9 +113,10 @@ void game()
 }
 
 void drawplayer() {
-  fill(255, 0, 0);
+  fill(0, 255, 0);
   stroke(0);
-  rect(playerx, height - 50, pwidth, pheight);
+  //rect(playerx, height - 50, pwidth, pheight);
+  triangle(playerx, height -50, playerx + pwidth, height - 50, playerx + pwidth/2, height -70);
 }
 
 void newlevel()
