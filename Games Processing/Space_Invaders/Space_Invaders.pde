@@ -1,4 +1,4 @@
-int game;
+int game = 1;
 
 void setup(){
  fullScreen();
@@ -33,6 +33,37 @@ void menu()
 
 void game()
 {
+  float playerx = width/2;
+  float playerspeed = 30;
+  
+  if (keyPressed)
+  {
+    if (keyCode == LEFT)
+    {
+      playerx = playerx - playerspeed;
+      
+      if(playerx > width)
+      {
+        playerx = width;
+      }
+    }
+    if (keyCode == RIGHT)
+    {
+      playerx = playerx + playerspeed;
+     
+      if(playerx < 0)
+      {
+        playerx = 0;
+      }
+    }
+    if (keyCode == UP)
+    {
+      void projectile(playerx);
+      
+    }
+  }
+  
+  drawplayer(playerx);
   
   
 }
@@ -41,4 +72,9 @@ void game()
 void gameover()
 {
   
+}
+
+void drawplayer(float playerx)
+{
+  rect(playerx -10, 50, 20, 50);
 }
