@@ -9,34 +9,81 @@ float rightfly = 0;
 
 float[][] terrain;
 
+star[] stars = new star[4000];
+float speed = 30;
+
 void setup() {
-  size(600, 600, P3D);
+  fullScreen(P3D);
   cols = w / scl;
   rows = h/ scl;
   terrain = new float[cols][rows];
+
+
+  for (int i = 0; i < stars.length; i++) 
+  {
+    stars[i] = new star();
+  }
 }
 
-
+float turn = 1;
+int location = 2;
 void draw() {
 
+switch(location)
+  {
+    case 1: 
+    drawland();
+    case 2:
+    drawspace();
+  }
+}
+
+void drawspace()
+{
+  background(0);
+  translate(width/2, height/2);
+  
+  for(int i = 0; i < stars.length; i++)
+  {
+     stars[i].staticview();
+  }
+  
   if(keyPressed)
   {
     if(keyCode == UP)
     {
-      flying -= 0.1;
+        
+        for (int i = 0; i < stars.length; i++) 
+        {
+          stars[i].move();
+          stars[i].create();
+        }
+        
+      }
     }
-    if(keyCode == RIGHT)
+}
+  
+
+
+void drawland()
+{
+  
+  turn = 0;
+  if (keyPressed)
+  {
+    if (keyCode == UP)
     {
-      rightfly -= 0.1;
     }
-    if(keyCode == LEFT)
+    if (keyCode == LEFT)
     {
-      rightfly += 0.1;
+    }
+    if (keyCode == RIGHT)
+    {
     }
   }
 
-  float yoff = flying;
-  
+  float yoff = 0;
+
   for (int y = 0; y < rows; y++) {
     float xoff = 0;
     for (int x = 0; x < cols; x++) {
