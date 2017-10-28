@@ -26,7 +26,7 @@ void setup() {
 }
 
 float turn = 1;
-int location = 2;
+int location = 1;
 void draw() {
 
 switch(location)
@@ -73,6 +73,7 @@ void drawland()
   {
     if (keyCode == UP)
     {
+       flying -= 0.1; 
     }
     if (keyCode == LEFT)
     {
@@ -85,7 +86,7 @@ void drawland()
   float yoff = 0;
 
   for (int y = 0; y < rows; y++) {
-    float xoff = 0;
+    float xoff = flying;
     for (int x = 0; x < cols; x++) {
       terrain[x][y] = map(noise(xoff, yoff), 0, 1, -100, 100);
       xoff += 0.2;
