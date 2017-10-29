@@ -1,2 +1,2 @@
-# College-Work
-A collection of all my publishable college work
+# College-Work in C
+Two C assignments for our lecture.
