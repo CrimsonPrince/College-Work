@@ -12,6 +12,7 @@ void setup()
 {
   size(800, 600);
   loaddata();
+  printProducts();
 }
 
 void loaddata()
@@ -21,5 +22,13 @@ void loaddata()
   {
     Product product = new Product(row);    
     products.add(product);
+  }
+}
+
+void printProducts()
+{
+  for(Product product : products)
+  {
+    println(product);
   }
 }
