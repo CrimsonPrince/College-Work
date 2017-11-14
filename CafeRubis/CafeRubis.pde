@@ -71,11 +71,9 @@ void displayBill()
   String Sprice;
   Product product;
   textSize(14);
-<<<<<<< HEAD
+
   fill(255);
   rect(width/2, height * 0.1 , width - wbuffer, height * 0.7);
-=======
->>>>>>> parent of 1593287... Finished
   for (int i = 0; i < count; i++)
   {
     fill(255);
