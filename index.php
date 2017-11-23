@@ -24,24 +24,27 @@
 	</div>
 	
 	<?php 
-		$nameErr = "Your name is too short";
+	
 		$pwErr = "";
 		$phoneErr = "";
 		
-		$nameErr = $_GET[nameErr];
-		$pwErr = $_GET[pwErr];
-		$phoneErr = $_GET[phoneErr];
-		$nameErr = "Your name is too short";
+		if (isset($_GET['pwErr']))
+		{
+			$pwErr = htmlspecialchars($_GET['pwErr']); 
+		}
+		if (isset($_GET['phoneErr']))
+		{
+			$pwErr = $_GET['phoneErr'];
+		}
 		
 	?>
 		
-	<p> Already Registered? Login <a href="login.php"> Here</a>.</p>
+	<p> Already Registered? Login <a href="register.php"> Here</a>.</p>
 	<div id="content">
 	<form method="post" action="login.php">
 	
 	Please Enter a Username(Must be Unique).
 	<input type="username" id="username" required>
-	<span class="error"> <?php echo $nameErr ;?></span>
 	<br><br>
 	
 	Please Enter a password of at least 6 characters
@@ -51,7 +54,7 @@
 
 	Confirm this password
 	<input type="password" id="passwordconfirm"  required>
-	<span class="error"> <?php echo $pweErr;?></span>
+	<span class="error"> <?php echo $pwErr;?></span>
 	<br><br>
 	Please Enter your Email Address
 	<input type="email" id="email" required>
