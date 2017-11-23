@@ -23,8 +23,32 @@
 		</header>
 	</div>
 	
+	<p> Already Registered? Login <a href="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> "> Here</a>.</p>
 	<div id="content">
+	<form action="register.php" method="post">
 	
+	Please Enter a Username(Must be Unique).
+	<input type="username" id="username" required>
+	<span class="error"> <?php echo $nameErr;?></span>
+	<br><br>
+	
+	Please Enter a password of at least 6 characters
+	<input type="password" id="password" required>
+	<span class="error"> <?php echo $nameErr;?></span>
+	<br><br>
+
+	Confirm this password
+	<input type="password" id="passwordconfirm"  required>
+	<span class="error"> <?php echo $nameErr;?></span>
+	<br><br>
+	Please Enter your Email Address
+	<input type="email" id="email" required>
+	<br>
+	Please Enter your Phone Number
+	<input type="number" id="phone" required>
+	<br>
+	<input type="submit" value="Submit">
+	</form>
 	</div>
 </body>
 
