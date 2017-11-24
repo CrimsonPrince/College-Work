@@ -1,49 +1,30 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-	<title>Main Page</title>
-	<link rel="stylesheet" type="text/css" href="Assets/CSS/site.css">
-	<meta charset="UTF-8">
-</head>
+<?php
 
-<body>
-	<div id="main">
-		<header>
-				<nav>
-				<a href="index.html"><img src="Assets/Images/DIT_logocol_reverse2013.png"></img></a>
-				<span id="spanNav"> <h1> DIT Libary </h1> </span>
-					<ul>
-					  <li><a class="active" href="contact.html">Contacts</a></li>
-					  <li><a href="experiment.html">Experiments</a></li>
-					  <li><a href="gallery.html">Galley</a></li>
-					  <li><a href="about.html">About</a></li>
-					  <li><a href="index.html">Home</a></li>
-					</ul>
-				</nav>	
-		</header>
-	</div>
-	
-	<?php 
-	
-		$pwErr = "";
-		$phoneErr = "";
-		
-		if (isset($_GET['pwErr']))
-		{
-			$pwErr = htmlspecialchars($_GET['pwErr']); 
-		}
-		if (isset($_GET['phoneErr']))
-		{
-			$pwErr = $_GET['phoneErr'];
-		}
-		
-	?>
-		
-	<p> Not Registered ? Register <a href="index.php"> Here</a>.</p>
-	<div id="content">
-	
-	
-	</div>
-</body>
+$name = $_POST["username"];
+$password = $_POST["password"];
+$passwordconfirm = $_POST["passwordconfirm"];
+$email = $_POST["email"];
+$phone = $_POST["phone"];
 
-</html>
+$phoneErr = 0;
+$nameErr = 0;
+$pwErr = 0;
+
+if($password != $passwordconfirm)
+{
+	$pwErr = 10;
+		header("Location:index.php?nameErr=" . $nameErr . "&" . "phoneErr=". $phoneErr . "&" . "pwErr=" . $pwErr);
+}
+	
+if(strlen($password) < 6)
+{
+	$pwErr = 20;
+		header("Location:index.php?nameErr=" . $nameErr . "&" . "phoneErr=". $phoneErr . "&" . "pwErr=" . $pwErr);
+}
+
+if(strlen($phone) < 10)
+{
+	$phoneErr = 10;
+		header("Location:index.php?nameErr=" . $nameErr . "&" . "phoneErr=". $phoneErr . "&" . "pwErr=" . $pwErr);
+}
+?>
