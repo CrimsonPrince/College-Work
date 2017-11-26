@@ -44,24 +44,28 @@ $result = mysqli_query($conn,"SELECT Username FROM users");
 
 while($row = mysqli_fetch_array($result))
 {	
-	echo "hello";
-	if($name == $row['Username'])
+
+	if(strcmp($name,$row['Username']) == 0)
 	{
 		$nameErr = 10;
 		header("Location:index.php?nameErr=" . $nameErr . "&" . "phoneErr=". $phoneErr . "&" . "pwErr=" . $pwErr);
 	}
 }
 
-$sql = "INSERT INTO `users`(`Username`, `Password`, `Email`, `Phone`)
-VALUES ('$name','$password','$email','$phone')";
+$password = password_hash($password, PASSWORD_DEFAULT);
+if($nameErr == 0 && $pwErr == 0 && $phoneErr == 0)
+{
+	$sql = "INSERT INTO `users`(`Username`, `Password`, `Email`, `Phone`)
+	VALUES ('$name','$password','$email','$phone')";
 
-if ($conn->query($sql) === TRUE) 
-{
-   header("Location:User.php");
-} 
-else 
-{
-    echo "Error: " . $sql . "<br>" . $conn->error;
+	if ($conn->query($sql) === TRUE) 
+	{
+	   header("Location:user.php");
+	} 
+	else 
+	{
+		echo "Error: " . $sql . "<br>" . $conn->error;
+	}
 }
 
 
