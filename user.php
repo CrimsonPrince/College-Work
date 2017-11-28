@@ -41,12 +41,14 @@ else
          </header>
       </div>
 	  
-	  <div id="content" style="width:50%; margin-left:25%; margin-top:10%; color: #0095DA">
+	  <div id="content">
+	  <form action="search.php" method="post" class="w3-container" style="width:50%; margin-left:25%; margin-top:10%; color: #0095DA">
 	  <h2 class="w3-center">Search</h2>
 	    <div class="w3-row w3-section">
 		  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-search"></i></div>
 			<div class="w3-rest">
-			  <input class="w3-input w3-border" name="search" type="search" placeholder="Enter Book Title or Author Name"> <select class="w3-select w3-border" name="option" style="width:10%">
+			  <input class="w3-input w3-border" name="search" type="search" placeholder="Enter Book Title or Author Name" required>
+			  <select class="w3-select w3-border" name="option" style="width:30%" required>
 			  <option value="" disabled selected>Choose your option</option>
 			  <option value="1">Option 1</option>
 			  <option value="2">Option 2</option>
@@ -59,6 +61,7 @@ else
 			</select>
 			</div>
 		</div>
+		</form>
 </div>
    </body>
 </html>
