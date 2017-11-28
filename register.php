@@ -3,8 +3,10 @@
 $name = $_POST["username"];
 $password = $_POST["password"];
 $passwordconfirm = $_POST["passwordconfirm"];
-$email = $_POST["email"];
+$email = $_POST["Email"];
 $phone = $_POST["phone"];
+$firstname = $_POST["FirstName"];
+$lastname = $_POST["LastName"];
 
 $phoneErr = 0;
 $nameErr = 0;
@@ -55,8 +57,8 @@ while($row = mysqli_fetch_array($result))
 $password = password_hash($password, PASSWORD_DEFAULT);
 if($nameErr == 0 && $pwErr == 0 && $phoneErr == 0)
 {
-	$sql = "INSERT INTO `users`(`Username`, `Password`, `Email`, `Phone`)
-	VALUES ('$name','$password','$email','$phone')";
+	$sql = "INSERT INTO `users`(`Username`, `Password`, `Email`, `Phone`,`FirstName`,`LastName`)
+	VALUES ('$name','$password','$email','$phone','$firstname','$lastname')";
 
 	if ($conn->query($sql) === TRUE) 
 	{
