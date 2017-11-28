@@ -59,6 +59,7 @@ else
 			  <option value="3">Option 7</option>
 			  <option value="3">Option 8</option>
 			</select>
+			<input type="submit" value="Search" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">
 			</div>
 		</div>
 		</form>
