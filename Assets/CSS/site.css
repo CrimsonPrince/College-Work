@@ -44,10 +44,3 @@ body {
 	border: 0%;
 	font-family: "lucida grande", arial, sans-serif;
 }
-
-#content {
-	 background-image: url("../Images/DIT_logocol_reverse2013.png");
-	 height:100%;
-	 width: 100%;
-	 overflow:hidden;
-}

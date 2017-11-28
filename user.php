@@ -11,6 +11,4 @@ else
 }
 
 
-$conn->close();
-
 ?>
