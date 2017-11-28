@@ -3,7 +3,7 @@ session_start();
 
 if(isset($_SESSION['login_user']))
 {
-	echo "Authenticated";
+	
 }
 else
 {
@@ -12,3 +12,53 @@ else
 
 
 ?>
+
+<!DOCTYPE HTML>
+<html>
+   <head>
+      <title>Main Page</title>
+      <link rel="stylesheet" type="text/css" href="Assets/CSS/site.css">
+      <link rel="stylesheet" type="text/css" href="https://www.w3schools.com/w3css/4/w3.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <meta charset="UTF-8">
+   </head>
+   <body>
+      <div id="main">
+         <header>
+            <nav>
+               <a href="index.html"><img src="Assets/Images/DIT_logocol_reverse2013.png"></img></a>
+               <span id="spanNav">
+                  <h1> DIT Libary </h1>
+               </span>
+               <ul>
+                  <li><a class="active" href="contact.html">Contact Us</a></li>
+                  <li><a href="experiment.html">View Reserved</a></li>
+                  <li><a href="gallery.html">Catalog</a></li>
+                  <li><a href="about.html">Advanced Search</a></li>
+                  <li><a href="index.html">Home</a></li>
+               </ul>
+            </nav>
+         </header>
+      </div>
+	  
+	  <div id="content" style="width:50%; margin-left:25%; margin-top:10%; color: #0095DA">
+	  <h2 class="w3-center">Search</h2>
+	    <div class="w3-row w3-section">
+		  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-search"></i></div>
+			<div class="w3-rest">
+			  <input class="w3-input w3-border" name="search" type="search" placeholder="Enter Book Title or Author Name"> <select class="w3-select w3-border" name="option" style="width:10%">
+			  <option value="" disabled selected>Choose your option</option>
+			  <option value="1">Option 1</option>
+			  <option value="2">Option 2</option>
+			  <option value="3">Option 3</option>
+			  <option value="3">Option 4</option>
+			  <option value="3">Option 5</option>
+			  <option value="3">Option 6</option>
+			  <option value="3">Option 7</option>
+			  <option value="3">Option 8</option>
+			</select>
+			</div>
+		</div>
+</div>
+   </body>
+</html>
