@@ -47,7 +47,7 @@ $category = $_POST['option'];
 			die("Connection failed: " . $conn->connect_error);
 		}
 
-			$sql = "SELECT COUNT(*) FROM `users`";
+			$sql = "SELECT COUNT(*) FROM `book`";
 
 		$result = $conn->query($sql);
 		$row = $result->fetch_array(MYSQLI_NUM);
@@ -80,30 +80,30 @@ $category = $_POST['option'];
 		$offset = ($currentpage - 1) * $pagelimit;
 
 		
-		$sql = "SELECT * FROM `users` LIMIT $offset, $pagelimit";
+		$sql = "SELECT * FROM `book` LIMIT $offset, $pagelimit";
 		$result = $conn->query($sql);
 		
-		echo '<table class="w3-table-all w3-hoverable">
-		<tr class="w3-blue">
-		<th>ISBN</th>
-		<th>BookTitle</th>
-		<th>Author</th>
-		<th>Category</th>
-		<th>Year</th>
-		<th>Edition</th>
-		</tr>';
+		echo '<table class="w3-table-all">';
+		echo '<tr class="w3-blue">';
+		echo '<th>ISBN</th>';
+		echo '<th>BookTitle</th>';
+		echo '<th>Author</th>';
+		echo '<th>Category</th>';
+		echo '<th>Year</th>';
+		echo '<th>Edition</th>';
+		echo '</tr>';
 
 		
 		while ($list = $result->fetch_assoc()) 
 		{
-			echo '<tr class="w3-hover-white">'
-			echo"<td>$list['ISBN']</td>"
-			echo"<td>$list['BookTitle']</td>"
-			echo"<td>$list['Author']</td>"
-			echo"<td>$list['Category']</td>"
-			echo"<td>$list['Year']</td>"
-			echo"<td>$list['Edition']</td>";
-			echo "</tr>"
+			echo "<tr class=" . "w3-hover-white" . ">";
+			echo "<td>" . $list['ISBN'] . "</td>";
+			echo "<td>" . $list['BookTitle'] . "</td>";
+			echo "<td>" . $list['Author'] . "</td>";
+			echo "<td>" . $list['Category'] . "</td>";
+			echo "<td>" . $list['Year'] . "</td>";
+			echo "<td>" . $list['Edition'] . "</td>";
+			echo "</tr>";
 		} 
 		
 	  ?>
