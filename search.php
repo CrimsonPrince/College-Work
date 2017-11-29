@@ -1,0 +1,112 @@
+<?php
+
+$search = $_POST['search'];
+$category = $_POST['option'];
+
+?>
+
+<!DOCTYPE HTML>
+<html>
+   <head>
+      <title>Main Page</title>
+      <link rel="stylesheet" type="text/css" href="Assets/CSS/site.css">
+      <link rel="stylesheet" type="text/css" href="https://www.w3schools.com/w3css/4/w3.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <meta charset="UTF-8">
+   </head>
+   <body>
+      <div id="main">
+         <header>
+            <nav>
+               <a href="index.html"><img src="Assets/Images/DIT_logocol_reverse2013.png"></img></a>
+               <span id="spanNav">
+                  <h1> DIT Libary </h1>
+               </span>
+               <ul>
+                  <li><a class="active" href="contact.html">Contact Us</a></li>
+                  <li><a href="experiment.html">View Reserved</a></li>
+                  <li><a href="gallery.html">Catalog</a></li>
+                  <li><a href="about.html">Advanced Search</a></li>
+                  <li><a href="index.html">Home</a></li>
+               </ul>
+            </nav>
+         </header>
+      </div>
+	  <div id="content">
+	  <?php
+	  
+		$servername = "localhost";
+		$username = "root";
+		$passwordDB = "";
+		$dbname = "webdevproj";
+
+		// Create connection
+		$conn = new mysqli($servername,$username,$passwordDB,$dbname);
+		// Check connection
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		}
+
+			$sql = "SELECT COUNT(*) FROM `users`";
+
+		$result = $conn->query($sql);
+		$row = $result->fetch_array(MYSQLI_NUM);
+		$num = $row[0];
+		
+		$pagelimit = 5;
+		
+		$total = ceil($num/$pagelimit);
+		
+		
+		if (isset($_GET['currentpage']) && is_numeric($_GET['currentpage'])) {
+		
+			$currentpage = (int) $_GET['currentpage'];
+		} 
+		else 
+		{
+			$currentpage = 1;
+		} 
+		
+		if ($currentpage > $total) {
+		  
+		   $currentpage = $total;
+		} 
+		if ($currentpage < 1) {
+		  
+		   $currentpage = 1;
+		}
+		
+		
+		$offset = ($currentpage - 1) * $pagelimit;
+
+		
+		$sql = "SELECT * FROM `users` LIMIT $offset, $pagelimit";
+		$result = $conn->query($sql);
+		
+		echo '<table class="w3-table-all w3-hoverable">
+		<tr class="w3-blue">
+		<th>ISBN</th>
+		<th>BookTitle</th>
+		<th>Author</th>
+		<th>Category</th>
+		<th>Year</th>
+		<th>Edition</th>
+		</tr>';
+
+		
+		while ($list = $result->fetch_assoc()) 
+		{
+			echo '<tr class="w3-hover-white">'
+			echo"<td>$list['ISBN']</td>"
+			echo"<td>$list['BookTitle']</td>"
+			echo"<td>$list['Author']</td>"
+			echo"<td>$list['Category']</td>"
+			echo"<td>$list['Year']</td>"
+			echo"<td>$list['Edition']</td>";
+			echo "</tr>"
+		} 
+		
+	  ?>
+	  </div>
+   </body>
+</html>
