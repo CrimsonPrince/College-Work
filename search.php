@@ -108,7 +108,7 @@ $category = $_POST['option'];
 				echo "<td>" . $list['Category'] . "</td>";
 				echo "<td>" . $list['Year'] . "</td>";
 				echo "<td>" . $list['Edition'] . "</td>";
-				echo "<td>" . "<a href='reserve.php?isbn={$list['ISBN']}'> Hi </a>" . "</td>";
+				echo "<td>" . "<a href='reserve.php?isbn={$list['ISBN']}'> <button class = 'w3-btn w3-blue'>{$list['Reserved']}</button> </a>" . "</td>";
 				echo "</tr>";
 			} 
 		}
