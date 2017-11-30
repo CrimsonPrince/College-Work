@@ -79,33 +79,39 @@ $category = $_POST['option'];
 		
 		$offset = ($currentpage - 1) * $pagelimit;
 
-		
-		$sql = "SELECT * FROM `book` LIMIT $offset, $pagelimit";
-		$result = $conn->query($sql);
-		
-		echo '<table class="w3-table-all">';
-		echo '<tr class="w3-blue">';
-		echo '<th>ISBN</th>';
-		echo '<th>BookTitle</th>';
-		echo '<th>Author</th>';
-		echo '<th>Category</th>';
-		echo '<th>Year</th>';
-		echo '<th>Edition</th>';
-		echo '</tr>';
-
-		
-		while ($list = $result->fetch_assoc()) 
+		if($search)
 		{
-			echo "<tr class=" . "w3-hover-white" . ">";
-			echo "<td>" . $list['ISBN'] . "</td>";
-			echo "<td>" . $list['BookTitle'] . "</td>";
-			echo "<td>" . $list['Author'] . "</td>";
-			echo "<td>" . $list['Category'] . "</td>";
-			echo "<td>" . $list['Year'] . "</td>";
-			echo "<td>" . $list['Edition'] . "</td>";
-			echo "</tr>";
-		} 
-		
+			$conn->real_escape_string($search);
+			$sql = "SELECT * FROM `book` WHERE `BookTitle` LIKE $search" . "LIMIT" . $offset . "," . $pagelimit;
+			$result = $conn->query($sql);
+			if ($conn->error) {
+				die("Connection failed: " . $conn->error);
+			}
+			echo '<table class="w3-table-all">';
+			echo '<tr class="w3-blue">';
+			echo '<th>ISBN</th>';
+			echo '<th>BookTitle</th>';
+			echo '<th>Author</th>';
+			echo '<th>Category</th>';
+			echo '<th>Year</th>';
+			echo '<th>Edition</th>';
+			echo '<th>Reserved?</th>';
+			echo '</tr>';
+
+			
+			while ($list = $result->fetch_assoc()) 
+			{
+				echo "<tr class=" . "w3-hover-white" . ">";
+				echo "<td>" . $list['ISBN'] . "</td>";
+				echo "<td>" . $list['BookTitle'] . "</td>";
+				echo "<td>" . $list['Author'] . "</td>";
+				echo "<td>" . $list['Category'] . "</td>";
+				echo "<td>" . $list['Year'] . "</td>";
+				echo "<td>" . $list['Edition'] . "</td>";
+				echo "<td>" . '<a href="reserve.php"> Hi </a>' . "</td>";
+				echo "</tr>";
+			} 
+		}
 	  ?>
 	  </div>
    </body>
