@@ -82,7 +82,7 @@ $category = $_POST['option'];
 		if($search)
 		{
 			$conn->real_escape_string($search);
-			$sql = "SELECT * FROM `book` WHERE `BookTitle` LIKE $search" . "LIMIT" . $offset . "," . $pagelimit;
+			$sql = "SELECT * FROM `book` WHERE `BookTitle` LIKE '%{$search}%'  LIMIT $offset,$pagelimit";
 			$result = $conn->query($sql);
 			if ($conn->error) {
 				die("Connection failed: " . $conn->error);
@@ -108,7 +108,7 @@ $category = $_POST['option'];
 				echo "<td>" . $list['Category'] . "</td>";
 				echo "<td>" . $list['Year'] . "</td>";
 				echo "<td>" . $list['Edition'] . "</td>";
-				echo "<td>" . '<a href="reserve.php"> Hi </a>' . "</td>";
+				echo "<td>" . "<a href='reserve.php?isbn={$list['ISBN']}'> Hi </a>" . "</td>";
 				echo "</tr>";
 			} 
 		}
