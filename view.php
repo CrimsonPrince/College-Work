@@ -41,7 +41,7 @@
 			die("Connection failed: " . $conn->connect_error);
 		}
 
-			$sql = "SELECT COUNT(*) FROM `book`";
+			$sql = "SELECT COUNT(*) FROM `book` WHERE Reserved = 'Y'";
 
 		$result = $conn->query($sql);
 		$row = $result->fetch_array(MYSQLI_NUM);
@@ -74,7 +74,7 @@
 			$offset = ($currentpage - 1) * $pagelimit;
 
 		
-			$sql = "SELECT * FROM `book` LIMIT $offset , $pagelimit";
+			$sql = "SELECT * FROM `book` WHERE Reserved = 'Y'  LIMIT $offset,$pagelimit";
 			$result = $conn->query($sql);
 			if ($conn->error) {
 				die("Connection failed: " . $conn->error);
@@ -87,7 +87,7 @@
 			echo '<th>Category</th>';
 			echo '<th>Year</th>';
 			echo '<th>Edition</th>';
-			echo '<th>Reserved?</th>';
+			echo '<th>Cancel Reservation</th>';
 			echo '</tr>';
 
 			
@@ -100,7 +100,7 @@
 				echo "<td>" . $list['Category'] . "</td>";
 				echo "<td>" . $list['Year'] . "</td>";
 				echo "<td>" . $list['Edition'] . "</td>";
-				echo "<td>" . "<a href='reserve.php?isbn={$list['ISBN']}&reserved={$list['Reserved']}&search={$search}'> <button class = 'w3-btn w3-blue'>{$list['Reserved']}</button> </a>" . "</td>";
+				echo "<td>" . "<a href='cancel.php?isbn={$list['ISBN']}'> <button class = 'w3-btn w3-blue'>{$list['Reserved']}</button> </a>" . "</td>";
 				echo "</tr>";
 			}
 				
