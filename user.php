@@ -31,11 +31,11 @@ else
                   <h1> DIT Libary </h1>
                </span>
                <ul>
-                  <li><a class="active" href="contact.html">Contact Us</a></li>
-                  <li><a href="experiment.html">View Reserved</a></li>
-                  <li><a href="gallery.html">Catalog</a></li>
-                  <li><a href="about.html">Advanced Search</a></li>
-                  <li><a href="index.html">Home</a></li>
+                   <li><a class="active" href="contact.html">Contact Us</a></li>
+                  <li><a href="view.php">View Reserved</a></li>
+                  <li><a href="catalog.php">Catalog</a></li>
+                  <li><a href="advsearch.php">Advanced Search</a></li>
+                  <li><a href="user.php">Home</a></li>
                </ul>
             </nav>
          </header>

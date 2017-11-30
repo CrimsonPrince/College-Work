@@ -38,10 +38,10 @@ If(isset($_GET['option']))
                </span>
                <ul>
                   <li><a class="active" href="contact.html">Contact Us</a></li>
-                  <li><a href="experiment.html">View Reserved</a></li>
-                  <li><a href="gallery.html">Catalog</a></li>
-                  <li><a href="about.html">Advanced Search</a></li>
-                  <li><a href="index.html">Home</a></li>
+                  <li><a href="view.php">View Reserved</a></li>
+                  <li><a href="catalog.php">Catalog</a></li>
+                  <li><a href="advsearch.php">Advanced Search</a></li>
+                  <li><a href="user.php">Home</a></li>
                </ul>
             </nav>
          </header>
@@ -125,26 +125,28 @@ If(isset($_GET['option']))
 				echo "<td>" . "<a href='reserve.php?isbn={$list['ISBN']}&reserved={$list['Reserved']}&search={$search}'> <button class = 'w3-btn w3-blue'>{$list['Reserved']}</button> </a>" . "</td>";
 				echo "</tr>";
 			}
-			
-			$range = 3;
+				
+		}
+	  ?>
+	  </div>
+	  <div id="navbar2" style="margin-left:45%" class="w3-container">
+	  <?php $range = 3;
 			
 			for ($x = ($currentpage - $range); $x < (($currentpage + $range) + 1); $x++) {
 		   
 			   if (($x > 0) && ($x <= $total)) {
 				 
 				  if ($x == $currentpage) {
-					 echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$x&search=$search' class='w3-button w3-blue w3-display-middle'>$x</a> ";
+					 echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$x&search=$search' class='w3-button w3-blue'>$x</a> ";
 				  } 
 				  else {
 					 
-					 echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$x&search=$search' class='w3-button  w3-display-middle'>$x</a> ";
+					 echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$x&search=$search' class='w3-button'>$x</a> ";
 					 
 				  } 
 			   } 
 			} 
-				
-		}
-	  ?>
+			?>
 	  </div>
    </body>
 </html>
