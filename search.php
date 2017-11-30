@@ -1,8 +1,22 @@
 <?php
 
-$search = $_POST['search'];
-$category = $_POST['option'];
+If(isset($_POST['search']))
+{
+	$search = $_POST['search'];
+}
+If(isset($_POST['option']))
+{
+	$category = $_POST['option'];
+}
 
+If(isset($_GET['search']))
+{
+	$search = $_GET['search'];
+}
+If(isset($_GET['option']))
+{
+	$category = $_GET['option'];
+}
 ?>
 
 <!DOCTYPE HTML>
@@ -108,9 +122,27 @@ $category = $_POST['option'];
 				echo "<td>" . $list['Category'] . "</td>";
 				echo "<td>" . $list['Year'] . "</td>";
 				echo "<td>" . $list['Edition'] . "</td>";
-				echo "<td>" . "<a href='reserve.php?isbn={$list['ISBN']}'> <button class = 'w3-btn w3-blue'>{$list['Reserved']}</button> </a>" . "</td>";
+				echo "<td>" . "<a href='reserve.php?isbn={$list['ISBN']}&reserved={$list['Reserved']}&search={$search}'> <button class = 'w3-btn w3-blue'>{$list['Reserved']}</button> </a>" . "</td>";
 				echo "</tr>";
+			}
+			
+			$range = 3;
+			
+			for ($x = ($currentpage - $range); $x < (($currentpage + $range) + 1); $x++) {
+		   
+			   if (($x > 0) && ($x <= $total)) {
+				 
+				  if ($x == $currentpage) {
+					 echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$x&search=$search' class='w3-button w3-blue w3-display-middle'>$x</a> ";
+				  } 
+				  else {
+					 
+					 echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$x&search=$search' class='w3-button  w3-display-middle'>$x</a> ";
+					 
+				  } 
+			   } 
 			} 
+				
 		}
 	  ?>
 	  </div>

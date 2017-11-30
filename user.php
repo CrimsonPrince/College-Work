@@ -48,7 +48,7 @@ else
 		  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-search"></i></div>
 			<div class="w3-rest">
 			  <input class="w3-input w3-border" name="search" type="search" placeholder="Enter Book Title or Author Name" required>
-			  <select class="w3-select w3-border" name="option" style="width:30%" required>
+			  <select class="w3-select w3-border" name="option" style="width:30%">
 			  <option value="" disabled selected>Choose your option</option>
 			  <option value="1">Option 1</option>
 			  <option value="2">Option 2</option>
