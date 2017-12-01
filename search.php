@@ -15,6 +15,11 @@ If(isset($_POST['Category']))
 	$cat = $_POST['Category'];
 }
 
+If(isset($_GET['Category']))
+{
+	$cat = $_GET['Category'];
+}
+
 If(isset($_POST['search']))
 {
 	$search = $_POST['search'];
@@ -76,17 +81,16 @@ If(isset($_GET['option']))
 			die("Connection failed: " . $conn->connect_error);
 		}
 
-			$sql = "SELECT COUNT(*) FROM `book` WHERE `$option` LIKE '%{$search}%'";
 			
 			
-		if(isset($option))
+		if(isset($search))
 		{
 			$sql = "SELECT COUNT(*) FROM `book` WHERE `$option` LIKE '%{$search}%'";
 		}
 		
 		if(isset($cat))
 		{
-		 $sql = "SELECT COUNT(*) FROM Category WHERE CategoryDesc = '$cat'";
+			$sql = "SELECT COUNT(*) FROM Category WHERE CategoryDesc = '$cat'";
 		}
 			
 		$result = $conn->query($sql);
@@ -127,8 +131,7 @@ If(isset($_GET['option']))
 			
 			if(isset($cat))
 			{
-			$conn->real_escape_string($search);
-			$sql = "SELECT * FROM `Category` WHERE CategoryDesc = '$cat'  LIMIT $offset,$pagelimit";
+			$sql = "SELECT * FROM `book` WHERE Category = '$cat'  LIMIT $offset,$pagelimit";
 			}
 			
 			
@@ -154,10 +157,23 @@ If(isset($_GET['option']))
 				echo "<td>" . $list['ISBN'] . "</td>";
 				echo "<td>" . $list['BookTitle'] . "</td>";
 				echo "<td>" . $list['Author'] . "</td>";
-				echo "<td>" . $list['Category'] . "</td>";
+				
+				$sql = "SELECT * FROM Category WHERE Category = {$list['Category']}";
+				$catresult = $conn->query($sql);
+				$catlist = $catresult->fetch_assoc();
+				echo "<td>" . $catlist['CategoryDesc'] . "</td>";
+				
 				echo "<td>" . $list['Year'] . "</td>";
 				echo "<td>" . $list['Edition'] . "</td>";
-				echo "<td>" . "<a href='reserve.php?isbn={$list['ISBN']}&reserved={$list['Reserved']}&search={$search}'> <button class = 'w3-btn w3-blue'>{$list['Reserved']}</button> </a>" . "</td>";
+				
+				if(isset($option))
+				{
+				echo "<td>" . "<a href='reserve.php?isbn={$list['ISBN']}&reserved={$list['Reserved']}&search={$search}&option={$option}'> <button class = 'w3-btn w3-blue'>{$list['Reserved']}</button> </a>" . "</td>";
+				}
+				if(isset($cat))
+				{
+				echo "<td>" . "<a href='reserve.php?isbn={$list['ISBN']}&reserved={$list['Reserved']}&cat={$cat}'> <button class = 'w3-btn w3-blue'>{$list['Reserved']}</button> </a>" . "</td>";
+				}
 				echo "</tr>";
 			}
 				
@@ -165,22 +181,47 @@ If(isset($_GET['option']))
 	  ?>
 	  </div>
 	  <div id="navbar2" style="margin-left:45%" class="w3-container">
-	  <?php $range = 3;
+	  <?php 
+	  
+			$range = 3;
 			
-			for ($x = ($currentpage - $range); $x < (($currentpage + $range) + 1); $x++) {
-		   
-			   if (($x > 0) && ($x <= $total)) {
-				 
-				  if ($x == $currentpage) {
-					 echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$x&search=$search' class='w3-button w3-blue'>$x</a> ";
-				  } 
-				  else {
+			if(isset($option))
+			{
+				for ($x = ($currentpage - $range); $x < (($currentpage + $range) + 1); $x++) {
+			   
+				   if (($x > 0) && ($x <= $total)) {
 					 
-					 echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$x&search=$search' class='w3-button'>$x</a> ";
+					  if ($x == $currentpage) {
+						 echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$x&search=$search' class='w3-button w3-blue'>$x</a> ";
+					  } 
+					  else {
+						 
+						 echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$x&search=$search' class='w3-button'>$x</a> ";
+						 
+					  } 
+				   } 
+				} 
+			}
+			
+			if(isset($cat))
+			{
+				for ($x = ($currentpage - $range); $x < (($currentpage + $range) + 1); $x++) {
+			   
+				   if (($x > 0) && ($x <= $total)) {
 					 
-				  } 
-			   } 
-			} 
+					  if ($x == $currentpage) {
+						 echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$x&cat=$cat' class='w3-button w3-blue'>$x</a> ";
+					  } 
+					  else {
+						 
+						 echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$x&cat=$cat' class='w3-button'>$x</a> ";
+						 
+					  } 
+				   } 
+				} 
+			}
+				
+				
 			?>
 	  </div>
    </body>
