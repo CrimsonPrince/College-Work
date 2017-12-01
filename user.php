@@ -26,7 +26,7 @@ else
       <div id="main">
          <header>
             <nav>
-               <a href="index.html"><img src="Assets/Images/DIT_logocol_reverse2013.png"></img></a>
+               <a href="login.html"><img src="Assets/Images/DIT_logocol_reverse2013.png"></img></a>
                <span id="spanNav">
                   <h1> DIT Libary </h1>
                </span>
