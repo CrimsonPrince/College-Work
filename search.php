@@ -10,7 +10,10 @@ else
 	header("Location:login.html");
 }
 
-
+If(isset($_POST['Category']))
+{
+	$cat = $_POST['Category'];
+}
 
 If(isset($_POST['search']))
 {
@@ -52,7 +55,7 @@ If(isset($_GET['option']))
                   <li><a class="active" href="contact.html">Contact Us</a></li>
                   <li><a href="view.php">View Reserved</a></li>
                   <li><a href="catalog.php">Catalog</a></li>
-                  <li><a href="advsearch.php">Advanced Search</a></li>
+                  <li><a href="advsearch.php">Category</a></li>
                   <li><a href="user.php">Home</a></li>
                </ul>
             </nav>
@@ -74,7 +77,18 @@ If(isset($_GET['option']))
 		}
 
 			$sql = "SELECT COUNT(*) FROM `book` WHERE `$option` LIKE '%{$search}%'";
-
+			
+			
+		if(isset($option))
+		{
+			$sql = "SELECT COUNT(*) FROM `book` WHERE `$option` LIKE '%{$search}%'";
+		}
+		
+		if(isset($cat))
+		{
+		 $sql = "SELECT COUNT(*) FROM Category WHERE CategoryDesc = '$cat'";
+		}
+			
 		$result = $conn->query($sql);
 		$row = $result->fetch_array(MYSQLI_NUM);
 		$num = $row[0];
@@ -105,10 +119,19 @@ If(isset($_GET['option']))
 		
 		$offset = ($currentpage - 1) * $pagelimit;
 
-		if($search)
-		{
+			if(isset($option))
+			{
 			$conn->real_escape_string($search);
 			$sql = "SELECT * FROM `book` WHERE `$option` LIKE '%{$search}%'  LIMIT $offset,$pagelimit";
+			}
+			
+			if(isset($cat))
+			{
+			$conn->real_escape_string($search);
+			$sql = "SELECT * FROM `Category` WHERE CategoryDesc = '$cat'  LIMIT $offset,$pagelimit";
+			}
+			
+			
 			$result = $conn->query($sql);
 			if ($conn->error) {
 				die("Connection failed: " . $conn->error);
@@ -138,7 +161,7 @@ If(isset($_GET['option']))
 				echo "</tr>";
 			}
 				
-		}
+		
 	  ?>
 	  </div>
 	  <div id="navbar2" style="margin-left:45%" class="w3-container">
