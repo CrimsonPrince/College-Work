@@ -1,3 +1,21 @@
+<?php 
+
+$uError = "";
+$pError = "";
+
+if(isset($_GET['uError']))
+{
+	$uError = "Your Username is incorrect";
+}
+
+if(isset($_GET['pError']))
+{
+	$pError = "Your Password is incorrect";
+}
+
+
+?>
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -12,11 +30,11 @@
 	<div id="main">
 		<header>
 				<nav>
-				<a href="login.html"><img src="Assets/Images/DIT_logocol_reverse2013.png"></img></a>
+				<a href="loginpage.php"><img src="Assets/Images/DIT_logocol_reverse2013.png"></img></a>
 				<span id="spanNav"> <h1> DIT Libary </h1> </span>
 					<ul>
 					  <li><a href="register.php">Register</a></li>
-					  <li><a class="active" href="login.html">Login</a></li>
+					  <li><a class="active" href="loginpage.php">Login</a></li>
 					</ul>
 				</nav>	
 		</header>
@@ -29,14 +47,14 @@
 <div class="w3-row w3-section">
   <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
     <div class="w3-rest">
-      <input class="w3-input w3-border" name="username" type="username" placeholder="Username" required>
+      <input class="w3-input w3-border" name="username" type="username" placeholder="Username" required><?php echo $uError ?>
     </div>
 </div>
 
 <div class="w3-row w3-section">
   <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
     <div class="w3-rest">
-      <input class="w3-input w3-border" name="password" type="password" placeholder="Password" required>
+      <input class="w3-input w3-border" name="password" type="password" placeholder="Password" required><?php echo $pError ?>
     </div>
 </div>
 

@@ -34,7 +34,7 @@ if(password_verify($password, $hash))
 }
 else
 {
-	echo "False";
+	header("Location:loginpage.php?uError=10&pError=20");
 }
 
 		
