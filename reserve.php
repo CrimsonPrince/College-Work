@@ -1,8 +1,23 @@
 <?php
 
+if(isset($_GET['search']))
+{	
+$search = $_GET['search'];
+}
+
+If(isset($_GET['option']))
+{
+	$option = $_GET['option'];
+}
+
+if(isset($_GET['cat']))
+{			
+$cat = $_GET['cat'];
+}
+
 $ISBN = $_GET['isbn'];
 $Reserved = $_GET['reserved'];
-$search = $_GET['search'];
+
 		
 		if($Reserved = "Y")
 		{
@@ -24,8 +39,16 @@ $search = $_GET['search'];
 			
 			echo $conn->error;
 		}
-			
-		header("Location:search.php?search={$search}");
+		
+		If(isset($search))
+		{
+			header("Location:search.php?search={$search}&option=$option");
+		}
+		
+		if(isset($cat))
+		{
+			header("Location:search.php?Category={$cat}");
+		}
 		
 		
 ?>

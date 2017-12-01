@@ -48,14 +48,14 @@ else
 		  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-search"></i></div>
 			<div class="w3-rest">
 			  <select class="w3-select w3-border w3-display" name="Category" required>
-			  <option value="Health" selected>Health</option>
-			  <option value="Business">Business</option>
-			  <option value="Biography" selected>Biography</option>
-			  <option value="Technology">Technology</option>
-			  <option value="Travel" selected>Travel</option>
-			  <option value="SelfHelp">Self Help</option>
-			  <option value="Cookery" selected>Cookery</option>
-			  <option value="Fiction">Fiction</option>
+			  <option value="001" selected>Health</option>
+			  <option value="002">Business</option>
+			  <option value="003" selected>Biography</option>
+			  <option value="004">Technology</option>
+			  <option value="005" selected>Travel</option>
+			  <option value="006">Self Help</option>
+			  <option value="007" selected>Cookery</option>
+			  <option value="008">Fiction</option>
 			</select>
 			<input type="submit" value="Search" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">
 			</div>
