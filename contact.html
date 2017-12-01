@@ -1,3 +1,18 @@
+<?php
+session_start();
+
+if(isset($_SESSION['login_user']))
+{
+	
+}
+else
+{
+	header("Location:login.html");
+}
+
+
+?>
+
 <!DOCTYPE HTML>
 <html>
    <head>
