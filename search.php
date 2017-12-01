@@ -6,7 +6,7 @@ If(isset($_POST['search']))
 }
 If(isset($_POST['option']))
 {
-	$category = $_POST['option'];
+	$option = $_POST['option'];
 }
 
 If(isset($_GET['search']))
@@ -15,7 +15,7 @@ If(isset($_GET['search']))
 }
 If(isset($_GET['option']))
 {
-	$category = $_GET['option'];
+	$option = $_GET['option'];
 }
 ?>
 
@@ -61,7 +61,7 @@ If(isset($_GET['option']))
 			die("Connection failed: " . $conn->connect_error);
 		}
 
-			$sql = "SELECT COUNT(*) FROM `book`";
+			$sql = "SELECT COUNT(*) FROM `book` WHERE `$option` LIKE '%{$search}%'";
 
 		$result = $conn->query($sql);
 		$row = $result->fetch_array(MYSQLI_NUM);
@@ -96,7 +96,7 @@ If(isset($_GET['option']))
 		if($search)
 		{
 			$conn->real_escape_string($search);
-			$sql = "SELECT * FROM `book` WHERE `BookTitle` LIKE '%{$search}%'  LIMIT $offset,$pagelimit";
+			$sql = "SELECT * FROM `book` WHERE `$option` LIKE '%{$search}%'  LIMIT $offset,$pagelimit";
 			$result = $conn->query($sql);
 			if ($conn->error) {
 				die("Connection failed: " . $conn->error);
