@@ -34,7 +34,7 @@ else
                    <li><a class="active" href="contact.html">Contact Us</a></li>
                   <li><a href="view.php">View Reserved</a></li>
                   <li><a href="catalog.php">Catalog</a></li>
-                  <li><a href="advsearch.php">Advanced Search</a></li>
+                  <li><a href="advsearch.php">Category</a></li>
                   <li><a href="user.php">Home</a></li>
                </ul>
             </nav>
@@ -47,10 +47,15 @@ else
 	    <div class="w3-row w3-section">
 		  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-search"></i></div>
 			<div class="w3-rest">
-			  <input class="w3-input w3-border" name="search" type="search" placeholder="Enter Book Title or Author Name" required>
-			  <select class="w3-select w3-border" name="option" style="width:30%" required>
-			  <option value="BookTitle" selected>Book Title</option>
-			  <option value="Author">Author</option>
+			  <select class="w3-select w3-border w3-display" name="Category" required>
+			  <option value="Health" selected>Health</option>
+			  <option value="Business">Business</option>
+			  <option value="Biography" selected>Biography</option>
+			  <option value="Technology">Technology</option>
+			  <option value="Travel" selected>Travel</option>
+			  <option value="SelfHelp">Self Help</option>
+			  <option value="Cookery" selected>Cookery</option>
+			  <option value="Fiction">Fiction</option>
 			</select>
 			<input type="submit" value="Search" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">
 			</div>

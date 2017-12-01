@@ -34,7 +34,7 @@ else
                    <li><a class="active" href="contact.html">Contact Us</a></li>
                   <li><a href="view.php">View Reserved</a></li>
                   <li><a href="catalog.php">Catalog</a></li>
-                  <li><a href="advsearch.php">Advanced Search</a></li>
+                  <li><a href="advsearch.php">Category</a></li>
                   <li><a href="user.php">Home</a></li>
                </ul>
             </nav>
