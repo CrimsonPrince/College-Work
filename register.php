@@ -62,7 +62,7 @@ if($nameErr == 0 && $pwErr == 0 && $phoneErr == 0)
 
 	if ($conn->query($sql) === TRUE) 
 	{
-	   header("Location:user.php");
+	   header("Location:loginpage.php");
 	} 
 	else 
 	{
