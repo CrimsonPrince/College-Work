@@ -60,9 +60,9 @@ CREATE TABLE Product
 stockCode NUMBER(6) NOT NULL ,
 stockDescription VARCHAR2(50) NOT NULL ,
 costPrice NUMBER(6,2) NOT NULL ,
+costPrice NUMBER(6,2) NOT NULL ,
 drugnondrug NUMBER(1) NULL ,--A product is shown to be a drug if this value is NOT NULL and not a drug if the value is NULL
 supplierID NUMBER(6) NOT NULL ,
-markup NUMBER(4,2) NOT NULL, --Markup Column as requested, requires an input
 CONSTRAINT costPrice_chk CHECK (costPrice < 1000),
 CONSTRAINT product_pk PRIMARY KEY (stockCode),
 CONSTRAINT product_supplier_fk FOREIGN KEY (supplierID) REFERENCES Supplier (supplierID)
@@ -271,6 +271,10 @@ COMMIT;
 -- This will be marked out of 100 but will constitue 40% of the marks allocated to this part of the CA.
 --1. Add a column to Product called markup. This should be able to accept values up to 99.99. 
 -- 5 marks
+--Done
+
+ALTER TABLE PRODUCT
+ADD 
 
 --2. Set the value of this product to be the difference between the current product retail price and the current product cost price divided by 100.
 -- 5 marks
@@ -278,7 +282,7 @@ COMMIT;
 
 --3. Add a constraint to the markup column so that it cannot contain null
 -- 5 marks
-
+--Done
 
 --4. The column drugnondrug on the product table is used to indicate that a product is a drug or not a drug. 
 -- If the value of this column is currently null set it to be 0
@@ -288,6 +292,7 @@ COMMIT;
 --5.
 --Remove the column retailprice from the product table.
 -- 5 marks
+--Done
 
 --6. Add a constraint to the product table to ensure that the column drugnondrug can only take values 0 or 1 and that it cannot be null.
 -- 10 marks
