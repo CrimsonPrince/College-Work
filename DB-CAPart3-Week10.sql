@@ -286,7 +286,7 @@ SET markup = (Product.retailPrice - Product.costPrice) / 100;
 -- 5 marks
 --Done
 ALTER TABLE Product
-MODIFY markup NUMBER(4,2) NOT NULL;
+MODIFY markup NOT NULL;
 
 --4. The column drugnondrug on the product table is used to indicate that a product is a drug or not a drug. 
 -- If the value of this column is currently null set it to be 0
@@ -304,6 +304,8 @@ DROP COLUMN retailprice;
 
 --6. Add a constraint to the product table to ensure that the column drugnondrug can only take values 0 or 1 and that it cannot be null.
 -- 10 marks
+ALTER TABLE Product
+MODIFY drugnondrug CONSTRAINT CHK_drugnondrug CHECK(drugnondrug BETWEEN 0 and 1) NOT NULL;
 
 
 --7. Update the dosage of all prescriptions of the product Calpol to be 50 using a sub-query. You should ensure case sensitivity is not an issue.
@@ -316,9 +318,9 @@ SET preDosage=50;
 --Delete all prescriptions and prescription items for customer Danny. Use sub-queries to achieve this. You should ensure case sensitivity is not an issue.
 -- 15 marks
 DELETE FROM PrescriptionItem
-WHERE  prescriptionID = ANY (SELECT CustID FROM Customer WHERE custName = 'Danny');
+WHERE  prescriptionID = ANY (SELECT CustID FROM Customer WHERE custName = UPPER('Danny'));
 DELETE FROM Prescription
-WHERE  prescriptionID = ANY (SELECT CustID FROM Customer WHERE custName = 'Danny');
+WHERE  prescriptionID = ANY (SELECT CustID FROM Customer WHERE custName = UPPER('Danny'));
 
 --9.
 -- Change all nondrugsales of Umberella to be for product Lynx. You need to use sub-queries
@@ -333,9 +335,9 @@ WHERE stockCode = ANY (SELECT stockCode FROM Product WHERE stockDescription = 'U
 --You should ensure case sensitivity is not an issue.
 -- 15 marks
 DELETE FROM nonDrugsale 
-WHERE stockCode = ANY(SELECT stockCode FROM Product WHERE stockDescription = 'Lynx');
+WHERE stockCode = ANY(SELECT stockCode FROM Product WHERE stockDescription = UPPER('Lynx'));
 DELETE FROM Product 
-WHERE stockCode = ANY(SELECT stockCode FROM Product WHERE stockDescription = 'Lynx');
+WHERE stockCode = ANY(SELECT stockCode FROM Product WHERE stockDescription = UPPER('Lynx'));
 
 --11
 --Add a column to the prescription table called  Notes which can accept up to 100 characters.
@@ -344,5 +346,13 @@ WHERE stockCode = ANY(SELECT stockCode FROM Product WHERE stockDescription = 'Ly
 -- You need to use subqueries and a case statement
 --You should ensure case sensitivity is not an issue.
 -- 15 marks
-
+ALTER TABLE Prescription ADD Notes VARCHAR(100);
+UPDATE Prescription 
+SET Notes='Verify Instructions' WHERE docID IN 
+(
+	SELECT docID FROM Doctor WHERE 
+		upper(docName)=upper('Lindsey')
+		OR 
+		upper(docName)=upper('Jack')
+);
 
