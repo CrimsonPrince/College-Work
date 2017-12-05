@@ -273,23 +273,27 @@ COMMIT;
 -- 5 marks
 --Done
 
-ALTER TABLE PRODUCT
+ALTER TABLE Product
 ADD markup NUMBER(4,2);
 
 --2. Set the value of this product to be the difference between the current product retail price and the current product cost price divided by 100.
 -- 5 marks
+UPDATE Product
+SET markup = (Product.retailPrice - Product.costPrice) / 100;
 
 
 --3. Add a constraint to the markup column so that it cannot contain null
 -- 5 marks
 --Done
-
 ALTER TABLE Product
 MODIFY markup NUMBER(4,2) NOT NULL;
 
 --4. The column drugnondrug on the product table is used to indicate that a product is a drug or not a drug. 
 -- If the value of this column is currently null set it to be 0
 -- 5 marks
+UPDATE Product
+set drugnondrug = 0
+WHERE drugnondrug IS NULL;
 
 --5.
 --Remove the column retailprice from the product table.
@@ -300,6 +304,7 @@ DROP COLUMN retailprice;
 
 --6. Add a constraint to the product table to ensure that the column drugnondrug can only take values 0 or 1 and that it cannot be null.
 -- 10 marks
+
 
 --7. Update the dosage of all prescriptions of the product Calpol to be 50 using a sub-query. You should ensure case sensitivity is not an issue.
 -- 10 marks
@@ -327,6 +332,10 @@ WHERE stockCode = ANY (SELECT stockCode FROM Product WHERE stockDescription = 'U
 --Delete the product lYNX from the database. Think carefully about what this involves (drug sales and non drug sales). 
 --You should ensure case sensitivity is not an issue.
 -- 15 marks
+DELETE FROM nonDrugsale 
+WHERE stockCode = ANY(SELECT stockCode FROM Product WHERE stockDescription = 'Lynx');
+DELETE FROM Product 
+WHERE stockCode = ANY(SELECT stockCode FROM Product WHERE stockDescription = 'Lynx');
 
 --11
 --Add a column to the prescription table called  Notes which can accept up to 100 characters.
