@@ -275,18 +275,24 @@ COMMIT;
 --Note: You are only looking for products that do not appear on prescription item. You need only output the product name
 
 -- 10 marks 
-
+SELECT stockDescription FROM Product 
+where drugnondrug >= 1 AND Product.stockCode NOT IN(SELECT stockCode from prescriptionItem);
 
 --2. Change your SQL so that it outputs for all products the number of times it has been prescribed.
 --If a product has not been used on a prescription item, None should be output
 -- Hint: group and decode
 -- 15 marks
-
+SELECT stockDescription FROM Product 
+JOIN PrescriptionItem
+ON Product.stockCode = PrescriptionItem.stockCode;
 
 --3. Change your SQL  for 2 so that it outputs only drug products that have never been prescribed without checking for null in the where clause 
 -- 10 marks 
 -- You need to think about how to restrict the output from a group
-
+SELECT stockDescription FROM Product 
+JOIN PrescriptionItem
+ON Product.stockCode = PrescriptionItem.stockCode
+where EXISTS(SELECT stockCode from prescriptionItem);
 
 
 --4. Write the sql to output for each customer the ids of any prescriptions George's pharmacy has processed for them.
