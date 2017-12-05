@@ -60,9 +60,9 @@ CREATE TABLE Product
 stockCode NUMBER(6) NOT NULL ,
 stockDescription VARCHAR2(50) NOT NULL ,
 costPrice NUMBER(6,2) NOT NULL ,
-costPrice NUMBER(6,2) NOT NULL ,
 drugnondrug NUMBER(1) NULL ,--A product is shown to be a drug if this value is NOT NULL and not a drug if the value is NULL
 supplierID NUMBER(6) NOT NULL ,
+retailPrice 
 CONSTRAINT costPrice_chk CHECK (costPrice < 1000),
 CONSTRAINT product_pk PRIMARY KEY (stockCode),
 CONSTRAINT product_supplier_fk FOREIGN KEY (supplierID) REFERENCES Supplier (supplierID)
@@ -274,7 +274,7 @@ COMMIT;
 --Done
 
 ALTER TABLE PRODUCT
-ADD 
+ADD markup NUMBER(4,2);
 
 --2. Set the value of this product to be the difference between the current product retail price and the current product cost price divided by 100.
 -- 5 marks
@@ -284,10 +284,12 @@ ADD
 -- 5 marks
 --Done
 
+ALTER TABLE PRODUCT
+MODIFY COLUMN markup NUMBER(4,2), NOT NULL;
+
 --4. The column drugnondrug on the product table is used to indicate that a product is a drug or not a drug. 
 -- If the value of this column is currently null set it to be 0
 -- 5 marks
-
 
 --5.
 --Remove the column retailprice from the product table.
@@ -300,9 +302,15 @@ ADD
 --7. Update the dosage of all prescriptions of the product Calpol to be 50 using a sub-query. You should ensure case sensitivity is not an issue.
 -- 10 marks
 
+UPDATE PRESCRIPTIONITEM
+SET preDosage=50;
+
 --8.
 --Delete all prescriptions and prescription items for customer Danny. Use sub-queries to achieve this. You should ensure case sensitivity is not an issue.
 -- 15 marks
+DELETE FROM PrescriptionItem, Prescription 
+WHERE  prescriptionID IN(SELECT custID FROM Prescription WHERE custName = 'Danny');
+
 
 --9.
 -- Change all nondrugsales of Umberella to be for product Lynx. You need to use sub-queries
