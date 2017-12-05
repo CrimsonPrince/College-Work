@@ -60,9 +60,9 @@ CREATE TABLE Product
 stockCode NUMBER(6) NOT NULL ,
 stockDescription VARCHAR2(50) NOT NULL ,
 costPrice NUMBER(6,2) NOT NULL ,
+retailPrice NUMBER(6,2) NOT NULL ,
 drugnondrug NUMBER(1) NULL ,--A product is shown to be a drug if this value is NOT NULL and not a drug if the value is NULL
-supplierID NUMBER(6) NOT NULL ,
-retailPrice 
+supplierID NUMBER(6) NOT NULL , 
 CONSTRAINT costPrice_chk CHECK (costPrice < 1000),
 CONSTRAINT product_pk PRIMARY KEY (stockCode),
 CONSTRAINT product_supplier_fk FOREIGN KEY (supplierID) REFERENCES Supplier (supplierID)
@@ -284,8 +284,8 @@ ADD markup NUMBER(4,2);
 -- 5 marks
 --Done
 
-ALTER TABLE PRODUCT
-MODIFY COLUMN markup NUMBER(4,2), NOT NULL;
+ALTER TABLE Product
+MODIFY markup NUMBER(4,2) NOT NULL;
 
 --4. The column drugnondrug on the product table is used to indicate that a product is a drug or not a drug. 
 -- If the value of this column is currently null set it to be 0
@@ -295,6 +295,8 @@ MODIFY COLUMN markup NUMBER(4,2), NOT NULL;
 --Remove the column retailprice from the product table.
 -- 5 marks
 --Done
+ALTER TABLE Product
+DROP COLUMN retailprice;
 
 --6. Add a constraint to the product table to ensure that the column drugnondrug can only take values 0 or 1 and that it cannot be null.
 -- 10 marks
@@ -308,13 +310,17 @@ SET preDosage=50;
 --8.
 --Delete all prescriptions and prescription items for customer Danny. Use sub-queries to achieve this. You should ensure case sensitivity is not an issue.
 -- 15 marks
-DELETE FROM PrescriptionItem, Prescription 
-WHERE  prescriptionID IN(SELECT custID FROM Prescription WHERE custName = 'Danny');
-
+DELETE FROM PrescriptionItem
+WHERE  prescriptionID = ANY (SELECT CustID FROM Customer WHERE custName = 'Danny');
+DELETE FROM Prescription
+WHERE  prescriptionID = ANY (SELECT CustID FROM Customer WHERE custName = 'Danny');
 
 --9.
 -- Change all nondrugsales of Umberella to be for product Lynx. You need to use sub-queries
 --10 marks
+UPDATE  NonDrugSale
+SET stockCode = 7
+WHERE stockCode = ANY (SELECT stockCode FROM Product WHERE stockDescription = 'Umbrella');
 
 
 --10.
