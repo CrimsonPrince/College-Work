@@ -299,6 +299,9 @@ where EXISTS(SELECT stockCode from prescriptionItem);
 -- If a customer has not produced an prescription 0 should be output.
 -- The columns in the output should be called Customer Name and PrescriptionID
 -- 10 marks
+SELECT custName, NVL(prescriptionID,0) FROM Customer
+LEFT JOIN Prescription
+ON Customer.custID = Prescription.custID;
 
 
 
@@ -308,8 +311,11 @@ where EXISTS(SELECT stockCode from prescriptionItem);
 -- Columns in the output should be called Customer Name, Doctor's Name and Prescription ID
 -- You need to use functions to achieve the output required
 -- 20 marks
-
-
+SELECT custName, NVL(docName,'NA') AS "Doctor's Name" , NVL(TO_CHAR(prescriptionID), 'NA') AS "Prescription ID" FROM Customer
+LEFT JOIN Prescription
+ON Customer.custID = Prescription.custID
+LEFT JOIN Doctor
+ON Prescription.docID = Doctor.docID;
 --6. Write the SQL to create a View called CustomerPrescription using the SQL for part 5
 -- but also including columns Customer Address, Customer Phone NOA
 -- Write SQL to verify that the view has been successfully created and contains the data you expect
