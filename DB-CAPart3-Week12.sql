@@ -290,7 +290,9 @@ COMMIT;
 --- You will need to use inner joins in this statement
 -- The best way to tackle it is to write your two select statements first and then write the union
 --25 marks
+SELECT staffName FROM Staff WHERE staffID IN (select staffID from Prescription JOIN NonDrugSale);
 
+SELECT prescriptionID FROM Prescription WHERE prescriptionID IN (select prescriptionID, stockCode FROM PrescriptionItem JOIN NonDrugSale ON stockCode = );
 
 
 --2. Change your SQL so that it uses a set operation but outputs only rows where the product has been prescribed and sold by the same person
@@ -301,16 +303,25 @@ COMMIT;
 --whose name/description starts with a capital letter B
 -- 10 marks
 -- You need to think about the naming of your columns
-
+SELECT stockDescription AS "Beginning with B" FROM Product WHERE SUBSTR(stockDescription,0,1) = 'B'
+UNION
+SELECT staffName FROM Staff WHERE SUBSTR(staffName,0,1) = 'B'
+UNION
+SELECT custName FROM Customer WHERE SUBSTR(custName,0,1) = 'B';
 
 
 --4. Write the sql using a SET operation to output the names of doctors that have not appeared on a prescription
 -- 20 marks
-
+SELECT TO_CHAR(docID) from Prescription
+INTERSECT
+select docName from Doctor;
 
 --5. Write the SQL to output the names of doctors that appeared on a prescription but without using a SET operation
 -- think about using an inner join 
 -- 15 marks
+SELECT docName FROM Prescription
+INNER JOIN Doctor 
+ON Doctor.docID = Prescription.docID;
 
 
 
@@ -319,13 +330,21 @@ COMMIT;
 -- This does not need a SET operation or an outer join
 --5 marks
 
+SELECT docName, COUNT(Prescription.docID)
+FROM Prescription
+JOIN Doctor 
+ON Doctor.docID = Prescription.docID
+GROUP BY docName;
 
 --6b. Write the SQL to output for each doctor their name and the number of prescriptions they appear on 
 -- but include in your output only doctors that do not appear on a prescription  
 -- prescriptions
 -- This does not need a SET operation  - you are changing the SQL for part 5
 --10 marks
-
+SELECT docName, COUNT(Prescription.docID) FROM Prescription
+JOIN Doctor 
+ON Doctor.docID = Prescription.docID
+GROUP BY docName;
 
 --6c. Write the SQL using UNION and your answer to 6b and 6c (with adjustment if needed) to create a view called 
 --    DoctorLeagueTable which has two columns DoctorName and NumPrescriptions
