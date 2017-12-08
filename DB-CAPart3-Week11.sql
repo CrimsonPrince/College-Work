@@ -349,3 +349,5 @@ FROM prescription
 INNER JOIN precriptionItem ON prescription.prescriptionID = prescriptionItem.prescriptionID
 INNER JOIN Product ON Product.stockCode = prescriptionItem.stockCode
 INNER JOIN staff ON prescription.staffID = staff.staffID;
+
+COMMIT;
