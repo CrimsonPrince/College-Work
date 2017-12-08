@@ -258,7 +258,7 @@ INSERT INTO PrescriptionItem( prescriptionID, stockCode, staffID, preDosage, pre
 VALUES( 1, 1,5,20,'2 every 4 hours for 24 hrs');
 INSERT INTO PrescriptionItem( prescriptionID, stockCode,preDosage, preInstructions ) 
 VALUES( 2, 2, 20,'2 every 4 hours. Do not exceed 12 in any 24 hour period' );
-INSERT INTO PrescriptionItem( prescriptionID, stockCode,preDosage, preInstructions ) 
+INSERT INTO PrescriptionItem( prescriptionID, stockCode,preDosage, preInstructions )  -- Too long  for Varchar value of 50 set but I chose to keep as not a question
 VALUES( 3, 1, 20,'Take as required' );
 INSERT INTO PrescriptionItem( prescriptionID, stockCode, staffID, preDosage, preInstructions ) 
 VALUES( 4, 1,3,20, ' 2 every 3 hrs' );
@@ -274,51 +274,53 @@ COMMIT;
 --Done
 
 ALTER TABLE Product
-ADD markup NUMBER(4,2);
+ADD markup NUMBER(2,2); --Simple Alter table statement to add an extra column
 
 --2. Set the value of this product to be the difference between the current product retail price and the current product cost price divided by 100.
 -- 5 marks
 UPDATE Product
-SET markup = (Product.retailPrice - Product.costPrice) / 100;
+SET markup = (Product.retailPrice - Product.costPrice) / 100; --Basic Update statement too set markup = to the values divided by eachother
 
 
 --3. Add a constraint to the markup column so that it cannot contain null
 -- 5 marks
 --Done
 ALTER TABLE Product
-MODIFY markup NOT NULL;
+MODIFY markup NOT NULL; --This is adding the constraint on the column level using an alter table statement 
 
 --4. The column drugnondrug on the product table is used to indicate that a product is a drug or not a drug. 
 -- If the value of this column is currently null set it to be 0
 -- 5 marks
 UPDATE Product
 set drugnondrug = 0
-WHERE drugnondrug IS NULL;
+WHERE drugnondrug IS NULL; --Simply updating the drugondrug to 0 where it's null by testing with IS NULLL
 
 --5.
 --Remove the column retailprice from the product table.
 -- 5 marks
 --Done
 ALTER TABLE Product
-DROP COLUMN retailprice;
+DROP COLUMN retailprice; --Very simple dropping of column using alter table
 
 --6. Add a constraint to the product table to ensure that the column drugnondrug can only take values 0 or 1 and that it cannot be null.
 -- 10 marks
 ALTER TABLE Product
-MODIFY drugnondrug CONSTRAINT CHK_drugnondrug CHECK(drugnondrug BETWEEN 0 and 1) NOT NULL;
+ADD CONSTRAINT  drugnondrug CONSTRAINT CHK_drugnondrug CHECK(drugnondrug BETWEEN 0 and 1) NOT NULL;
 
 
 --7. Update the dosage of all prescriptions of the product Calpol to be 50 using a sub-query. You should ensure case sensitivity is not an issue.
 -- 10 marks
 
 UPDATE PRESCRIPTIONITEM
-SET preDosage=50;
+SET preDosage=50
+WHERE stockCode=(select stockCode from Product where stockDescription = 'Calpol');
 
 --8.
 --Delete all prescriptions and prescription items for customer Danny. Use sub-queries to achieve this. You should ensure case sensitivity is not an issue.
 -- 15 marks
 DELETE FROM PrescriptionItem
-WHERE  prescriptionID = ANY (SELECT CustID FROM Customer WHERE custName = UPPER('Danny'));
+WHERE prescriptionID = (SELECT prescriptionID FROM Prescription  WHERE custID = (SELECT custID FROM Customer WHERE UPPER(custName = 'DANNY')));
+
 DELETE FROM Prescription
 WHERE  prescriptionID = ANY (SELECT CustID FROM Customer WHERE custName = UPPER('Danny'));
 
@@ -356,3 +358,4 @@ SET Notes='Verify Instructions' WHERE docID IN
 		upper(docName)=upper('Jack')
 );
 
+COMMIT;

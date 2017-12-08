@@ -290,10 +290,29 @@ COMMIT;
 --- You will need to use inner joins in this statement
 -- The best way to tackle it is to write your two select statements first and then write the union
 --25 marks
-SELECT staffName FROM Staff WHERE staffID IN (select staffID from Prescription JOIN NonDrugSale);
+SELECT staffName AS "Staff Members", stockDescription AS "Products"
+FROM Product
+INNER join
+(
+    SELECT stockCode, staffName, staffID
+    FROM PrescriptionItem
+    INNER JOIN Staff
+    USING (staffID)
+)
+USING (stockCode)
 
-SELECT prescriptionID FROM Prescription WHERE prescriptionID IN (select prescriptionID, stockCode FROM PrescriptionItem JOIN NonDrugSale ON stockCode = );
+UNION
 
+SELECT staffName, stockDescription
+FROM Product
+INNER JOIN
+(
+    SELECT StockCode, staffName, staffID
+    FROM NonDrugSale
+    INNER JOIN Staff
+    USING (staffID)
+)
+USING (stockCode);
 
 --2. Change your SQL so that it uses a set operation but outputs only rows where the product has been prescribed and sold by the same person
 -- 5 marks
@@ -312,9 +331,9 @@ SELECT custName FROM Customer WHERE SUBSTR(custName,0,1) = 'B';
 
 --4. Write the sql using a SET operation to output the names of doctors that have not appeared on a prescription
 -- 20 marks
-select docName from Doctor
+SELECT docName FROM Doctor
 MINUS
-SELECT docName from Doctor;
+SELECT docName FROM Prescription JOIN Doctor on Prescription.docID = Doctor.docID;
 
 --5. Write the SQL to output the names of doctors that appeared on a prescription but without using a SET operation
 -- think about using an inner join 
@@ -346,9 +365,36 @@ FROM Doctor
 JOIN Prescription
 ON prescription.docID = Doctor.docID;
 
+SELECT docName, COUNT(prescriptionID) FROM Prescription
+RIGHT OUTER JOIN Doctor ON Prescription.docID = Doctor.docID
+GROUP BY docName
+HAVING COUNT(prescriptionID) = 0;
+
 
 --6c. Write the SQL using UNION and your answer to 6b and 6c (with adjustment if needed) to create a view called 
 --    DoctorLeagueTable which has two columns DoctorName and NumPrescriptions
 --    The view should include a row for each doctor their name and the number of prescriptions they appear on even if they appear on none.
 --    The rows should be sorted in order of number of prescriptions
 --10 marks
+
+DROP VIEW DoctorLeagueTable;
+
+CREATE VIEW DoctorLeagueTable AS
+    SELECT docName AS "Doctor Name", COUNT(prescriptionID) AS "Number OF Prescriptions"
+    FROM Doctor
+    INNER JOIN Prescription
+    ON Doctor.docID = Prescription.docID
+    GROUP BY docName
+UNION
+    SELECT docName, COUNT(prescriptionID)
+    FROM Prescription
+    RIGHT OUTER JOIN Doctor
+    ON Prescription.docID = Doctor.docID
+    GROUP BY docName
+    HAVING COUNT(prescriptionID) = 0
+    ORDER BY "Number OF Prescriptions" DESC;
+
+SELECT * FROM DoctorLeagueTable;
+SELECT * FROM Product;
+
+COMMIT;
