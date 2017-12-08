@@ -16,6 +16,11 @@ DROP TABLE Supplier CASCADE CONSTRAINTS PURGE;
 DROP TABLE Staff CASCADE CONSTRAINTS PURGE;
 DROP TABLE Role CASCADE CONSTRAINTS PURGE;
 
+--Dropping views
+
+DROP VIEW CustomerPrescription; 
+DROP VIEW PrescriptionDetail;
+
 -- Create the tables
 CREATE TABLE Role
 (
@@ -320,12 +325,17 @@ ON Prescription.docID = Doctor.docID;
 -- but also including columns Customer Address, Customer Phone NOA
 -- Write SQL to verify that the view has been successfully created and contains the data you expect
 --10 marks
-
-
-
+CREATE VIEW CustomerPrescription AS 
+SELECT customer.custName AS Customer_Name, customer.CUSTADDRESS AS Customer_Address, customer.CUSTPHONE AS Customer_Phone, nvl(doctor.docName, 'N/A') AS Doctor_Name, COALESCE(prescription.prescriptionID,0) AS Prescription_ID
+FROM prescription
+RIGHT JOIN customer ON prescription.custID = customer.custID
+INNER JOIN doctor ON prescription.docID = doctor.docID;
 --7. Change the SQL for part 5 to use a derived table and a left outer join
 -- 15 marks
-
+SELECT customer.custName AS Customer_Name, nvl(doctor.docName, 'N/A') AS Doctor_Name, COALESCE(prescription.prescriptionID,0) AS Prescription_ID
+FROM customer
+LEFT JOIN prescription ON prescription.custID = customer.custID
+INNER JOIN doctor ON prescription.docID = doctor.docID;
 
 --8. Create a view called PrescriptionDetail that includes information for every prescription item
 -- Only inner joins are required
@@ -333,4 +343,9 @@ ON Prescription.docID = Doctor.docID;
 --PrescriptionID, StockDescription,  DispensedBy
 -- (Dispensed By is the name of the staff member who dispensed the prescription item)
 -- 10 marks
-
+CREATE VIEW PrescriptionDetail AS
+SELECT Prescription.prescriptionID AS prescriptionID ,Product.stockDescription AS stockDescription, staff.staffName AS DispensedBy
+FROM prescription
+INNER JOIN precriptionItem ON prescription.prescriptionID = prescriptionItem.prescriptionID
+INNER JOIN Product ON Product.stockCode = prescriptionItem.stockCode
+INNER JOIN staff ON prescription.staffID = staff.staffID;

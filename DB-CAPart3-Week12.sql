@@ -312,9 +312,9 @@ SELECT custName FROM Customer WHERE SUBSTR(custName,0,1) = 'B';
 
 --4. Write the sql using a SET operation to output the names of doctors that have not appeared on a prescription
 -- 20 marks
-SELECT TO_CHAR(docID) from Prescription
-INTERSECT
-select docName from Doctor;
+select docName from Doctor
+MINUS
+SELECT docName from Doctor;
 
 --5. Write the SQL to output the names of doctors that appeared on a prescription but without using a SET operation
 -- think about using an inner join 
@@ -341,10 +341,11 @@ GROUP BY docName;
 -- prescriptions
 -- This does not need a SET operation  - you are changing the SQL for part 5
 --10 marks
-SELECT docName, COUNT(Prescription.docID) FROM Prescription
-JOIN Doctor 
-ON Doctor.docID = Prescription.docID
-GROUP BY docName;
+SELECT docName, prescriptionID
+FROM Doctor 
+JOIN Prescription
+ON prescription.docID = Doctor.docID;
+
 
 --6c. Write the SQL using UNION and your answer to 6b and 6c (with adjustment if needed) to create a view called 
 --    DoctorLeagueTable which has two columns DoctorName and NumPrescriptions
