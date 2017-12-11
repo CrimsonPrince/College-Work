@@ -55,7 +55,8 @@ void drawspace()
       {
        for (int i = 0; i < stars.length; i++) 
         {
-          stars[i].move();
+          int direction = 4;
+          stars[i].move(direction);
         }
       }
       
