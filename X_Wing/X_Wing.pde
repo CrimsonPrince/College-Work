@@ -6,6 +6,7 @@ star[] stars = new star[4000];
 float speed = 30;
 int state = 2;
 int sound = 0;
+PShape s;
 
 void soundplayer(AudioPlayer sound)
 {
@@ -28,6 +29,14 @@ void setup() {
   }
   minim = new Minim(this);
   hyper=minim.loadFile("Millennium falcon hyperdrive effect.mp3");
+  
+  s = createShape();
+  s.beginShape();
+  s.vertex(width* 0.5, height * 0.5);
+  s.vertex(width * 0.3, height * 0.3);
+  s.vertex(width * -0.3, height * -0.3);
+  s.vertex(width* -0.5, height * -0.5);
+  s.endShape();
 }
 
 
@@ -39,6 +48,7 @@ void draw() {
   case 2:
     drawspace();
     movement();
+    gui();
   }
 }
 
@@ -55,13 +65,22 @@ void drawspace()
    
 }
 
+void gui()
+{
+  stroke(200);
+  ellipse(100,height * 0.5, 20,20);
+  shape(s,100,100);
+  
+  
+}
+
 void movement()
 {
   int direction;
   
   if (keyPressed)
     {
-      if (keyCode == ENTER)
+      if (key == ' ')
       {
         for (int i = 0; i < stars.length; i++) 
         {
