@@ -7,6 +7,18 @@ float speed = 30;
 int state = 2;
 int sound = 0;
 
+void soundplayer(AudioPlayer sound)
+{
+  
+    if (sound == null)
+    {
+    return;
+    }
+    sound.rewind();
+    sound.play(); 
+   
+}
+
 void setup() {
   fullScreen(P3D);
 
@@ -26,6 +38,7 @@ void draw() {
   case 1: 
   case 2:
     drawspace();
+    movement();
   }
 }
 
@@ -33,16 +46,22 @@ void drawspace()
 {
   background(0);
   translate(width/2, height/2);
-
+  
+  
   for (int i = 0; i < stars.length; i++)
   {
     stars[i].staticview();
   }
+   
+}
 
-
-    if (keyPressed)
+void movement()
+{
+  int direction;
+  
+  if (keyPressed)
     {
-      if (keyCode == UP)
+      if (keyCode == ENTER)
       {
         for (int i = 0; i < stars.length; i++) 
         {
@@ -51,26 +70,40 @@ void drawspace()
         }
       }
       
-      if (keyCode == DOWN)
+      if (keyCode == UP)
       {
        for (int i = 0; i < stars.length; i++) 
         {
-          int direction = 4;
+          direction = 2;
           stars[i].move(direction);
         }
       }
       
-    }
-}
-
-void soundplayer(AudioPlayer sound)
-{
-  
-    if (sound == null)
-    {
-    return;
-    }
-    sound.rewind();
-    sound.play(); 
-   
+      if (keyCode == LEFT)
+      {
+       for (int i = 0; i < stars.length; i++) 
+        {
+          direction = 2;
+          stars[i].move(direction);
+        }
+      }
+      if (keyCode == RIGHT)
+      {
+       for (int i = 0; i < stars.length; i++) 
+        {
+          direction = 3;
+          stars[i].move(direction);
+        }
+      }
+      
+      if (keyCode == DOWN)
+      {
+       for (int i = 0; i < stars.length; i++) 
+        {
+          direction = 4;
+          stars[i].move(direction);
+        }
+      }
+      
+    } 
 }
