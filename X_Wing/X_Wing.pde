@@ -46,10 +46,19 @@ void drawspace()
       {
         for (int i = 0; i < stars.length; i++) 
         {
-          stars[i].move();
-          stars[i].create();
+          stars[i].hyper();
+          stars[i].lines();
         }
       }
+      
+      if (keyCode == DOWN)
+      {
+       for (int i = 0; i < stars.length; i++) 
+        {
+          stars[i].move();
+        }
+      }
+      
     }
 }
 
