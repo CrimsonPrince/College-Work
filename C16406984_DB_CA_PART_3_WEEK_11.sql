@@ -1,8 +1,8 @@
 /************************************************************************************************************
 **    DT228/DT282 Year 2 Databases I CA Part III Week 11 Questions                                         **
 **    This will be marked out of 100 but will constitue 30% of the marks allocated to this part of the CA. **
-**    Submit this with the questions for Week 10 and Week 11 by the deadline set.                          **
-**    Your submission should be called <studentno>CAPart3-Week12.sql                                       **
+**    Submit this with the questions for Week 10 and Week 12 by the deadline set.                          **
+**    Your submission should be called <studentno>CAPart3-Week11.sql                                       **
 **    You are expected to include comments to explain what your SQL for your answer is doing               **
 *************************************************************************************************************/
 -- Drop the tables 
@@ -15,6 +15,11 @@ DROP TABLE Product CASCADE CONSTRAINTS PURGE;
 DROP TABLE Supplier CASCADE CONSTRAINTS PURGE;
 DROP TABLE Staff CASCADE CONSTRAINTS PURGE;
 DROP TABLE Role CASCADE CONSTRAINTS PURGE;
+
+--Dropping views
+
+DROP VIEW CustomerPrescription; 
+DROP VIEW PrescriptionDetail;
 
 -- Create the tables
 CREATE TABLE Role
@@ -235,9 +240,6 @@ INSERT INTO Doctor ( docID,docName,surgName,surgAddress)
 VALUES( 4, 'Griffin', 'Clinic 4', 'Office 4' );
 INSERT INTO Doctor ( docID,docName,surgName,surgAddress) 
 VALUES( 5, 'Jack', 'Clinic 5', 'Office 5' );
-
-INSERT INTO Doctor ( docID,docName,surgName,surgAddress) 
-VALUES( 6, 'Jason', 'Clinic 5', 'Office 5' );
 --SELECT * FROM DOCTOR;
 
 
@@ -245,17 +247,14 @@ VALUES( 6, 'Jason', 'Clinic 5', 'Office 5' );
 
 INSERT INTO Prescription( prescriptionID, custID, docID,staffID ) 
 VALUES ( 1, 1, 1, 3);
-INSERT INTO Prescription( prescriptionID, custID, docID, staffID ) 
-VALUES ( 2, 2, 2,3);
-INSERT INTO Prescription( prescriptionID, custID, docID, staffID ) 
-VALUES ( 3, 3, 3,3);
+INSERT INTO Prescription( prescriptionID, custID, docID ) 
+VALUES ( 2, 2, 2);
+INSERT INTO Prescription( prescriptionID, custID, docID ) 
+VALUES ( 3, 3, 3);
 INSERT INTO Prescription( prescriptionID, custID, docID,staffID ) 
 VALUES ( 4, 4, 4, 6);
-INSERT INTO Prescription( prescriptionID, custID, docID, staffID ) 
-VALUES ( 5, 5, 5,6);
-
-
-
+INSERT INTO Prescription( prescriptionID, custID, docID ) 
+VALUES ( 5, 5, 5);
 --SELECT * FROM PRESCRIPTION;
 
 INSERT INTO PrescriptionItem( prescriptionID, stockCode, staffID, preDosage, preInstructions ) 
@@ -272,129 +271,104 @@ INSERT INTO PrescriptionItem( prescriptionID, stockCode, staffID, preDosage, pre
 VALUES( 4, 1,3,20, ' 2 every 3 hrs' );
 INSERT INTO PrescriptionItem( prescriptionID, stockCode,preDosage, preInstructions ) 
 VALUES( 5, 4, 50,'10ml every 4 hours');
-INSERT INTO PrescriptionItem( prescriptionID, stockCode, staffID, preDosage, preInstructions ) 
-VALUES( 4, 6,3,20, 'When blood sugar is low' );
-INSERT INTO PrescriptionItem( prescriptionID, stockCode, staffID, preDosage, preInstructions ) 
-VALUES( 5, 6,4, 50,'One per day');
-
-
 --SELECT * FROM PRESCRIPTIONITEM;
 COMMIT;
 
---QUESTIONS for CA Part 3 Week 12
+--QUESTIONS for CA Part 3 Week 11
 -- This will be marked out of 100 but will constitue 30% of the marks allocated to this part of the CA.
+--1. Write the SQL to find the names (stockdescription) of all drug products that have not been used as part of a prescription.
+--Note: You are only looking for products that do not appear on prescription item. You need only output the product name
 
---1. Using UNION write the SQL to find the products which have been prescribed by each member of staff or sold by each member of staff
--- In your SQL you need to output the name of the product (stockDescription) in a column called Product name and the name of the staff
--- member (staffName) in a column called Staff Member
---- You will need to use inner joins in this statement
--- The best way to tackle it is to write your two select statements first and then write the union
---25 marks
-SELECT staffName AS "Staff Members", stockDescription AS "Products"
-FROM Product
-INNER join
-(
-    SELECT stockCode, staffName, staffID
-    FROM PrescriptionItem
-    INNER JOIN Staff
-    USING (staffID)
-)
-USING (stockCode)
-
-UNION
-
-SELECT staffName, stockDescription
-FROM Product
-INNER JOIN
-(
-    SELECT StockCode, staffName, staffID
-    FROM NonDrugSale
-    INNER JOIN Staff
-    USING (staffID)
-)
-USING (stockCode);
-
---2. Change your SQL so that it uses a set operation but outputs only rows where the product has been prescribed and sold by the same person
--- 5 marks
+-- 10 marks 
+SELECT stockDescription FROM Product 
+where drugnondrug >= 1 AND Product.stockCode NOT IN(SELECT stockCode from prescriptionItem); --This is a select statement that selects where drug on drug is more than one 
+--and not in a subquery which selects all prescription items 
 
 
---3. Using a set operation write the SQL to output the names of all customers, staff and products 
---whose name/description starts with a capital letter B
--- 10 marks
--- You need to think about the naming of your columns
-SELECT stockDescription AS "Beginning with B" FROM Product WHERE SUBSTR(stockDescription,0,1) = 'B'
-UNION
-SELECT staffName FROM Staff WHERE SUBSTR(staffName,0,1) = 'B'
-UNION
-SELECT custName FROM Customer WHERE SUBSTR(custName,0,1) = 'B';
-
-
---4. Write the sql using a SET operation to output the names of doctors that have not appeared on a prescription
--- 20 marks
-SELECT docName FROM Doctor
-MINUS
-SELECT docName FROM Prescription JOIN Doctor on Prescription.docID = Doctor.docID;
-
---5. Write the SQL to output the names of doctors that appeared on a prescription but without using a SET operation
--- think about using an inner join 
+--2. Change your SQL so that it outputs for all products the number of times it has been prescribed.
+--If a product has not been used on a prescription item, None should be output
+-- Hint: group and decode
 -- 15 marks
-SELECT docName FROM Prescription
-INNER JOIN Doctor 
-ON Doctor.docID = Prescription.docID;
+SELECT stockDescription FROM Product 
+JOIN PrescriptionItem
+ON Product.stockCode = PrescriptionItem.stockCode;
+--This uses a join to connect the tables and associate the rows with eachother based on common attribute, the nulls are automatically excluded as they have no matching counterpart
+
+--3. Change your SQL  for 2 so that it outputs only drug products that have never been prescribed without checking for null in the where clause 
+-- 10 marks 
+-- You need to think about how to restrict the output from a group
+SELECT stockDescription FROM Product 
+JOIN PrescriptionItem
+ON Product.stockCode = PrescriptionItem.stockCode
+where EXISTS(SELECT stockCode from prescriptionItem);
+--This selects the StockCode that matches the product then checks if it exists within prescription items via subquery
 
 
+--4. Write the sql to output for each customer the ids of any prescriptions George's pharmacy has processed for them.
+-- If a customer has not produced an prescription 0 should be output.
+-- The columns in the output should be called Customer Name and PrescriptionID
+-- 10 marks
+SELECT custName, NVL(prescriptionID,0) FROM Customer
+LEFT JOIN Prescription
+ON Customer.custID = Prescription.custID;
+--This selects the customer name from customer and uses a join to join prescription,  a left join is used to ensure that items on customer side that are not in prescription are output
+--NVL is then used to set those null values to 0 instead 
 
---6a. Write the SQL to output for each doctor their name and the number of prescriptions they appear on - you are only concerned with doctors that appear on 
--- prescriptions. 
--- This does not need a SET operation or an outer join
---5 marks
 
-SELECT docName, COUNT(Prescription.docID)
-FROM Prescription
-JOIN Doctor 
-ON Doctor.docID = Prescription.docID
-GROUP BY docName;
+--5. Write the SQL to output the customer name, doctors name and prescription id for all prescriptions and for 
+-- customers that do not have prescriptions NA is output for doctors name and prescription ID.
+-- You need to use a right outer join and an inner join in the SQL
+-- Columns in the output should be called Customer Name, Doctor's Name and Prescription ID
+-- You need to use functions to achieve the output required
+-- 20 marks
+SELECT custName, NVL(docName,'NA') AS "Doctor's Name" , NVL(TO_CHAR(prescriptionID), 'NA') AS "Prescription ID" FROM Customer
+LEFT JOIN Prescription
+ON Customer.custID = Prescription.custID
+LEFT JOIN Doctor
+ON Prescription.docID = Doctor.docID;
 
---6b. Write the SQL to output for each doctor their name and the number of prescriptions they appear on 
--- but include in your output only doctors that do not appear on a prescription  
--- prescriptions
--- This does not need a SET operation  - you are changing the SQL for part 5
+--Selects the required data and renames it with AS statements, both the Doctor and Prescription table are left joined to ensure customer values appear regardless of whether they are in the other two tables
+--NVL is used again to replace the null values with NA this time, and PrescriptionID had to be converted to a string with TO_CHAR to do this
+
+--6. Write the SQL to create a View called CustomerPrescription using the SQL for part 5
+-- but also including columns Customer Address, Customer Phone NOA
+-- Write SQL to verify that the view has been successfully created and contains the data you expect
 --10 marks
-SELECT docName, prescriptionID
-FROM Doctor 
-JOIN Prescription
-ON prescription.docID = Doctor.docID;
+CREATE VIEW CustomerPrescription AS 
+SELECT customer.custName AS Customer_Name, customer.CUSTADDRESS AS Customer_Address, customer.CUSTPHONE AS Customer_Phone, nvl(doctor.docName, 'N/A') AS Doctor_Name, COALESCE(prescription.prescriptionID,0) AS Prescription_ID
+FROM prescription
+RIGHT JOIN customer ON prescription.custID = customer.custID
+INNER JOIN doctor ON prescription.docID = doctor.docID;
 
-SELECT docName, COUNT(prescriptionID) FROM Prescription
-RIGHT OUTER JOIN Doctor ON Prescription.docID = Doctor.docID
-GROUP BY docName
-HAVING COUNT(prescriptionID) = 0;
+select *  FROM CustomerPrescription;
+--A view is created for the first time here, inside the view the tables are named with AS, the data is selected and then coalesce is used to replace the first NULL the tables are then joined 
+--with a right join to ensure customers are displayed regardless of prescense in other tables and an inner join on doctor
 
 
---6c. Write the SQL using UNION and your answer to 6b and 6c (with adjustment if needed) to create a view called 
---    DoctorLeagueTable which has two columns DoctorName and NumPrescriptions
---    The view should include a row for each doctor their name and the number of prescriptions they appear on even if they appear on none.
---    The rows should be sorted in order of number of prescriptions
---10 marks
+--7. Change the SQL for part 5 to use a derived table and a left outer join
+-- 15 marks
+SELECT customer.custName AS Customer_Name, nvl(doctor.docName, 'N/A') AS Doctor_Name, COALESCE(prescription.prescriptionID,0) AS Prescription_ID
+FROM customer
+LEFT JOIN prescription ON prescription.custID = customer.custID
+INNER JOIN doctor ON prescription.docID = doctor.docID;
 
-DROP VIEW DoctorLeagueTable;
+--The data from part 5 is selected as previously and it is instead joined with a left join and an inner join to create a derived table
 
-CREATE VIEW DoctorLeagueTable AS
-    SELECT docName AS "Doctor Name", COUNT(prescriptionID) AS "Number OF Prescriptions"
-    FROM Doctor
-    INNER JOIN Prescription
-    ON Doctor.docID = Prescription.docID
-    GROUP BY docName
-UNION
-    SELECT docName, COUNT(prescriptionID)
-    FROM Prescription
-    RIGHT OUTER JOIN Doctor
-    ON Prescription.docID = Doctor.docID
-    GROUP BY docName
-    HAVING COUNT(prescriptionID) = 0
-    ORDER BY "Number OF Prescriptions" DESC;
+--8. Create a view called PrescriptionDetail that includes information for every prescription item
+-- Only inner joins are required
+-- The view should have the following columns:
+--PrescriptionID, StockDescription,  DispensedBy
+-- (Dispensed By is the name of the staff member who dispensed the prescription item)
+-- 10 marks
+CREATE VIEW PrescriptionDetail AS
+SELECT Prescription.prescriptionID AS prescriptionID ,Product.stockDescription AS stockDescription, staff.staffName AS DispensedBy
+FROM prescription
+INNER JOIN precriptionItem ON prescription.prescriptionID = prescriptionItem.prescriptionID
+INNER JOIN Product ON Product.stockCode = prescriptionItem.stockCode
+INNER JOIN staff ON prescription.staffID = staff.staffID;
 
-SELECT * FROM DoctorLeagueTable;
-SELECT * FROM Product;
+--Here a view is created using create view and the data is selected from the sources, this uses three innner joins to get all the data required from the tables and makes sure no other 
+--outer data is included
+
 
 COMMIT;

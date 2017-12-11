@@ -1,8 +1,8 @@
 /************************************************************************************************************
-**    DT228/DT282 Year 2 Databases I CA Part III Week 10 Questions                                         **
-**    This will be marked out of 100 but will constitue 40% of the marks allocated to this part of the CA. **
-**    Submit this with the questions for Week 11 and Week 12 by the deadline set.                          **
-**    Your submission should be called <studentno>CAPart3-Week10.sql                                       **
+**    DT228/DT282 Year 2 Databases I CA Part III Week 11 Questions                                         **
+**    This will be marked out of 100 but will constitue 30% of the marks allocated to this part of the CA. **
+**    Submit this with the questions for Week 10 and Week 11 by the deadline set.                          **
+**    Your submission should be called <studentno>CAPart3-Week12.sql                                       **
 **    You are expected to include comments to explain what your SQL for your answer is doing               **
 *************************************************************************************************************/
 -- Drop the tables 
@@ -61,8 +61,8 @@ stockCode NUMBER(6) NOT NULL ,
 stockDescription VARCHAR2(50) NOT NULL ,
 costPrice NUMBER(6,2) NOT NULL ,
 retailPrice NUMBER(6,2) NOT NULL ,
-drugnondrug NUMBER(1) NULL ,--A product is shown to be a drug if this value is NOT NULL and not a drug if the value is NULL
-supplierID NUMBER(6) NOT NULL , 
+drugnondrug NUMBER(1) DEFAULT 0,--A product is shown to be a drug if this value is 1 and not a drug if this value is 0
+supplierID NUMBER(6) NOT NULL ,
 CONSTRAINT costPrice_chk CHECK (costPrice < 1000),
 CONSTRAINT product_pk PRIMARY KEY (stockCode),
 CONSTRAINT product_supplier_fk FOREIGN KEY (supplierID) REFERENCES Supplier (supplierID)
@@ -122,7 +122,7 @@ prescriptionID NUMBER(6) NOT NULL ,
 stockCode NUMBER(6) NOT NULL ,
 staffID NUMBER(6),
 preDosage NUMBER(6,2) NOT NULL ,
-preInstructions VARCHAR2(50) NOT NULL ,
+preInstructions VARCHAR2(100) NOT NULL ,
 
 CONSTRAINT prescriptionItem_pk PRIMARY KEY (prescriptionID,stockCode),
 CONSTRAINT preItem_staff_fk FOREIGN KEY (staffID) REFERENCES Staff (staffID),
@@ -221,6 +221,8 @@ INSERT INTO Customer ( custID, custName,custAddress, custPhone, medCard )
 VALUES( 4, 'Brian', 'Apartment 4','0897777444', 99994444 );
 INSERT INTO Customer ( custID, custName,custAddress, custPhone ) 
 VALUES( 5, 'Arin','Apartment 5','0897777555' );
+INSERT INTO Customer ( custID, custName,custAddress, custPhone ) 
+VALUES( 6, 'Another','Another apt',0876737373 );
 --SELECT * FROM CUSTOMER;
 
 INSERT INTO Doctor ( docID,docName,surgName,surgAddress) 
@@ -233,6 +235,9 @@ INSERT INTO Doctor ( docID,docName,surgName,surgAddress)
 VALUES( 4, 'Griffin', 'Clinic 4', 'Office 4' );
 INSERT INTO Doctor ( docID,docName,surgName,surgAddress) 
 VALUES( 5, 'Jack', 'Clinic 5', 'Office 5' );
+
+INSERT INTO Doctor ( docID,docName,surgName,surgAddress) 
+VALUES( 6, 'Jason', 'Clinic 5', 'Office 5' );
 --SELECT * FROM DOCTOR;
 
 
@@ -240,14 +245,17 @@ VALUES( 5, 'Jack', 'Clinic 5', 'Office 5' );
 
 INSERT INTO Prescription( prescriptionID, custID, docID,staffID ) 
 VALUES ( 1, 1, 1, 3);
-INSERT INTO Prescription( prescriptionID, custID, docID ) 
-VALUES ( 2, 2, 2);
-INSERT INTO Prescription( prescriptionID, custID, docID ) 
-VALUES ( 3, 3, 3);
+INSERT INTO Prescription( prescriptionID, custID, docID, staffID ) 
+VALUES ( 2, 2, 2,3);
+INSERT INTO Prescription( prescriptionID, custID, docID, staffID ) 
+VALUES ( 3, 3, 3,3);
 INSERT INTO Prescription( prescriptionID, custID, docID,staffID ) 
 VALUES ( 4, 4, 4, 6);
-INSERT INTO Prescription( prescriptionID, custID, docID ) 
-VALUES ( 5, 5, 5);
+INSERT INTO Prescription( prescriptionID, custID, docID, staffID ) 
+VALUES ( 5, 5, 5,6);
+
+
+
 --SELECT * FROM PRESCRIPTION;
 
 INSERT INTO PrescriptionItem( prescriptionID, stockCode, staffID, preDosage, preInstructions ) 
@@ -258,104 +266,170 @@ INSERT INTO PrescriptionItem( prescriptionID, stockCode, staffID, preDosage, pre
 VALUES( 1, 1,5,20,'2 every 4 hours for 24 hrs');
 INSERT INTO PrescriptionItem( prescriptionID, stockCode,preDosage, preInstructions ) 
 VALUES( 2, 2, 20,'2 every 4 hours. Do not exceed 12 in any 24 hour period' );
-INSERT INTO PrescriptionItem( prescriptionID, stockCode,preDosage, preInstructions )  -- Too long  for Varchar value of 50 set but I chose to keep as not a question
+INSERT INTO PrescriptionItem( prescriptionID, stockCode,preDosage, preInstructions ) 
 VALUES( 3, 1, 20,'Take as required' );
 INSERT INTO PrescriptionItem( prescriptionID, stockCode, staffID, preDosage, preInstructions ) 
 VALUES( 4, 1,3,20, ' 2 every 3 hrs' );
 INSERT INTO PrescriptionItem( prescriptionID, stockCode,preDosage, preInstructions ) 
 VALUES( 5, 4, 50,'10ml every 4 hours');
+INSERT INTO PrescriptionItem( prescriptionID, stockCode, staffID, preDosage, preInstructions ) 
+VALUES( 4, 6,3,20, 'When blood sugar is low' );
+INSERT INTO PrescriptionItem( prescriptionID, stockCode, staffID, preDosage, preInstructions ) 
+VALUES( 5, 6,4, 50,'One per day');
+
+
 --SELECT * FROM PRESCRIPTIONITEM;
 COMMIT;
 
---QUESTIONS for CA Part 3 Week 10
--- This will be marked out of 100 but will constitue 40% of the marks allocated to this part of the CA.
---1. Add a column to Product called markup. This should be able to accept values up to 99.99. 
--- 5 marks
---Done
+--QUESTIONS for CA Part 3 Week 12
+-- This will be marked out of 100 but will constitue 30% of the marks allocated to this part of the CA.
 
-ALTER TABLE Product
-ADD markup NUMBER(2,2); --Simple Alter table statement to add an extra column
-
---2. Set the value of this product to be the difference between the current product retail price and the current product cost price divided by 100.
--- 5 marks
-UPDATE Product
-SET markup = (Product.retailPrice - Product.costPrice) / 100; --Basic Update statement too set markup = to the values divided by eachother
-
-
---3. Add a constraint to the markup column so that it cannot contain null
--- 5 marks
---Done
-ALTER TABLE Product
-MODIFY markup NOT NULL; --This is adding the constraint on the column level using an alter table statement 
-
---4. The column drugnondrug on the product table is used to indicate that a product is a drug or not a drug. 
--- If the value of this column is currently null set it to be 0
--- 5 marks
-UPDATE Product
-set drugnondrug = 0
-WHERE drugnondrug IS NULL; --Simply updating the drugondrug to 0 where it's null by testing with IS NULLL
-
---5.
---Remove the column retailprice from the product table.
--- 5 marks
---Done
-ALTER TABLE Product
-DROP COLUMN retailprice; --Very simple dropping of column using alter table
-
---6. Add a constraint to the product table to ensure that the column drugnondrug can only take values 0 or 1 and that it cannot be null.
--- 10 marks
-ALTER TABLE Product
-ADD CONSTRAINT  drugnondrug CONSTRAINT CHK_drugnondrug CHECK(drugnondrug BETWEEN 0 and 1) NOT NULL;
-
-
---7. Update the dosage of all prescriptions of the product Calpol to be 50 using a sub-query. You should ensure case sensitivity is not an issue.
--- 10 marks
-
-UPDATE PRESCRIPTIONITEM
-SET preDosage=50
-WHERE stockCode=(select stockCode from Product where stockDescription = 'Calpol');
-
---8.
---Delete all prescriptions and prescription items for customer Danny. Use sub-queries to achieve this. You should ensure case sensitivity is not an issue.
--- 15 marks
-DELETE FROM PrescriptionItem
-WHERE prescriptionID = (SELECT prescriptionID FROM Prescription  WHERE custID = (SELECT custID FROM Customer WHERE UPPER(custName = 'DANNY')));
-
-DELETE FROM Prescription
-WHERE  prescriptionID = ANY (SELECT CustID FROM Customer WHERE custName = UPPER('Danny'));
-
---9.
--- Change all nondrugsales of Umberella to be for product Lynx. You need to use sub-queries
---10 marks
-UPDATE  NonDrugSale
-SET stockCode = 7
-WHERE stockCode = ANY (SELECT stockCode FROM Product WHERE stockDescription = 'Umbrella');
-
-
---10.
---Delete the product lYNX from the database. Think carefully about what this involves (drug sales and non drug sales). 
---You should ensure case sensitivity is not an issue.
--- 15 marks
-DELETE FROM nonDrugsale 
-WHERE stockCode = ANY(SELECT stockCode FROM Product WHERE stockDescription = UPPER('Lynx'));
-DELETE FROM Product 
-WHERE stockCode = ANY(SELECT stockCode FROM Product WHERE stockDescription = UPPER('Lynx'));
-
---11
---Add a column to the prescription table called  Notes which can accept up to 100 characters.
---Set the value of this column to be 'Verify instructions' if the doctor prescribing is Lindsey or Jack 
---'Check with customer' if is Michael and 'Discuss with George' otherwise
--- You need to use subqueries and a case statement
---You should ensure case sensitivity is not an issue.
--- 15 marks
-ALTER TABLE Prescription ADD Notes VARCHAR(100);
-UPDATE Prescription 
-SET Notes='Verify Instructions' WHERE docID IN 
+--1. Using UNION write the SQL to find the products which have been prescribed by each member of staff or sold by each member of staff
+-- In your SQL you need to output the name of the product (stockDescription) in a column called Product name and the name of the staff
+-- member (staffName) in a column called Staff Member
+--- You will need to use inner joins in this statement
+-- The best way to tackle it is to write your two select statements first and then write the union
+--25 marks
+SELECT staffName AS "Staff Members", stockDescription AS "Products"
+FROM Product
+INNER join
 (
-	SELECT docID FROM Doctor WHERE 
-		upper(docName)=upper('Lindsey')
-		OR 
-		upper(docName)=upper('Jack')
-);
+    SELECT stockCode, staffName, staffID
+    FROM PrescriptionItem
+    INNER JOIN Staff
+    USING (staffID)
+)
+USING (stockCode)  --This selects from product which is then joined to a subquery that selects Prescription Item and links staff so we can get Staffname and the ID in one query from the prescription 
+--database. Only using works here for some reason not the ON keyword, not entirely sure why
+
+UNION
+
+SELECT staffName, stockDescription
+FROM Product
+INNER JOIN
+(
+    SELECT StockCode, staffName, staffID
+    FROM NonDrugSale
+    INNER JOIN Staff
+    USING (staffID)
+)
+USING (stockCode);
+--Same procedure is carried out here as above except that it's with nondrugsale instead, to get the non drug sales, this is then connected via union and values outside are not shown 
+
+--2. Change your SQL so that it uses a set operation but outputs only rows where the product has been prescribed and sold by the same person
+-- 5 marks
+
+SELECT stockDescription AS "Product", staffName AS "Staff Member"
+FROM Product
+INNER join
+(
+    SELECT stockCode, staffName, staffID
+    FROM PrescriptionItem
+    INNER JOIN Staff
+    USING (staffID)
+)
+USING (stockCode)
+
+INTERSECT
+
+SELECT stockDescription, staffName
+FROM Product
+INNER JOIN
+(
+    SELECT StockCode, staffName, staffID
+    FROM NonDrugSale
+    INNER JOIN Staff
+    USING (staffID)
+)
+USING (stockCode);
+
+--Minor change here, same SQL essentially but intersect is used instead of union to show only the values that intersect between the two and discard the rest.
+
+
+--3. Using a set operation write the SQL to output the names of all customers, staff and products 
+--whose name/description starts with a capital letter B
+-- 10 marks
+-- You need to think about the naming of your columns
+SELECT stockDescription AS "Beginning with B" FROM Product WHERE SUBSTR(stockDescription,0,1) = 'B'
+UNION
+SELECT staffName FROM Staff WHERE SUBSTR(staffName,0,1) = 'B'
+UNION
+SELECT custName FROM Customer WHERE SUBSTR(custName,0,1) = 'B';
+
+--Simple set operation that uses union to connected statements checking the three tables for letter b which is changed with UPPER
+
+
+--4. Write the sql using a SET operation to output the names of doctors that have not appeared on a prescription
+-- 20 marks
+SELECT docName FROM Doctor
+MINUS
+SELECT docName FROM Prescription JOIN Doctor on Prescription.docID = Doctor.docID;
+
+--This selects doctornames except the ones in prescriptions using a minus statement which only shows what appears in the first statement but not the other
+
+--5. Write the SQL to output the names of doctors that appeared on a prescription but without using a SET operation
+-- think about using an inner join 
+-- 15 marks
+SELECT docName FROM Prescription
+INNER JOIN Doctor 
+ON Doctor.docID = Prescription.docID;
+
+--Simple join is used to show doctors that appear only on a prescription
+
+
+
+--6a. Write the SQL to output for each doctor their name and the number of prescriptions they appear on - you are only concerned with doctors that appear on 
+-- prescriptions. 
+-- This does not need a SET operation or an outer join
+--5 marks
+
+SELECT docName, COUNT(Prescription.docID)
+FROM Prescription
+JOIN Doctor 
+ON Doctor.docID = Prescription.docID
+GROUP BY docName;
+
+--This is similar to above but a count is used to count the prescriptions and it's grouped by docname 
+
+--6b. Write the SQL to output for each doctor their name and the number of prescriptions they appear on 
+-- but include in your output only doctors that do not appear on a prescription  
+-- prescriptions
+-- This does not need a SET operation  - you are changing the SQL for part 5
+--10 marks
+SELECT docName, COUNT(prescriptionID) FROM Prescription
+RIGHT OUTER JOIN Doctor ON Prescription.docID = Doctor.docID
+GROUP BY docName
+HAVING COUNT(prescriptionID) = 0;
+
+--This is much hearder, only way I could figure out was using a right outer join and then a count to check the count of prescriptions is 0
+
+--6c. Write the SQL using UNION and your answer to 6b and 6c (with adjustment if needed) to create a view called 
+--    DoctorLeagueTable which has two columns DoctorName and NumPrescriptions
+--    The view should include a row for each doctor their name and the number of prescriptions they appear on even if they appear on none.
+--    The rows should be sorted in order of number of prescriptions
+--10 marks
+
+DROP VIEW DoctorLeagueTable;
+
+CREATE VIEW DoctorLeagueTable AS
+    SELECT docName AS "Doctor Name", COUNT(prescriptionID) AS "Number OF Prescriptions"
+    FROM Doctor
+    INNER JOIN Prescription
+    ON Doctor.docID = Prescription.docID
+    GROUP BY docName
+UNION
+    SELECT docName, COUNT(prescriptionID)
+    FROM Prescription
+    RIGHT OUTER JOIN Doctor
+    ON Prescription.docID = Doctor.docID
+    GROUP BY docName
+    HAVING COUNT(prescriptionID) = 0
+    ORDER BY "Number OF Prescriptions" DESC;
+
+SELECT * FROM DoctorLeagueTable;
+SELECT * FROM Product;
+
+--This is the hardest, the view is created and named, it then counts the prescription as above and the statement is joined to prescription to get that value
+--Union is then used to select the doctor anema and prescription again to get the doctors that appear on nne
 
 COMMIT;
