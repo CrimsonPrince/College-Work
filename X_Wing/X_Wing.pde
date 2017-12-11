@@ -1,32 +1,30 @@
-int cols, rows;
-int scl = 20;
-int w = 2000;
-int h = 1600;
-
+import ddf.minim.*;
+Minim minim;
+AudioPlayer hyper;
 
 star[] stars = new star[4000];
 float speed = 30;
+int state = 2;
+int sound = 0;
 
 void setup() {
   fullScreen(P3D);
-  cols = w / scl;
-  rows = h/ scl;
-
 
   for (int i = 0; i < stars.length; i++) 
   {
     stars[i] = new star();
   }
+  minim = new Minim(this);
+  hyper=minim.loadFile("Millennium falcon hyperdrive effect.mp3");
 }
 
-float turn = 1;
-int location = 1;
+
 void draw() {
 
-switch(location)
+  switch(state)
   {
-    case 1: 
-    case 2:
+  case 1: 
+  case 2:
     drawspace();
   }
 }
@@ -35,24 +33,34 @@ void drawspace()
 {
   background(0);
   translate(width/2, height/2);
-  
-  for(int i = 0; i < stars.length; i++)
+
+  for (int i = 0; i < stars.length; i++)
   {
-     stars[i].staticview();
+    stars[i].staticview();
   }
-  
-  if(keyPressed)
-  {
-    if(keyCode == UP)
+
+
+    if (keyPressed)
     {
-        
+      if (keyCode == UP)
+      {
         for (int i = 0; i < stars.length; i++) 
         {
           stars[i].move();
           stars[i].create();
         }
-        
       }
     }
 }
+
+void soundplayer(AudioPlayer sound)
+{
   
+    if (sound == null)
+    {
+    return;
+    }
+    sound.rewind();
+    sound.play(); 
+   
+}
