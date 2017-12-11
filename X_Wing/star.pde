@@ -14,7 +14,7 @@ class star{
     prevz = z;
   }
   
-  void move()
+  void hyper()
   {
     z = z - speed;
     
@@ -28,7 +28,7 @@ class star{
   }
   
   
-  void create()
+  void lines()
   {
     fill(255);
     noStroke();
@@ -57,11 +57,32 @@ class star{
     noStroke();
 
     float sx = map(x / z, 0, 1, 0, width/2);
-    float sy = map(y / z, 0, 1, 0, height/2);;
+    float sy = map(y / z, 0, 1, 0, height/2);
 
    
     float r = map(z, 0, width/2, 4, 0);
     ellipse(sx, sy, r, r);
+  }
+  
+  void move()
+  {
+   
+    
+    float sx = map(x / z, 0, 1, 0, width/2);
+    float sy = map(y / z, 0, 1, 0, height/2);
+    float r = map(z, 0, width/2, 4, 0);
+    
+    sy = sy - 30;
+    ellipse(sx,sy, r, r);
+    if(sy < 1)
+    {
+      z = width/2;
+      x = random(-width/2, width/2);
+      y = random(-height/2, height/2);
+      prevz = z;
+      
+    }
+    
   }
   
 }
