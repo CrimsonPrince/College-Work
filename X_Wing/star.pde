@@ -73,13 +73,16 @@ class star {
     switch(direction)
     {
       case 1: 
+      y = y + 0.0001;
       
       case 2:
+      x = x + 0.0001;
       
       case 3:
+      x = x- 0.0001;
       
       case 4:
-      y = y - 30;
+      y = y - 0.0001;
     }
     
     ellipse(sx, sy, r, r);
@@ -88,6 +91,15 @@ class star {
       y = random(-height/2, height/2);
     }
     if (x < width * - 0.5)
+    {
+      x = random(-height/2, height/2);
+    }
+    
+    if (y < height *  0.5)
+    {
+      y = random(-height/2, height/2);
+    }
+    if (x < width *  0.5)
     {
       x = random(-height/2, height/2);
     }
