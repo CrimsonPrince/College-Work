@@ -32,11 +32,14 @@ void setup() {
   
   s = createShape();
   s.beginShape();
-  s.vertex(width* 0.5, height * 0.5);
-  s.vertex(width * 0.3, height * 0.3);
-  s.vertex(width * -0.3, height * -0.3);
-  s.vertex(width* -0.5, height * -0.5);
+  s.vertex(0, height * 0.5);
+  s.vertex(600, 600);
+  s.vertex(300, 300);
+  s.vertex(width* -0.5, 0);
   s.endShape();
+  s.setFill(color(127));
+  s.setStroke(color(255));
+  s.setStrokeWeight(4);
 }
 
 
@@ -69,7 +72,8 @@ void gui()
 {
   stroke(200);
   ellipse(100,height * 0.5, 20,20);
-  shape(s,100,100);
+  fill(255);
+  shape(s);
   
   
 }
