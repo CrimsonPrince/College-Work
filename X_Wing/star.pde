@@ -64,7 +64,7 @@ class star{
     ellipse(sx, sy, r, r);
   }
   
-  void move()
+  void move(int direction)
   {
    
     
@@ -72,15 +72,11 @@ class star{
     float sy = map(y / z, 0, 1, 0, height/2);
     float r = map(z, 0, width/2, 4, 0);
     
-    sy = sy - 30;
+    y = y - 30;
     ellipse(sx,sy, r, r);
-    if(sy < 1)
+       if(y < height * - 0.5)
     {
-      z = width/2;
-      x = random(-width/2, width/2);
       y = random(-height/2, height/2);
-      prevz = z;
-      
     }
     
   }
