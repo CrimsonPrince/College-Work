@@ -5,7 +5,7 @@ AudioPlayer opening;
 
 star[] stars = new star[4000];
 float speed = 30;
-int state = 1;
+int state = 2;
 int sound = 0;
 PFont f;
 PFont f2;
@@ -13,14 +13,13 @@ PImage logo;
 
 void soundplayer(AudioPlayer sound)
 {
-  
-    if (sound == null)
-    {
+
+  if (sound == null)
+  {
     return;
-    }
-    sound.rewind();
-    sound.play(); 
-   
+  }
+  sound.rewind();
+  sound.play();
 }
 
 void setup() {
@@ -45,59 +44,69 @@ void draw() {
   switch(state)
   {
   case 1: 
-  title();
-  break;
-  
+    title();
+    break;
+
   case 2:
     drawspace();
     movement();
     gui();
     break;
+    
+   case 3:
+     death();
+     break;
   }
 }
 
+
+void death()
+{
+ background(0); 
+ fill(200);
+ rect(0,0, width * 0.3,height);
+}
 void drawspace()
 {
   background(0);
   translate(width/2, height/2);
-  
-  
+
+
   for (int i = 0; i < stars.length; i++)
   {
     stars[i].staticview();
   }
-   
 }
 
 void gui()
 {
-  stroke(60,56,73);
+  stroke(60, 56, 73);
   strokeWeight(20);
   //ellipse(width * -0.5,height * 0.5, 20,20);
   fill(200);
-  quad(width * 0.5, height * 0.5, width * 0.3, height * 0.1,  width * -0.3, height * 0.1, width * -0.5, height * 0.5);
+  quad(width * 0.5, height * 0.5, width * 0.3, height * 0.1, width * -0.3, height * 0.1, width * -0.5, height * 0.5);
   line(width * 0.3, height * 0.1, width *  0.5, height * - 0.3);
   line(width * -0.3, height * 0.1, width *  -0.5, height * - 0.3);
   
-  
+  drawHex(0, height * 0.3, 200);
 }
 
-  float x = 500;
-  float y = height * 10;
-  float z = 0;
-  
+float x = 500;
+float y = height * 10;
+float z = 0;
+
 void title()
 {
-  
+
   background(0);
   int fontsize = 45;
   rotateX(PI/4);
   stroke(0);
   strokeWeight(5);
-  fill(229,177,58);
+  fill(229, 177, 58);
   textFont(f, fontsize);
   textAlign(CENTER);
-  image(logo, 0, 10);
+  image(logo, width/2 - 100, y-200, 200, 200 );
   //text("STARWARS", width/2, y, z);
   fontsize = 20;
   textFont(f2, fontsize);
@@ -114,57 +123,70 @@ void title()
   text("custodian of the stolen plans that can save her people", width/2, y+600, z);
   text("and restore freedom to the galaxy....", width/2, y+650, z);
   y = y - 0.4;
+  
+   for (int i = 0; i < stars.length; i++)
+  {
+    stars[i].staticview();
+  }
+
+  if (keyPressed)
+  {
+
+    if (key == ' ')
+    {
+      state = 2;
+    }
+  }
 }
 
 void movement()
 {
   int direction;
-  
+
   if (keyPressed)
+  {
+    if (key == ' ')
     {
-      if (key == ' ')
+      for (int i = 0; i < stars.length; i++) 
       {
-        for (int i = 0; i < stars.length; i++) 
-        {
-          stars[i].hyper();
-          stars[i].lines();
-        }
+        stars[i].hyper();
+        stars[i].lines();
       }
-      
-      if (keyCode == UP)
+    }
+
+    if (keyCode == UP)
+    {
+      for (int i = 0; i < stars.length; i++) 
       {
-       for (int i = 0; i < stars.length; i++) 
-        {
-          direction = 2;
-          stars[i].move(direction);
-        }
+        direction = 2;
+        stars[i].move(direction);
       }
-      
-      if (keyCode == LEFT)
+    }
+
+    if (keyCode == LEFT)
+    {
+      for (int i = 0; i < stars.length; i++) 
       {
-       for (int i = 0; i < stars.length; i++) 
-        {
-          direction = 2;
-          stars[i].move(direction);
-        }
+        direction = 2;
+        stars[i].move(direction);
       }
-      if (keyCode == RIGHT)
+    }
+    if (keyCode == RIGHT)
+    {
+      for (int i = 0; i < stars.length; i++) 
       {
-       for (int i = 0; i < stars.length; i++) 
-        {
-          direction = 3;
-          stars[i].move(direction);
-        }
+        direction = 3;
+        stars[i].move(direction);
       }
-      
-      if (keyCode == DOWN)
+    }
+
+    if (keyCode == DOWN)
+    {
+      for (int i = 0; i < stars.length; i++) 
       {
-       for (int i = 0; i < stars.length; i++) 
-        {
-          direction = 4;
-          stars[i].move(direction);
-        }
+        direction = 4;
+        stars[i].move(direction);
       }
-      
-    } 
+    }
+  }
 }
