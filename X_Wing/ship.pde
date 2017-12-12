@@ -1,6 +1,6 @@
 class ship {
   
-  float x,y;
+  float x,y = 0;
  
  void drawtie(float sx, float sy)
  {

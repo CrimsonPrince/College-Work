@@ -1,10 +1,16 @@
 class training
 {
+  
+  int i = 0;
+  ship ship1;
+  training()
+  {
+    ship1 = new ship();
+  }
+    
   void startT()
   {
-    int i;
-    ship ship1;
-    ship1 = new ship();
+    
 
     for (i = ships.size() - 1; i >= 0; i--)
     {
@@ -26,9 +32,7 @@ class training
 
   void runT()
   {
-    int i;
-    ship ship1;
-    ship1 = new ship();
+    
 
     if (ships.size() != 0)
     {

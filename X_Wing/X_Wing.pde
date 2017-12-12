@@ -4,7 +4,7 @@ AudioPlayer hyper;
 AudioPlayer opening;
 AudioPlayer laser;
 AudioPlayer explosion;
-AudioPlayer seek;
+AudioPlayer seekS;
 
 //normal global
 star[] stars = new star[4000];
@@ -13,6 +13,7 @@ float speed = 30;
 int state = 1;
 int sound = 0;
 boolean move;
+boolean seek;
 //For use in title screen
 float x = 500;
 float y = height * 14;
@@ -123,14 +124,13 @@ void gui()
   strokeWeight(20);
   //ellipse(width * -0.5,height * 0.5, 20,20);
   fill(200);
-  quad(width * 0.5, height * 0.5, width * 0.3, height * 0.1, width * -0.3, height * 0.1, width * -0.5, height * 0.5);
-  line(width * 0.3, height * 0.1, width *  0.5, height * - 0.3);
-  line(width * -0.3, height * 0.1, width *  -0.5, height * - 0.3);
+  quad(0, height, width * 0.15, height * 0.6, width * 0.85, height * 0.6, width , height);
+  line(width * 0.15, height * 0.6, 0 , 0);
+  line(width * 0.85, height * 0.6, width, 0);
   
-  p.drawHex(0, height * 0.3, 200);
-  popMatrix();
+  p.drawHex(width/2, height * 0.8 , 200);
 }
-int i;
+
 
   void mousePressed()
   {
