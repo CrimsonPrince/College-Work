@@ -90,6 +90,7 @@ void draw() {
     gui();
     aim.drawaim();
     b.drawB();
+    T1.runT();
     break;
     
    case 3:
@@ -101,6 +102,7 @@ void draw() {
 void drawspace()
 {
   background(0);
+  pushMatrix();
   translate(width/2, height/2);
 
 
@@ -121,4 +123,16 @@ void gui()
   line(width * -0.3, height * 0.1, width *  -0.5, height * - 0.3);
   
   p.drawHex(0, height * 0.3, 200);
+  popMatrix();
 }
+int i;
+
+  void mousePressed()
+  {
+     
+    //training mode
+    if (dist(mouseX, mouseY,b.tx,b.ty)<=60)
+    {
+      T1.startT();
+    }
+  }

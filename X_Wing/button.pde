@@ -1,11 +1,14 @@
 class button {
 
   float tx, ty;
-
+  float T = 0;
+  
+  
+  
   button()
   {
-    this.tx = width * 0.2;
-    this.ty = height * 0.4;
+    this.tx = width * 0.8;
+    this.ty = height * 0.8;
   }
 
   void drawB()
@@ -13,13 +16,7 @@ class button {
   { 
     //Training Mode Button
     fill(255, 0, 0);
-    ellipse(tx, ty, 100, 100);
-  }
-  
-  void mousePressed()
-  {
-        println("Hi");
-    
+    ellipse(tx,ty,100,100);
   }
 
 }

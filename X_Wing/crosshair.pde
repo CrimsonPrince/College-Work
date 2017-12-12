@@ -12,11 +12,6 @@ class crosshair{
     }
     
   }
-  
-  void check()
-  {
-    
-    
-  }
+ 
   
 }
