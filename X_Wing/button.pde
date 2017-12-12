@@ -1,7 +1,7 @@
 class button {
 
   float tx, ty;
-  
+
   button()
   {
     this.tx = width * 0.2;
@@ -15,19 +15,11 @@ class button {
     fill(255, 0, 0);
     ellipse(tx, ty, 100, 100);
   }
-
-  void detect()
+  
+  void mousePressed()
   {
-
-    if (mousePressed)
-    {
-      if (mouseX > tx )
-      {
-        if(mouseX < tx + 100)
-        {
-            state = 1;
-        }
-      }
-    }
+        println("Hi");
+    
   }
+
 }
