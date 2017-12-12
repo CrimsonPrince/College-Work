@@ -35,7 +35,6 @@ move moved;
 button b;
 
 
-
 void soundplayer(AudioPlayer sound)
 {
 
@@ -93,10 +92,10 @@ void draw() {
     drawspace();
     moved.movement();
     gui();
+    T1.runT();
     aim.drawaim();
     aim.fire();
     b.drawB();
-    T1.runT();
     break;
     
    case 3:
@@ -129,6 +128,24 @@ void gui()
   line(width * 0.85, height * 0.6, width, 0);
   
   p.drawHex(width/2, height * 0.8 , 200);
+  
+  if(seek)
+  {
+    fill(255);
+    textSize(30);
+    text("TIE FIGHTER",width/2 + 10, height * 0.8 -100);
+    image(tie, width/2 -45, height * 0.8 -30,100,100);
+    textSize(30);
+    text("Shield",width/2 + 120, height * 0.8);
+    text("0%",width/2 + 120, height * 0.8 + 30);
+    text("Firepower",width/2 - 110, height * 0.8);
+    text("100%",width/2 - 120, height * 0.8 + 30);
+    
+    if(aim.t == 1)
+    {
+         ships.remove(0);
+    }
+  }
 }
 
 

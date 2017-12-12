@@ -15,13 +15,17 @@ class crosshair {
     ship1 = new ship();
     if(ships.size() > 0)
     {
-      for (i=0; i < 3; i++)
+      for (i = ships.size() - 1; i >= 0; i--)
       {
         ship1=ships.get(i);
         
-        if(dist(mouseX, mouseY, ship1.x,ship1.y) <= 30)
+        if(dist(mouseX, mouseY, ship1.x,ship1.y) <= 60)
         {
           seek = true;
+        }
+        else
+        {
+          seek = false;
         }
       }
     }
@@ -42,6 +46,7 @@ class crosshair {
         t = 0;
       }
       soundplayer(laser);
+      
 
       /* stroke(0,0,255);
        line(lx,ly,lx,ly+50);

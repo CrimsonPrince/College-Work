@@ -36,7 +36,7 @@ class training
 
     if (ships.size() != 0)
     {
-      for (i=0; i < 3; i++)
+      for (i = ships.size() - 1; i >= 0; i--)
       {
         ship1=ships.get(i);
         ship1.drawtie(ship1.x, ship1.y);
