@@ -53,6 +53,7 @@ class star {
 
     fill(255);
     noStroke();
+    strokeWeight(1);
 
     float sx = map(x / z, 0, 1, 0, width/2);
     float sy = map(y / z, 0, 1, 0, height/2);
@@ -73,7 +74,7 @@ class star {
     switch(direction)
     {
       case 1: 
-      y = y + 0.0001;
+      y = y + 0.1;
       
       case 2:
       x = x + 0.0001;
