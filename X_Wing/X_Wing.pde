@@ -12,6 +12,7 @@ ArrayList<ship> ships = new ArrayList<ship>();
 float speed = 30;
 int state = 1;
 int sound = 0;
+int ammo = 3;
 boolean move;
 boolean seek;
 //For use in title screen
@@ -60,6 +61,8 @@ void setup() {
   hyper=minim.loadFile("Millennium falcon hyperdrive effect.mp3");
   opening=minim.loadFile("Op1.mp3");
   laser = minim.loadFile("laser.aiff");
+  explosion = minim.loadFile("explosion.aiff");
+  seekS = minim.loadFile("seek.aiff");
   soundplayer(opening);
   
   //fonts and text
@@ -140,10 +143,15 @@ void gui()
     text("0%",width/2 + 120, height * 0.8 + 30);
     text("Firepower",width/2 - 110, height * 0.8);
     text("100%",width/2 - 120, height * 0.8 + 30);
-    
+    soundplayer(seekS);
+    seek = false;
     if(aim.t == 1)
     {
+      if(ships.size() > 0)
+      {
          ships.remove(0);
+         soundplayer(explosion);
+      }
     }
   }
 }
