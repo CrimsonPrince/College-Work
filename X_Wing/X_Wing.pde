@@ -11,8 +11,11 @@ PFont f;
 PFont f2;
 PImage logo;
 PImage tie;
+PImage cross;
 control p;
-tie tie1;
+ship ship1;
+crosshair aim;
+boolean move;
 
 void soundplayer(AudioPlayer sound)
 {
@@ -41,7 +44,10 @@ void setup() {
   f2 = createFont("News Gothic Bold.otf", 16, true);
   logo = loadImage("logo.png");
   tie = loadImage("tie2.gif");
-  tie1 = new tie();
+  cross = loadImage("cross.png");
+  cross.resize(70,70);
+  aim = new crosshair();
+  ship1 = new ship();
   soundplayer(opening);
 }
 
@@ -58,6 +64,7 @@ void draw() {
     drawspace();
     movement();
     gui();
+    aim.drawaim();
     break;
     
    case 3:
@@ -96,7 +103,9 @@ void gui()
   line(width * -0.3, height * 0.1, width *  -0.5, height * - 0.3);
   
   p.drawHex(0, height * 0.3, 200);
-  tie1.drawtie(100.0,100.0);
+  ship1.drawtie(0,height * -0.3);
+  ship1.drawtie(width * 0.1,height * -0.3);
+  ship1.drawtie(width * -0.1,height * -0.3);
 }
 
 float x = 500;
@@ -157,6 +166,7 @@ void movement()
     {
       for (int i = 0; i < stars.length; i++) 
       {
+        move = true;
         stars[i].hyper();
         stars[i].lines();
       }
@@ -166,6 +176,7 @@ void movement()
     {
       for (int i = 0; i < stars.length; i++) 
       {
+        move = true;
         direction = 2;
         stars[i].move(direction);
       }
@@ -175,6 +186,7 @@ void movement()
     {
       for (int i = 0; i < stars.length; i++) 
       {
+        move = true;
         direction = 2;
         stars[i].move(direction);
       }
@@ -183,6 +195,7 @@ void movement()
     {
       for (int i = 0; i < stars.length; i++) 
       {
+        move = true;
         direction = 3;
         stars[i].move(direction);
       }
@@ -192,6 +205,7 @@ void movement()
     {
       for (int i = 0; i < stars.length; i++) 
       {
+        move = true;
         direction = 4;
         stars[i].move(direction);
       }
