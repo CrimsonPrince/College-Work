@@ -30,16 +30,6 @@ void setup() {
   minim = new Minim(this);
   hyper=minim.loadFile("Millennium falcon hyperdrive effect.mp3");
   
-  s = createShape();
-  s.beginShape();
-  s.vertex(0, height * 0.5);
-  s.vertex(600, 600);
-  s.vertex(300, 300);
-  s.vertex(width* -0.5, 0);
-  s.endShape();
-  s.setFill(color(127));
-  s.setStroke(color(255));
-  s.setStrokeWeight(4);
 }
 
 
@@ -71,9 +61,12 @@ void drawspace()
 void gui()
 {
   stroke(200);
-  ellipse(100,height * 0.5, 20,20);
+  strokeWeight(20);
+  //ellipse(width * -0.5,height * 0.5, 20,20);
   fill(255);
-  shape(s);
+  quad(width * 0.5, height * 0.5, width * 0.3, height * 0.1,  width * -0.3, height * 0.1, width * -0.5, height * 0.5);
+  line(width * 0.3, height * 0.1, width *  0.5, height * - 0.3);
+  line(width * -0.3, height * 0.1, width *  -0.5, height * - 0.3);
   
   
 }
