@@ -162,7 +162,11 @@ void gui()
     //laser fire
     if(mouseY < height * 0.6)
     {
-      aim.t = 1;
+      if(ammo > 0)
+      {
+        aim.t = 1;
+        ammo--;
+      }
     }
      
     //training mode
