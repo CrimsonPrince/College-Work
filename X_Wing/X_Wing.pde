@@ -9,6 +9,7 @@ int state = 1;
 int sound = 0;
 PFont f;
 PFont f2;
+PImage logo;
 
 void soundplayer(AudioPlayer sound)
 {
@@ -34,6 +35,8 @@ void setup() {
   opening=minim.loadFile("Op1.mp3");
   f = createFont("Starjhol.ttf", 16, true);
   f2 = createFont("News Gothic Bold.otf", 16, true);
+  logo = loadImage("logo.png");
+  soundplayer(opening);
 }
 
 
@@ -85,7 +88,7 @@ void gui()
   
 void title()
 {
-  soundplayer(opening);
+  
   background(0);
   int fontsize = 45;
   rotateX(PI/4);
@@ -94,7 +97,8 @@ void title()
   fill(229,177,58);
   textFont(f, fontsize);
   textAlign(CENTER);
-  text("STARWARS", width/2, y, z);
+  image(logo, 0, 10);
+  //text("STARWARS", width/2, y, z);
   fontsize = 20;
   textFont(f2, fontsize);
   text("A long Time Ago,", width/2, y+100, z);
