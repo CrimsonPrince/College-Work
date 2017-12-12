@@ -1,17 +1,5 @@
 class training
 {
-
-  training()
-  {
-    x = width * 0.2;
-    y = height * 0.4;
-  }
-
-  void drawT()
-  {
-    fill(255, 0, 0);
-    ellipse(x, y, 100, 100);
-  }
   void startT()
   {
     int i;
@@ -30,15 +18,7 @@ class training
     for (i=0; i < 3; i++)
     {
       ship1=ships.get(i);
-      ship1.drawtie(100,100);
-
-      if (mousePressed)
-      {
-        if (mouseX > x && mouseX < x + 100 && mouseY > y && mouseY < y + 100)
-        {
-          state = 1;
-        }
-      }
+      ship1.drawtie(100, 100);
     }
   }
 }
