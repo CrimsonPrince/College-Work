@@ -4,6 +4,7 @@ AudioPlayer hyper;
 AudioPlayer opening;
 
 star[] stars = new star[4000];
+ArrayList<ship> ships = new ArrayList(ship);
 float speed = 30;
 int state = 2;
 int sound = 0;
