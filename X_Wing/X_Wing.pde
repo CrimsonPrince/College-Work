@@ -60,6 +60,7 @@ void setup() {
   hyper=minim.loadFile("Millennium falcon hyperdrive effect.mp3");
   opening=minim.loadFile("Op1.mp3");
   laser = minim.loadFile("laser.aiff");
+  soundplayer(opening);
   
   //fonts and text
   f = createFont("Starjhol.ttf", 16, true);
@@ -72,7 +73,6 @@ void setup() {
   //classes
   T1 = new training();
   aim = new crosshair();
-  soundplayer(opening);
   title = new title();
   moved = new move();
   b = new button();
