@@ -17,6 +17,7 @@ class star {
   void hyper()
   {
     z = z - speed;
+    
 
     if (z < 1) {
       z = width/2;

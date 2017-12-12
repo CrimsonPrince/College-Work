@@ -49,13 +49,13 @@ void soundplayer(AudioPlayer sound)
 
 void setup() {
   fullScreen(P3D);
-  
+
   //initializing star
   for (int i = 0; i < stars.length; i++) 
   {
     stars[i] = new star();
   }
-  
+
   //sound 
   minim = new Minim(this);
   hyper=minim.loadFile("Millennium falcon hyperdrive effect.mp3");
@@ -64,15 +64,15 @@ void setup() {
   explosion = minim.loadFile("explosion.aiff");
   seekS = minim.loadFile("seek.aiff");
   soundplayer(opening);
-  
+
   //fonts and text
   f = createFont("Starjhol.ttf", 16, true);
   f2 = createFont("News Gothic Bold.otf", 16, true);
   logo = loadImage("logo.png");
   tie = loadImage("tie2.gif");
   cross = loadImage("cross.png");
-  cross.resize(70,70);
-  
+  cross.resize(70, 70);
+
   //classes
   T1 = new training();
   aim = new crosshair();
@@ -99,10 +99,11 @@ void draw() {
     aim.drawaim();
     aim.fire();
     b.drawB();
+    move = false;
     break;
-    
-   case 3:
-     break;
+
+  case 3:
+    break;
   }
 }
 
@@ -126,52 +127,55 @@ void gui()
   strokeWeight(20);
   //ellipse(width * -0.5,height * 0.5, 20,20);
   fill(200);
-  quad(0, height, width * 0.15, height * 0.6, width * 0.85, height * 0.6, width , height);
-  line(width * 0.15, height * 0.6, 0 , 0);
+  quad(0, height, width * 0.15, height * 0.6, width * 0.85, height * 0.6, width, height);
+  line(width * 0.15, height * 0.6, 0, 0);
   line(width * 0.85, height * 0.6, width, 0);
-  
-  p.drawHex(width/2, height * 0.8 , 200);
-  
-  if(seek)
+
+  p.drawHex(width/2, height * 0.8, 200);
+
+  if (seek)
   {
     fill(255);
     textSize(30);
-    text("TIE FIGHTER",width/2 + 10, height * 0.8 -100);
-    image(tie, width/2 -45, height * 0.8 -30,100,100);
+    text("TIE FIGHTER", width/2 + 10, height * 0.8 -100);
+    image(tie, width/2 -45, height * 0.8 -30, 100, 100);
     textSize(30);
-    text("Shield",width/2 + 120, height * 0.8);
-    text("0%",width/2 + 120, height * 0.8 + 30);
-    text("Firepower",width/2 - 110, height * 0.8);
-    text("100%",width/2 - 120, height * 0.8 + 30);
+    text("Shield", width/2 + 120, height * 0.8);
+    text("0%", width/2 + 120, height * 0.8 + 30);
+    text("Firepower", width/2 - 110, height * 0.8);
+    text("100%", width/2 - 120, height * 0.8 + 30);
     soundplayer(seekS);
     seek = false;
-    if(aim.t == 1)
+    if (aim.t == 1)
     {
-      if(ships.size() > 0)
+      if (ships.size() > 0)
       {
-         ships.remove(0);
-         soundplayer(explosion);
+        ships.remove(0);
+        soundplayer(explosion);
       }
     }
   }
 }
 
 
-  void mousePressed()
+void mousePressed()
+{
+  if (move == false)
   {
     //laser fire
-    if(mouseY < height * 0.6)
+    if (mouseY < height * 0.6)
     {
-      if(ammo > 0)
+      if (ammo > 0)
       {
         aim.t = 1;
         ammo--;
       }
     }
-     
+
     //training mode
-    if (dist(mouseX, mouseY,b.tx,b.ty)<=60)
+    if (dist(mouseX, mouseY, b.tx, b.ty)<=60)
     {
       T1.startT();
     }
   }
+}
