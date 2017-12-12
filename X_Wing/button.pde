@@ -15,6 +15,7 @@ class button {
 
   { 
     //Training Mode Button
+    stroke(60, 56, 73);
     fill(255, 0, 0);
     ellipse(tx,ty,100,100);
   }

@@ -2,6 +2,9 @@ import ddf.minim.*;
 Minim minim;
 AudioPlayer hyper;
 AudioPlayer opening;
+AudioPlayer laser;
+AudioPlayer explosion;
+AudioPlayer seek;
 
 //normal global
 star[] stars = new star[4000];
@@ -56,6 +59,7 @@ void setup() {
   minim = new Minim(this);
   hyper=minim.loadFile("Millennium falcon hyperdrive effect.mp3");
   opening=minim.loadFile("Op1.mp3");
+  laser = minim.loadFile("laser.aiff");
   
   //fonts and text
   f = createFont("Starjhol.ttf", 16, true);
@@ -89,6 +93,7 @@ void draw() {
     moved.movement();
     gui();
     aim.drawaim();
+    aim.fire();
     b.drawB();
     T1.runT();
     break;
@@ -129,6 +134,11 @@ int i;
 
   void mousePressed()
   {
+    //laser fire
+    if(mouseY < height * 0.6)
+    {
+      aim.t = 1;
+    }
      
     //training mode
     if (dist(mouseX, mouseY,b.tx,b.ty)<=60)
