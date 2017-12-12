@@ -31,10 +31,9 @@ void setup() {
   }
   minim = new Minim(this);
   hyper=minim.loadFile("Millennium falcon hyperdrive effect.mp3");
-  opening=minim.loadFile("Star Wars Episode IV Opening Crawl.mp3");
+  opening=minim.loadFile("Op1.mp3");
   f = createFont("Starjhol.ttf", 16, true);
   f2 = createFont("News Gothic Bold.otf", 16, true);
-  soundplayer(opening);
 }
 
 
@@ -86,6 +85,7 @@ void gui()
   
 void title()
 {
+  soundplayer(opening);
   background(0);
   int fontsize = 45;
   rotateX(PI/4);
