@@ -4,7 +4,7 @@ AudioPlayer hyper;
 AudioPlayer opening;
 
 star[] stars = new star[4000];
-ArrayList<ship> ships = new ArrayList(ship);
+ArrayList<ship> ships = new ArrayList<ship>();
 float speed = 30;
 int state = 2;
 int sound = 0;
@@ -14,9 +14,9 @@ PImage logo;
 PImage tie;
 PImage cross;
 control p;
-ship ship1;
 crosshair aim;
 boolean move;
+training T1;
 
 void soundplayer(AudioPlayer sound)
 {
@@ -46,9 +46,9 @@ void setup() {
   logo = loadImage("logo.png");
   tie = loadImage("tie2.gif");
   cross = loadImage("cross.png");
+  T1 = new training();
   cross.resize(70,70);
   aim = new crosshair();
-  ship1 = new ship();
   soundplayer(opening);
 }
 
@@ -66,6 +66,8 @@ void draw() {
     movement();
     gui();
     aim.drawaim();
+    T1.drawT();
+    T1.startT();
     break;
     
    case 3:
@@ -104,9 +106,6 @@ void gui()
   line(width * -0.3, height * 0.1, width *  -0.5, height * - 0.3);
   
   p.drawHex(0, height * 0.3, 200);
-  ship1.drawtie(0,height * -0.3);
-  ship1.drawtie(width * 0.1,height * -0.3);
-  ship1.drawtie(width * -0.1,height * -0.3);
 }
 
 float x = 500;
