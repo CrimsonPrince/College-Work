@@ -1,6 +1,6 @@
 class crosshair {
 
-  int t, i;
+  int t, f,i;
   float lx = width;
   float ly = height;
   void drawaim()
@@ -11,9 +11,7 @@ class crosshair {
     } else
     {
       cursor(ARROW);
-    }
-    
-    ship ship1;
+    }ship ship1;
     ship1 = new ship();
     if(ships.size() > 0)
     {
@@ -21,9 +19,9 @@ class crosshair {
       {
         ship1=ships.get(i);
         
-        if(dist(mouseX, mouseY, ship1.x,ship1.y) == 30)
+        if(dist(mouseX, mouseY, ship1.x,ship1.y) <= 30)
         {
-          println("Hi");
+          seek = true;
         }
       }
     }
@@ -36,11 +34,11 @@ class crosshair {
       stroke(0, 255, 0);
       line(lx, ly, mouseX, mouseY);
 
-      i = i + 1;
+      f = f + 1;
 
-      if (i == 10)
+      if (f == 10)
       {
-        i=0;
+        f=0;
         t = 0;
       }
       soundplayer(laser);

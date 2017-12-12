@@ -56,5 +56,6 @@ class move
         }
       }
     }
+    popMatrix();
   }
 }
