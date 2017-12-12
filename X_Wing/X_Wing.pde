@@ -10,6 +10,9 @@ int sound = 0;
 PFont f;
 PFont f2;
 PImage logo;
+PImage tie;
+control p;
+tie tie1;
 
 void soundplayer(AudioPlayer sound)
 {
@@ -29,12 +32,16 @@ void setup() {
   {
     stars[i] = new star();
   }
+  
+  p = new control();
   minim = new Minim(this);
   hyper=minim.loadFile("Millennium falcon hyperdrive effect.mp3");
   opening=minim.loadFile("Op1.mp3");
   f = createFont("Starjhol.ttf", 16, true);
   f2 = createFont("News Gothic Bold.otf", 16, true);
   logo = loadImage("logo.png");
+  tie = loadImage("tie2.gif");
+  tie1 = new tie();
   soundplayer(opening);
 }
 
@@ -88,7 +95,8 @@ void gui()
   line(width * 0.3, height * 0.1, width *  0.5, height * - 0.3);
   line(width * -0.3, height * 0.1, width *  -0.5, height * - 0.3);
   
-  drawHex(0, height * 0.3, 200);
+  p.drawHex(0, height * 0.3, 200);
+  tie1.drawtie(100.0,100.0);
 }
 
 float x = 500;
