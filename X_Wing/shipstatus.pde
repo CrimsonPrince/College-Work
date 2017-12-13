@@ -17,7 +17,11 @@ class shipstatus
     fill(255,0,0);
     if(dist(mouseX, mouseY,x,y) <= 125)
     {
-      
+     fill(255);
+     text("Shield Status 100%",width * 0.5 ,height * 0.72);
+     text("Heat Level",width * 0.5 ,height * 0.75);
+     text(ammo,width * 0.53    ,height * 0.75);
+     
     }
   }
 }

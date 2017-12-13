@@ -67,11 +67,30 @@ class star {
 
   void move(int direction)
   {
-    s1.speedV = - 1;
+    
     speed = 0.1;
-    float sx = map(x , 0, 1, 0, width/2);
-    float sy = map(y, 0, 1, 0, height/2);
+    z = z - speed;
+
+    if (z < 1) {
+      z = width/2;
+      x = random(-width/2, width/2);
+      y = random(-height/2, height/2);
+      prevz = z;
+    }
+    
+    s1.speedV = - 1;
+    //float sx = map(x , 0, 1, 0, width/2);
+    //float sy = map(y, 0, 1, 0, height/2);
+    //float r = map(z, 0, width/2, 4, 0);
+    
+     float sx = map(x / z, 0, 1, 0, width/2);
+    float sy = map(y / z, 0, 1, 0, height/2); 
     float r = map(z, 0, width/2, 4, 0);
+    ellipse(sx, sy, r, r);
+
+    prevz = z;
+
+    stroke(255);
     
     switch(direction)
     {
