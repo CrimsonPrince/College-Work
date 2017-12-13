@@ -18,8 +18,17 @@ class speed
 
     if (move)
     {
-      fill(255);
-      text("4 Parsec", sx, sy + 50);
+      if(speedV > 0)
+      {
+        fill(255);
+        text(int(speedV), sx + 145, sy + 50);
+        text("Parsec", sx + 45, sy + 50);
+      }
+      else
+      {
+        fill(255);
+        text("Sublight", sx + 100, sy + 50);
+      }
     }
   }
 }

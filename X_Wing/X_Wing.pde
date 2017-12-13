@@ -101,10 +101,7 @@ void draw() {
     aim.drawaim();
     aim.fire();
     b.drawB();
-    s1.display();
-    break;
-
-  case 3:
+    s1.displays();
     break;
   }
 }
