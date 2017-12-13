@@ -34,6 +34,7 @@ training T1;
 title title;
 move moved;
 button b;
+speed s1;
 
 
 void soundplayer(AudioPlayer sound)
@@ -80,6 +81,7 @@ void setup() {
   moved = new move();
   b = new button();
   p = new control();
+  s1 = new speed();
 }
 
 
@@ -99,7 +101,7 @@ void draw() {
     aim.drawaim();
     aim.fire();
     b.drawB();
-    move = false;
+    s1.display();
     break;
 
   case 3:
