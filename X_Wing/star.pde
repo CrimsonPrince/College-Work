@@ -127,3 +127,21 @@ class star {
     }
   }
 }
+
+class planet extends star
+{
+  void drawP()
+  {
+    float z,r,s,f;
+    pushMatrix();
+    noStroke();
+    z = random(0,800);
+    r = random(0,width);
+    s = random(0,height);
+    f = random(0,50);
+    translate(width/r, height/s,z);
+    sphere(f);
+    popMatrix();
+  }
+  
+}
