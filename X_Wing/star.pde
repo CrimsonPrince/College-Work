@@ -128,17 +128,19 @@ class star {
   }
 }
 
-float fs = 100;
+float fs = 0;
 
 class Planet extends star
 {
   float z,r,s,count;
+  color c;
   
   Planet()
   {
     z = random(0,100);
     r = random(0,width - 200);
     s = random(0,height * 0.6 );
+    c = color(random(255),random(255),random(255));
     
   }
   void drawP()
@@ -146,24 +148,36 @@ class Planet extends star
     
     pushMatrix();
     noStroke();
+    fill(c);
     translate(r,s,z);
-    fill(255,0,0);
     sphere(fs);
-    popMatrix();
-    
     if(move)
     {
-      fs--;
+      fs++;
       
     }
     
-    if(fs > 200 || fs < -200)
+    if(fs > 150)
     {
-      fs = 0;
-      z = random(0,100);
-    r = random(0,width - 200);
-    s = random(0,height * 0.6 );
+      fs = - 150;
     }
+    
+    if(fs == -1)
+    {
+       z = random(0,100);
+      r = random(0,width - 200);
+      s = random(0,height * 0.6 );
+      fs = 0;
+      c = color(random(255),random(255),random(255));
+    }
+    
+    
+    if(dist(mouseX, mouseY, r , y ) < fs)
+    {
+      
+      println(fs);
+    }
+    popMatrix();
   }
 }
   
