@@ -35,6 +35,7 @@ title title;
 move moved;
 button b;
 speed s1;
+Radar radar;
 
 
 void soundplayer(AudioPlayer sound)
@@ -82,6 +83,7 @@ void setup() {
   b = new button();
   p = new control();
   s1 = new speed();
+  radar = new Radar(width * 0.8, height * 0.85, 100, 0.5, color(0, 255, 0));
 }
 
 
@@ -102,6 +104,8 @@ void draw() {
     aim.fire();
     b.drawB();
     s1.displays();
+    radar.render();
+    radar.update();
     break;
   }
 }
