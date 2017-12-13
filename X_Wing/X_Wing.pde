@@ -26,6 +26,7 @@ PFont f2;
 PImage logo;
 PImage tie;
 PImage cross;
+PImage xwing;
 
 //classes
 control p;
@@ -36,6 +37,7 @@ move moved;
 button b;
 speed s1;
 Radar radar;
+shipstatus status;
 
 
 void soundplayer(AudioPlayer sound)
@@ -73,6 +75,7 @@ void setup() {
   logo = loadImage("logo.png");
   tie = loadImage("tie2.gif");
   cross = loadImage("cross.png");
+  xwing = loadImage("xwing.gif");
   cross.resize(70, 70);
 
   //classes
@@ -84,6 +87,7 @@ void setup() {
   p = new control();
   s1 = new speed();
   radar = new Radar(width * 0.8, height * 0.85, 100, 0.5, color(0, 255, 0));
+  status = new shipstatus();
 }
 
 
@@ -106,6 +110,7 @@ void draw() {
     s1.displays();
     radar.render();
     radar.update();
+    status.displaystatus();
     break;
   }
 }
