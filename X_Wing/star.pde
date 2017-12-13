@@ -16,6 +16,7 @@ class star {
 
   void hyper()
   {
+    speed = 30;
     z = z - speed;
     s1.speedV = s1.speedV + 0.00001;
 
@@ -67,7 +68,7 @@ class star {
   void move(int direction)
   {
     s1.speedV = - 1;
-
+    speed = 0.1;
     float sx = map(x , 0, 1, 0, width/2);
     float sy = map(y, 0, 1, 0, height/2);
     float r = map(z, 0, width/2, 4, 0);
