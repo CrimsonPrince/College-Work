@@ -19,6 +19,7 @@ boolean seek;
 float x = 500;
 float y = height * 14;
 float z = 0;
+int kill;
 
 //font and text
 PFont f;
@@ -160,6 +161,7 @@ void gui()
       {
         ships.remove(0);
         soundplayer(explosion);
+        kill++;
       }
     }
   }

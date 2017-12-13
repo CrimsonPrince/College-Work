@@ -18,10 +18,12 @@ class shipstatus
     if(dist(mouseX, mouseY,x,y) <= 125)
     {
      fill(255);
+     textFont(f2, 20);
      text("Shield Status 100%",width * 0.5 ,height * 0.72);
      text("Heat Level",width * 0.5 ,height * 0.75);
      text(ammo,width * 0.53    ,height * 0.75);
-     
+     text("Ships Destroyed",width * 0.5 ,height * 0.78); 
+     text(kill/3 , width * 0.55 ,height * 0.78);
     }
   }
 }
