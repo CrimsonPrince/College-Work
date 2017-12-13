@@ -121,27 +121,49 @@ class star {
     {
       y = random(-height/2, height/2);
     }
-    if (x < width *  0.5)
+      if (x < width *  0.5)
     {
       x = random(-height/2, height/2);
     }
   }
 }
 
-class planet extends star
+float fs = 100;
+
+class Planet extends star
 {
+  float z,r,s,count;
+  
+  Planet()
+  {
+    z = random(0,100);
+    r = random(0,width - 200);
+    s = random(0,height * 0.6 );
+    
+  }
   void drawP()
   {
-    float z,r,s,f;
+    
     pushMatrix();
     noStroke();
-    z = random(0,800);
-    r = random(0,width);
-    s = random(0,height);
-    f = random(0,50);
-    translate(width/r, height/s,z);
-    sphere(f);
+    translate(r,s,z);
+    fill(255,0,0);
+    sphere(fs);
     popMatrix();
+    
+    if(move)
+    {
+      fs--;
+      
+    }
+    
+    if(fs > 200 || fs < -200)
+    {
+      fs = 0;
+      z = random(0,100);
+    r = random(0,width - 200);
+    s = random(0,height * 0.6 );
+    }
   }
-  
 }
+  

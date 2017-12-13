@@ -8,6 +8,7 @@ AudioPlayer seekS;
 
 //normal global
 star[] stars = new star[4000];
+ArrayList<Planet> planets = new ArrayList<Planet>();
 ArrayList<ship> ships = new ArrayList<ship>();
 float speed = 30;
 int state = 1;
@@ -39,7 +40,7 @@ button b;
 speed s1;
 Radar radar;
 shipstatus status;
-
+Planet p1;
 
 void soundplayer(AudioPlayer sound)
 {
@@ -59,6 +60,14 @@ void setup() {
   for (int i = 0; i < stars.length; i++) 
   {
     stars[i] = new star();
+  }
+  
+  p1 = new Planet();
+  
+  for( int i = 0; i < random(0,6); i++)
+  {
+    planets.add(p1);
+    
   }
 
   //sound 
@@ -102,7 +111,8 @@ void draw() {
 
   case 2:
     drawspace();
-    moved.movement();
+    moved.movement() ;
+    drawplanets();
     gui();
     T1.runT();
     aim.drawaim();
@@ -116,6 +126,11 @@ void draw() {
   }
 }
 
+void drawplanets()
+{
+  p1.drawP();
+  
+}
 
 void drawspace()
 {
