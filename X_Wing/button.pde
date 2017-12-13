@@ -8,7 +8,7 @@ class button {
   button()
   {
     this.tx = width * 0.8;
-    this.ty = height * 0.7;
+    this.ty = height *  0.7;
     this.ax = width * 0.15;
     this.ay = height * 0.65;
   }
