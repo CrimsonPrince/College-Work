@@ -134,6 +134,9 @@ class Planet extends star
 {
   float z,r,s,count;
   color c;
+  float planetcount;
+  int tmp;
+  Data dataPlanet;
   
   Planet()
   {
@@ -141,19 +144,31 @@ class Planet extends star
     r = random(0,width - 200);
     s = random(0,height * 0.6 );
     c = color(random(255),random(255),random(255));
+    planetcount = random(0,dataP.size());
+    tmp = floor(planetcount);
     
   }
   void drawP()
   {
     
-    pushMatrix();
+   // pushMatrix();
     noStroke();
     fill(c);
-    translate(r,s,z);
-    sphere(fs);
+    //translate(r,s,z);
+    //sphere(fs);
+    ellipse(r,s,fs,fs);
     if(move)
     {
       fs++;
+      
+      if(r > width * 0.5)
+      {
+        r = r + 4;
+      }
+      if(r < width * 0.5)
+      {
+       r = r - 4; 
+      }
       
     }
     
@@ -169,15 +184,28 @@ class Planet extends star
       s = random(0,height * 0.6 );
       fs = 0;
       c = color(random(255),random(255),random(255));
+      planetcount = random(0,dataP.size());
+      tmp = floor(planetcount);
+      
     }
+    //popMatrix();
+  }
+  
+  void planetdata()
+  {
     
-    
-    if(dist(mouseX, mouseY, r , y ) < fs)
+    if(dist(mouseX, mouseY, r , s ) < 150)
     {
       
-      println(fs);
+      fill(255);
+      textFont(f2,20);
+      dataPlanet = dataP.get(tmp);
+      text(dataPlanet.name,width * 0.5 ,height * 0.72);
+      text(dataPlanet.terrain,width * 0.5 ,height * 0.75);
+      text(dataPlanet.climate,width * 0.5 ,height * 0.78);
+      text("Population", width * 0.48 ,height * 0.8);
+      text(dataPlanet.population,width * 0.54 ,height * 0.8);
     }
-    popMatrix();
   }
 }
   

@@ -7,8 +7,8 @@ AudioPlayer explosion;
 AudioPlayer seekS;
 
 //normal global
+ArrayList<Data> dataP = new ArrayList<Data>();
 star[] stars = new star[4000];
-ArrayList<Planet> planets = new ArrayList<Planet>();
 ArrayList<ship> ships = new ArrayList<ship>();
 float speed = 30;
 int state = 1;
@@ -18,7 +18,7 @@ boolean move;
 boolean seek;
 //For use in title screen
 float x = 500;
-float y = height * 14;
+float y = height * 11.5;
 float z = 0;
 int kill;
 
@@ -61,14 +61,9 @@ void setup() {
   {
     stars[i] = new star();
   }
-  
+
   p1 = new Planet();
-  
-  for( int i = 0; i < random(0,6); i++)
-  {
-    planets.add(p1);
-    
-  }
+
 
   //sound 
   minim = new Minim(this);
@@ -96,8 +91,10 @@ void setup() {
   b = new button();
   p = new control();
   s1 = new speed();
-  radar = new Radar(width * 0.8, height * 0.85, 100, 0.5, color(0, 255, 0));
+  radar = new Radar(width * 0.8, height * 0.87, 100, 0.5, color(0, 255, 0));
   status = new shipstatus();
+
+  loadData();
 }
 
 
@@ -112,8 +109,9 @@ void draw() {
   case 2:
     drawspace();
     moved.movement() ;
-    drawplanets();
+    p1.drawP();
     gui();
+    p1.planetdata();
     T1.runT();
     aim.drawaim();
     aim.fire();
@@ -126,11 +124,16 @@ void draw() {
   }
 }
 
-void drawplanets()
+void loadData()
 {
-  p1.drawP();
-  
+  Table table = loadTable("starwars.csv", "header");
+  for (TableRow row : table.rows())
+  {
+    Data loadData = new Data(row);    
+    dataP.add(loadData);
+  }
 }
+
 
 void drawspace()
 {

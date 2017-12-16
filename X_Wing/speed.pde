@@ -20,6 +20,7 @@ class speed
     {
       if(speedV > 0)
       {
+        textFont(f2,20);
         fill(255);
         text(int(speedV), sx + 145, sy + 50);
         text("Parsec", sx + 55, sy + 50);
