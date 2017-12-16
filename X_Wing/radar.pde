@@ -53,5 +53,11 @@ class Radar
         sy = map(ship1.y,0,600,cy -50, cy + 50);
         ellipse(sx,sy,2,2);
       }
+      
+      //drawing planet
+        fill(p1.c);
+        sx = map(p1.r,0, width,cx -50, cx + 50);
+        sy = map(p1.s,0,600,cy -50, cy + 50);
+        ellipse(sx,sy,2,2);
   }
 }

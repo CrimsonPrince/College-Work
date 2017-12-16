@@ -3,7 +3,7 @@ class shipstatus
   float x, y;
   shipstatus()
   {
-    x = width * 0.65;
+    x = width * 0.67;
     y = height * 0.85;
   }
 

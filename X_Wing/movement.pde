@@ -59,6 +59,7 @@ class move
     else
     {
       move = false;
+      s1.speedV = 0;
     }
     popMatrix();
   }
