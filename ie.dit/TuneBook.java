@@ -80,6 +80,16 @@ public class TuneBook {
     }
 
 
+    public String toString(){
+            StringBuffer tempBuffer = new StringBuffer();
+            for(String tune:tunes){
+    			// append all the Tunes
+                tempBuffer.append(tune + "\n");
+            }
+            return tempBuffer.toString();
+    }
+
+
 public static void main(String[] args){
         TuneBook tb = new TuneBook("hnj0.abc");
         System.out.println(tb);
