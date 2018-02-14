@@ -10,9 +10,10 @@ public class TuneBook {
 
     ArrayList<Tune> tunes = new ArrayList<Tune>();
 
-    public TuneBook(String Filename)
+    public TuneBook(String Filename2)
     {
-        this.Filename = Filename;
+        String Filename;
+        Filename = Filename2;
 
 
         BufferedReader inputStream = null;
@@ -24,7 +25,8 @@ public class TuneBook {
                 if(l.substring(0,2) == "X:")
                 {
                     Tune tune = new Tune();
-                    tune.setX(substring(3,3));
+                    String temp = substring(3,4);
+                    tune.setX(temp);
 
 
                 if(!l.startsWith("X:")) {
