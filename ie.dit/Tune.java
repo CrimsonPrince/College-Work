@@ -40,5 +40,15 @@ public class Tune {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public string toString
+    {
+        String s;
+        s += x + ',' + title;
+        if (altTitle != NULL)
+        {
+            s += altTitle;
+        }
+    }
 }
 
