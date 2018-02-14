@@ -22,16 +22,16 @@ public class TuneBook {
                     tune.setX(substring(3,3));
                 }
 
-                while (l.substring(0, 2) != "X:") {
+                while (!l.startsWith("X:")) {
 
                     int count = 0;
-                    if(l.substring(0,2) == "T:" && count == 0)
+                    if(l.startsWith("T:") && count == 0)
                     {
 
                         tune.setTitle(l)
                         count = 1;
                     }
-                    if(l.substring(0,2) == "T:" && count == 1)
+                    if(l.startsWith("T:") && count == 1)
                     {
                         tune.setaltTitle(l);
                         count = 2;
