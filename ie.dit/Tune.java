@@ -45,7 +45,7 @@ public class Tune {
     {
         String s;
         s += x + ',' + title;
-        if (altTitle != NULL)
+        if (altTitle != null)
         {
             s += altTitle;
         }
