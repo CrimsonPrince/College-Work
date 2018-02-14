@@ -1,6 +1,9 @@
 package ie.dit;
-import java.util.ArrayList;
 
+import java.io.IOException;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.io.BufferedReader;
 
 
 public class TuneBook {
@@ -40,7 +43,7 @@ public class TuneBook {
                         count = 2;
                         //Sets count to 2, to prevent altTitle from being set to null below
                     }
-                    if(count = 1) {
+                    if(count == 1) {
                         tune.setaltTitle(null);
 
                     }
@@ -53,7 +56,7 @@ public class TuneBook {
                 }
                     tune.setNotation(s);
                     s = null;
-                    this.tunes.add(temp);
+                    this.tunes.add(tune);
                 }
             }
         }
