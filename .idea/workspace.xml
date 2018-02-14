@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07309c3b-7ace-4084-bc3f-869b81543948" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/ie.dit/TuneBook.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/ie.dit/main.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/ie.dit/Tune.java" afterPath="$PROJECT_DIR$/ie.dit/Tune.java" />
+      <change beforePath="$PROJECT_DIR$/ie.dit/main.java" afterPath="$PROJECT_DIR$/ie.dit/main.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,8 +27,8 @@
       <file leaf-file-name="main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ie.dit/main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state relative-caret-position="336">
+              <caret line="34" column="47" lean-forward="true" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -39,8 +37,8 @@
       <file leaf-file-name="Tune.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ie.dit/Tune.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="51" column="5" lean-forward="true" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
+            <state relative-caret-position="606">
+              <caret line="47" column="28" lean-forward="false" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
               <folding>
                 <element signature="e#127#128#0" expanded="true" />
                 <element signature="e#151#152#0" expanded="true" />
@@ -78,8 +76,8 @@
       <list>
         <option value="$PROJECT_DIR$/ie.dit/TuneBook" />
         <option value="$PROJECT_DIR$/ie.dit/TuneBook.java" />
-        <option value="$PROJECT_DIR$/ie.dit/Tune.java" />
         <option value="$PROJECT_DIR$/ie.dit/main.java" />
+        <option value="$PROJECT_DIR$/ie.dit/Tune.java" />
       </list>
     </option>
   </component>
@@ -272,12 +270,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1518624950130</updated>
-      <workItem from="1518624951414" duration="2859000" />
+      <workItem from="1518624951414" duration="3128000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2859000" />
+    <option name="totallyTimeSpent" value="3128000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -349,8 +347,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ie.dit/Tune.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="51" column="5" lean-forward="true" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
+        <state relative-caret-position="606">
+          <caret line="47" column="28" lean-forward="false" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
           <folding>
             <element signature="e#127#128#0" expanded="true" />
             <element signature="e#151#152#0" expanded="true" />
@@ -374,8 +372,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ie.dit/main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state relative-caret-position="336">
+          <caret line="34" column="47" lean-forward="true" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
           <folding />
         </state>
       </provider>

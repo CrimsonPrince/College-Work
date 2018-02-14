@@ -23,9 +23,16 @@ public class TuneBook {
                     {
                         Tune tune = new Tune();
                         tune.setTitle(l)
+                        count = 1;
                     }
                     if(l.substring(0,2) == "T:" && count == 1)
                     {
+                        tune.setaltTitle(l);
+                        count = 2;
+                    }
+                    if(count = 1)
+                    {
+                        tune.setaltTitle(null);
 
                     }
                 }
