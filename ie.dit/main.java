@@ -16,12 +16,18 @@ public class TuneBook {
 
             String l;
             while ((l = inputStream.readLine()) != null) {
+                if(l.substring(0,2) == "X:")
+                {
+                    Tune tune = new Tune();
+                    tune.setX(substring(3,3));
+                }
+
                 while (l.substring(0, 2) != "X:") {
 
                     int count = 0;
                     if(l.substring(0,2) == "T:" && count == 0)
                     {
-                        Tune tune = new Tune();
+
                         tune.setTitle(l)
                         count = 1;
                     }
