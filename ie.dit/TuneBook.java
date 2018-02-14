@@ -1,54 +1,42 @@
 package ie.dit;
+import java.util.ArrayList;
 
-public class Tune {
+ArrayList<Tune> tunes = new ArrayList<Tune>();
 
-    private int x;
-    private String title, altTitle, notation;
+public class TuneBook {
+
+    public TuneBook(String Filename)
+	{
+		this.Filename = Filename;
 
 
-    public int getX() {
-        return x;
-    }
+		BufferedReader inputStream = null;
+        try {
+            inputStream = new BufferedReader(new FileReader(Filename));
 
-    public String getTitle()
-    {
-        return title;
-    }
-
-    public String getAltTitle()
-    {
-        return altTitle;
-    }
-
-    public String getNotation()
-    {
-        return notation;
-    }
-
-    public void setNotation(String notation) {
-        this.notation = notation;
-    }
-
-    public void setAltTitle(String altTitle) {
-        this.altTitle = altTitle;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public string toString
-    {
-        String s;
-        s += x + ',' + title;
-        if altTitle != NULL
-        {
-            s += altTitle;
+            String l;
+            while ((l = inputStream.readLine()) != null)
+            {
+                System.out.println(l);
+            }
         }
-    }
-}
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            if (inputStream != null) {
+                try
+                {
+                    inputStream.close();
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+	}
 
+}
