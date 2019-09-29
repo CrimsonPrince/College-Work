@@ -1,2 +1,2 @@
 # College-Work in C
-Two C assignments for our lecture.
+A Collection of My Work developed in College from Year 1 through to Year 4.
