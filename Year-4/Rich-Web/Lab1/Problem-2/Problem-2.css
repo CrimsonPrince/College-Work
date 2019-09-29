@@ -1,0 +1,12 @@
+.flexContainer {
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    border-left: 1px;
+    border-left-color: black;
+}
+
+.flexItem {
+    width: 25%;
+    background-color: hotpink;
+}
