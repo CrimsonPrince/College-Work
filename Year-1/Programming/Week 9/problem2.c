@@ -1,0 +1,29 @@
+#include <stdio.h>
+#define ROW 4
+#define COL 6
+int main()
+{
+    int data[ROW][COL] = {  {3, 2, 5, 7, 4, 2}, {1, 4, 4, 8, 13, 1}, {9, 1, 0, 2,0 , 0},{0, 2, 6, 3, -1, -8} };
+    int largest = 0;
+
+// declare the sum
+int i, j;
+
+// compute the sum
+for ( i=0; i < ROW; i++)
+{
+    for ( j=0; j < COL; j++) 
+        {
+            // calculate the sum here
+            largest = data[i][j] + largest;
+            printf("Largest is currently %d \n", largest);
+        }
+}
+// display the sum
+printf("%d is the sum of the whole array \n", largest);
+
+flushall();
+getchar();
+
+return(0);
+}

@@ -1,0 +1,18 @@
+/* Programming Lab week 7 Q1
+Arthur Coll */
+
+#include <stdio.h>
+
+int main()
+{
+    int ReadIn[5];
+    
+    scanf("%d", &ReadIn);
+    printf("%d", ReadIn);
+    
+    
+    flushall();
+    getchar();
+    
+    return(0);
+}

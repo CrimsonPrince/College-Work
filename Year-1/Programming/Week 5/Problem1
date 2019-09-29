@@ -1,0 +1,23 @@
+/* Problem 1 Programming 
+Arthur Coll */
+#include <stdio.h>
+int main()
+
+{ 
+    char inputchar;
+    
+    printf( "Enter a characther\n");
+    scanf("%c", &inputchar );
+     
+    if( inputchar == a, e, i, o, u)
+    {
+        printf( "You entered a vowel\n")
+    }
+    
+    else
+    {
+        printf(" You did not enter a vowel\n")
+    }
+    
+    flushall()
+    getchar()
