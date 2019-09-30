@@ -6,7 +6,7 @@
 <script src="https://kit.fontawesome.com/f92648ce1d.js" crossorigin="anonymous"></script>
 <noscript>Sorry, your browser does not support JavaScript!</noscript>
 </head>
-<body>
+<body onload="displayNotes()">
 
 <h1>Note Taking App</h1>
 
@@ -17,7 +17,7 @@
 <form>
     Input New Item Here:<br>
     <input type="text" id="newItemInput">
-    <input type="button" onclick="addItem()" value="Submit">
+    <input type="button" onclick="addNote()" value="Submit">
 </form> 
 
 </body>

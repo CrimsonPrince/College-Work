@@ -39,26 +39,68 @@ function addItem() {
 
 function addListeners() {
   
-  for(let span of deleteIcons){
-    span.addEventListener ("click",function (){
-      span.parentElement.remove();
-      event.stopPropagation();
-    });
-  }
-
-  for(let span of editIcons){
-    span.addEventListener ("click",function (){
-      span.parentElement.addItem;
-      event.stopPropagation();
-    });
+  spans = document.getElementsByClassName("noteItem");
+  for(let span of spans ){
+    span.addEventListener ("click",deleteNote());
   }
 }
 
-function deleteItem(value)
+function deleteNote()
 {
-  console.log("Delete Item", value);
-  let notesList = document.getElementsByClassName("noteItem");
-  let element = notesList[1];
-  console.log("Deleting Task", element.TEXT_NODE)
+  console.log("Deleting Note");
 }
 
+function addNote() {
+  let input = document.getElementById("newItemInput").value;
+
+  if (input === '') {
+      alert("Text Field Cannot Be Empty");
+      return;
+    }
+  document.getElementById("newItemInput").value = "";
+
+  let notes = [];
+  notes = retrieveNotes();  
+  notes.push(input);
+  localStorage.setItem('notes', JSON.stringify(notes));
+
+  console.log("Created Note with Value", input);
+
+  displayNotes()
+
+}
+
+function displayNotes()
+{
+  let notes = retrieveNotes();
+  let list = document.getElementById("notesList");
+  list.innerHTML = '';
+
+  for(let note of notes)
+  {
+
+    let icon  = document.createElement("i");
+    icon.classList.add("fas", "fa-trash");
+    let span = document.createElement("span");
+    span.classList.add("noteItem")
+    span.append(icon);
+
+
+    let noteItem = document.createElement("li");
+    list.appendChild(noteItem).append(note, span);
+
+  }
+
+  addListeners();
+}
+
+function retrieveNotes(){
+  let notesJson = localStorage.getItem('notes');
+  notes = [];
+  if(notesJson !== null)
+  {
+    notes = JSON.parse(notesJson);
+  }
+
+  return notes;
+}
