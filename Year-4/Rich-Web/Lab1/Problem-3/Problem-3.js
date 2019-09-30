@@ -39,15 +39,22 @@ function addItem() {
 
 function addListeners() {
   
-  spans = document.getElementsByClassName("noteItem");
-  for(let span of spans ){
-    span.addEventListener ("click",deleteNote());
+  spans = Array.from(document.getElementsByClassName("noteItem"));
+  for(let [i, span] of spans.entries() ){
+    span.addEventListener("click", function() {
+      deleteNote(i)
+    }
+    );
   }
 }
 
-function deleteNote()
+function deleteNote(i)
 {
-  console.log("Deleting Note");
+  let notes = retrieveNotes();
+  notes.splice(i,1)
+  localStorage.setItem('notes', JSON.stringify(notes));
+  console.log("Deleted Note", i);
+  displayNotes()
 }
 
 function addNote() {
@@ -59,8 +66,7 @@ function addNote() {
     }
   document.getElementById("newItemInput").value = "";
 
-  let notes = [];
-  notes = retrieveNotes();  
+  let notes = retrieveNotes();  
   notes.push(input);
   localStorage.setItem('notes', JSON.stringify(notes));
 
