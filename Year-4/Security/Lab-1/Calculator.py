@@ -1,183 +1,225 @@
-#imports gi
-import gi
-import backgroundCalculator
+#
+# Requires GTK3 to RUN
+#
 
-#set gi version
+import gi
+
+#Setting GI version
 gi.require_version("Gtk", "3.0")
 
-#import gtk (the ui)
+#Import GTK For UI
 from gi.repository import Gtk
 
-#define calculator window
-class calculatorWindow(Gtk.Window):
+#Class than contains the visualizations for the Calculator
+class calculatorDisplay(Gtk.Window):
 
-    #initialize -Called by python on calculatorWindow creation
+    #Init Tasks
     def __init__(self):
         Gtk.Window.__init__(self, title="Calculator")
         self.set_border_width(10)
-
-        #add box as container
         outerBox = Gtk.HBox()
         self.add(outerBox)
 
-        #add numbers box
+        #Defines Box
         numbersBox = Gtk.VBox()
         outerBox.pack_start(numbersBox, True, True, 0)
 
-        #add ROW 1
+        #Draws First Row of Buttons
         row1 = Gtk.Box()
         numbersBox.pack_start(row1, True, True, 0)
 
-        #add text view
         self.m_bufferTvView = Gtk.TextBuffer()
         tvView = Gtk.TextView(buffer=self.m_bufferTvView)
         row1.pack_start(tvView, True, True, 0)
 
-        #add ROW 2
         row2 = Gtk.Box()
         numbersBox.pack_start(row2, True, True, 0)
 
-        #add number1 button
+        #Draws button 0 - 9
         button = Gtk.Button.new_with_label("1")
         button.connect("clicked", self.appBtnLbl)
         row2.pack_start(button, True, True, 0)
 
-        #add number2 button
         button = Gtk.Button.new_with_label("2")
         button.connect("clicked", self.appBtnLbl)
         row2.pack_start(button, True, True, 0)
 
-        #add number3 button
         button = Gtk.Button.new_with_label("3")
         button.connect("clicked", self.appBtnLbl)
         row2.pack_start(button, True, True, 0)
 
-        #Add ROW 3
         row3 = Gtk.Box()
         numbersBox.pack_start(row3, True, True, 0)
 
-        #add number4 button
         button = Gtk.Button.new_with_label("4")
         button.connect("clicked", self.appBtnLbl)
         row3.pack_start(button, True, True, 0)
 
-        #add number5 button
         button = Gtk.Button.new_with_label("5")
         button.connect("clicked", self.appBtnLbl)
         row3.pack_start(button, True, True, 0)
 
-        #add number6 button
+
         button = Gtk.Button.new_with_label("6")
         button.connect("clicked", self.appBtnLbl)
         row3.pack_start(button, True, True, 0)
 
-        #add ROW 4
         row4 = Gtk.Box()
         numbersBox.pack_start(row4, True, True, 0)
 
-        #add number7 button
         button = Gtk.Button.new_with_label("7")
         button.connect("clicked", self.appBtnLbl)
         row4.pack_start(button, True, True, 0)
 
-        #add number8 button
+
         button = Gtk.Button.new_with_label("8")
         button.connect("clicked", self.appBtnLbl)
         row4.pack_start(button, True, True, 0)
 
-        #add number9 button
         button = Gtk.Button.new_with_label("9")
         button.connect("clicked", self.appBtnLbl)
         row4.pack_start(button, True, True, 0)
 
-        #add ROW 5
         row5 = Gtk.Box()
         numbersBox.pack_start(row5, True, True, 0)
 
-        #add number0 button
         button = Gtk.Button.new_with_label("0")
         button.connect("clicked", self.appBtnLbl)
         row5.pack_start(button, True, True, 0)
 
-        #add controllers box
+
+        #Draws Symbols
         controllersBox = Gtk.VBox()
         outerBox.pack_start(controllersBox, True, True, 0)
 
-        #add clear button
         button = Gtk.Button.new_with_label("c")
         button.connect("clicked", self.onClickClear)
         controllersBox.pack_start(button, True, True, 0)
 
-        #add plus button
         button = Gtk.Button.new_with_label("+")
         button.connect("clicked", self.appBtnLbl)
         controllersBox.pack_start(button, True, True, 0)
 
-        #add minus button
         button = Gtk.Button.new_with_label("-")
         button.connect("clicked", self.appBtnLbl)
         controllersBox.pack_start(button, True, True, 0)
 
-        #add divide button
         button = Gtk.Button.new_with_label("/")
         button.connect("clicked", self.appBtnLbl)
         controllersBox.pack_start(button, True, True, 0)
 
-        #add multiply button
         button = Gtk.Button.new_with_label("*")
         button.connect("clicked", self.appBtnLbl)
         controllersBox.pack_start(button, True, True, 0)
 
-        #add equals button
         button = Gtk.Button.new_with_label("=")
         button.connect("clicked", self.btnEquals)
         controllersBox.pack_start(button, True, True, 0)
 
-    #Quick easy way to show the UI created in __init__
     def show(self):
-        #bind exit gtk event to destory
         self.connect("destroy", Gtk.main_quit)
-
-        #function defined by pyobject to show all ui elements
+        #Draws
         self.show_all()
 
-        #gtk main launch
         Gtk.main()
 
-    #quick way to append to the text view
     def append(self, textToAppend):
         end_iter = self.m_bufferTvView.get_end_iter()
         self.m_bufferTvView.insert(end_iter, textToAppend)
     
-    #quick way to get the current text from the text view
     def getText(self):
         return self.m_bufferTvView.get_text(self.m_bufferTvView.get_start_iter(), self.m_bufferTvView.get_end_iter(), False)
 
-    #an on click handler to clear to get the label of button clicked and appened it to the text view
+
     def appBtnLbl(self, btn):
         self.append(btn.get_label())
 
-    #an on click handler to clear the text view
+    #Clear Function for C
     def onClickClear(self, btn):
         self.clear()
 
-    #a qucik way to clear the text view
     def clear(self):
         self.m_bufferTvView.set_text("")
-    
-    #an on click handler to solve the equation
-    def btnEquals(self, btn):
-        #create background Calculator
-        bkgCalc = backgroundCalculator.backgroundCalculator()
 
-        #get string to calc
+    def btnEquals(self, btn):
+
+        calculator = Calculator()
+
         stringToCalc = self.getText()
 
-        #get solution
-        sSolution = str(bkgCalc.calculateByString(stringToCalc))
+        sSolution = str(calculator.calculateByString(stringToCalc))
 
-        #clear
         self.clear()
 
-        #append solution
         self.append(sSolution)
+
+#Calculator Class that contains all the functionality
+class Calculator():
+
+    def calculateByString(self, stringToCalcBy):
+        calcEqu = self.parseStringToEquation(stringToCalcBy)
+        return self.solveEquation(calcEqu)
+
+    def solveEquation(self, equation):
+        solution = None
+        
+        curMod = ""
+
+        for variable in equation.variableList:
+            if variable.isModifer == False:
+                if solution == None:
+                    solution = int(variable.value)
+                else:
+                    curInt = int(variable.value)
+                    #Checks Symbol
+                    if curMod == "+":
+                        solution = solution + curInt
+                    elif curMod == "-":
+                        solution = solution - curInt
+                    elif curMod == "*":
+                        solution = solution * curInt
+                    elif curMod == "/":
+                        solution = solution / curInt
+            else:
+                curMod = variable.value
+
+        return solution
+
+    def parseStringToEquation(self, stringToParse):
+        lsModifers = ["*", "+", "-", "/"]
+        
+        result = calcEquation()
+
+        Variables = list(stringToParse)
+
+        current = None
+        for char in Variables:
+            if current == None:
+                current = calcVariable()
+            
+            if char in lsModifers:
+                result.variableList.append(current)
+                current = calcVariable()
+
+                current.value += str(char)
+                current.isModifer = True
+                result.variableList.append(current)
+                current = None
+            else:
+                current.value += char
+        if current != None:
+            result.variableList.append(current)
+
+        return result
+
+class calcVariable():
+    def __init__(self):
+        self.value = ""
+        self.isModifer = False
+
+class calcEquation(): 
+    def __init__(self):
+        self.variableList = []
+
+window = calculatorDisplay()
+window.show()
