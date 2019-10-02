@@ -186,7 +186,7 @@ class Calculator():
         return solution
 
     def parseStringToEquation(self, stringToParse):
-        lsModifers = ["*", "+", "-", "/"]
+        symbols = ["*", "+", "-", "/"]
         
         result = calcEquation()
 
@@ -197,7 +197,7 @@ class Calculator():
             if current == None:
                 current = calcVariable()
             
-            if char in lsModifers:
+            if char in symbols:
                 result.variableList.append(current)
                 current = calcVariable()
 
