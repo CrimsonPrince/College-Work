@@ -52,7 +52,6 @@ function displayNotes()
     span.classList.add("noteItem")
     span.append(icon);
 
-
     let noteItem = document.createElement("li");
     list.appendChild(noteItem).append(note, span);
 
@@ -76,5 +75,7 @@ function editNote(i)
 {
   let liElement = document.getElementsByTagName("li");
   let element = liElement[i];
-  element = document.createElement("input");
+  let input = document.createElement("input");
+  input.type = "text";
+  element.replaceWith(input)
 }
