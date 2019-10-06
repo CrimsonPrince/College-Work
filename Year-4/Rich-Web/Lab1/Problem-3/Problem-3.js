@@ -104,21 +104,16 @@
 (function(){
   
   let  list = document.querySelector('#list');
-  let    form = document.querySelector('form');
-    let  item = document.querySelector('#item');
+  let  form = document.querySelector('form');
+  let  item = document.querySelector('#item');
   
   form.addEventListener('submit', function(e) {
     addNote(e);
   })
   
   list.addEventListener('click',function(e){
-    var t = e.target;
-    t.parentNode.removeChild(t);
-    
-    t.classList.add('checked');
-    
-    store();
-  },false)
+    removeNote(e);
+  })
   
   function store() {
     window.localStorage.myitems = list.innerHTML;
@@ -127,7 +122,6 @@
   function getValues() {
     var storedValues = window.localStorage.myitems;
       list.innerHTML = storedValues;
-
   }
 
   function addNote(e){
@@ -135,6 +129,12 @@
     list.innerHTML += '<li>' + item.value + '</li>';
     store();
     item.value = "";
+  }
+
+  function removeNote(e){
+    var t = e.target;
+    t.parentNode.removeChild(t);
+    store();
   }
 
   getValues();
