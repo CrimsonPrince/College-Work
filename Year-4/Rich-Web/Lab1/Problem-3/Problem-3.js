@@ -1,8 +1,10 @@
+document.getElementById("red").addEventListener('click',addNote);
+
 function addListeners() {
   
   spans = Array.from(document.getElementsByClassName("noteItem"));
   for(let [i, span] of spans.entries() ){
-    span.addEventListener("click", function() {
+    span.addEventListener("click", function(e) {
       editNote(i)
     }
     );
@@ -18,7 +20,7 @@ function deleteNote(i)
   displayNotes()
 }
 
-function addNote() {
+function addNote(e) {
   let input = document.getElementById("newItemInput").value;
 
   if (input === '') {
@@ -33,31 +35,49 @@ function addNote() {
 
   console.log("Created Note with Value", input);
 
-  displayNotes()
+  displayNotes(e)
 
 }
 
-function displayNotes()
+function displayNotes(e)
 {
   let notes = retrieveNotes();
-  let list = document.getElementById("notesList");
-  list.innerHTML = '';
-
+  console.log(e);
   for(let note of notes)
   {
-
-    let icon  = document.createElement("i");
-    icon.classList.add("fas", "fa-trash");
-    let span = document.createElement("span");
-    span.classList.add("noteItem")
-    span.append(icon);
-
-    let noteItem = document.createElement("li");
-    list.appendChild(noteItem).append(note, span);
-
+  var div = document.createElement('div');
+  var textArea = document.createElement("textarea");
+  var button = document.createElement("button");
+  div.setAttribute('id', 'textDiv');
+  textArea.setAttribute("id", "card");
+  button.textContent = note;
+  button.setAttribute("id", "deleteButton");
+  button.setAttribute('onclick', 'removeParent(event)')
+  div.appendChild(button);
+  div.appendChild(textArea);
+  document.getElementById("main").appendChild(div);
   }
+  // let list = document.getElementById("notesList");
+  // list.innerHTML = '';
+
+  // for(let note of notes)
+  // {
+
+  //   let icon  = document.createElement("i");
+  //   icon.classList.add("fas", "fa-trash");
+  //   let span = document.createElement("span");
+  //   span.classList.add("noteItem")
+  //   span.append(icon);
+
+  //   let noteItem = document.createElement("li");
+  //   list.appendChild(noteItem).append(note, span);
+
+  // }
 
   addListeners();
+}
+function removeParent(e){
+  e.target.parentElement.remove();
 }
 
 function retrieveNotes(){
