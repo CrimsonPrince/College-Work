@@ -1,142 +1,81 @@
-// document.getElementById("red").addEventListener('click',addNote);
-
-// function addListeners() {
-  
-//   spans = Array.from(document.getElementsByClassName("noteItem"));
-//   for(let [i, span] of spans.entries() ){
-//     span.addEventListener("click", function(e) {
-//       editNote(i)
-//     }
-//     );
-//   }
-// }
-
-// function deleteNote(i)
-// {
-//   let notes = retrieveNotes();
-//   notes.splice(i,1)
-//   localStorage.setItem('notes', JSON.stringify(notes));
-//   console.log("Deleted Note", i);
-//   displayNotes()
-// }
-
-// function addNote(e) {
-//   let input = document.getElementById("newItemInput").value;
-
-//   if (input === '') {
-//       alert("Text Field Cannot Be Empty");
-//       return;
-//     }
-//   document.getElementById("newItemInput").value = "";
-
-//   let notes = retrieveNotes();  
-//   notes.push(input);
-//   localStorage.setItem('notes', JSON.stringify(notes));
-
-//   console.log("Created Note with Value", input);
-
-//   displayNotes(e)
-
-// }
-
-// function displayNotes(e)
-// {
-//   let notes = retrieveNotes();
-//   console.log(e);
-//   for(let note of notes)
-//   {
-//   var div = document.createElement('div');
-//   var textArea = document.createElement("textarea");
-//   var button = document.createElement("button");
-//   div.setAttribute('id', 'textDiv');
-//   textArea.setAttribute("id", "card");
-//   button.textContent = note;
-//   button.setAttribute("id", "deleteButton");
-//   button.setAttribute('onclick', 'removeParent(event)')
-//   div.appendChild(button);
-//   div.appendChild(textArea);
-//   document.getElementById("main").appendChild(div);
-//   }
-//   // let list = document.getElementById("notesList");
-//   // list.innerHTML = '';
-
-//   // for(let note of notes)
-//   // {
-
-//   //   let icon  = document.createElement("i");
-//   //   icon.classList.add("fas", "fa-trash");
-//   //   let span = document.createElement("span");
-//   //   span.classList.add("noteItem")
-//   //   span.append(icon);
-
-//   //   let noteItem = document.createElement("li");
-//   //   list.appendChild(noteItem).append(note, span);
-
-//   // }
-
-//   addListeners();
-// }
-// function removeParent(e){
-//   e.target.parentElement.remove();
-// }
-
-// function retrieveNotes(){
-//   let notesJson = localStorage.getItem('notes');
-//   notes = [];
-//   if(notesJson !== null)
-//   {
-//     notes = JSON.parse(notesJson);
-//   }
-
-//   return notes;
-// }
-
-// function editNote(i)
-// {
-//   let liElement = document.getElementsByTagName("li");
-//   let element = liElement[i];
-//   let input = document.createElement("input");
-//   input.type = "text";
-//   element.replaceWith(input)
-// }
-
-
 (function(){
   
   let  list = document.querySelector('#list');
-  let  form = document.querySelector('form');
+  let  form = document.querySelector('#add');
   let  item = document.querySelector('#item');
   
   form.addEventListener('submit', function(e) {
     addNote(e);
   })
-  
-  list.addEventListener('click',function(e){
-    removeNote(e);
-  })
-  
+
+
+
   function store() {
     window.localStorage.myitems = list.innerHTML;
+    getValues();
   }
   
   function getValues() {
     var storedValues = window.localStorage.myitems;
-      list.innerHTML = storedValues;
+    if(!storedValues) {
+      list.innerHTML = "";
+    }
+    else{
+      list.innerHTML = storedValues; 
+    }
+      addListeners();
+  }
+
+  function addListeners()
+  {
+    let deleteButtons = document.querySelectorAll('.deleteButton');
+    let deleteButtonItems = [].slice.call(deleteButtons);
+  
+    deleteButtonItems.forEach(function (item) {
+      item.addEventListener('click', function (e) {
+          removeNote(e);
+      });
+  });
+
+    let editButtons = document.querySelectorAll('.editButton');
+    let editButtonItems = [].slice.call(editButtons);
+  
+    editButtonItems.forEach(function (item) {
+      item.addEventListener('click', function (e) {
+          editNote(e);
+      });
+  });
   }
 
   function addNote(e){
+    if(item.value === "") { return; }
     e.preventDefault();
-    list.innerHTML += '<li>' + item.value + '</li>';
+    list.innerHTML += '<li>' + item.value + '<input type="button" class="editButton" value="Edit">' + '<input type="button" class="deleteButton" value="Delete">' + '</li>';
     store();
     item.value = "";
   }
 
+  
+
   function removeNote(e){
     var t = e.target;
+    t = t.parentNode;
     t.parentNode.removeChild(t);
     store();
   }
 
+  function editNote(e) {
+    var t = e.target;
+    t.parentNode.innerHTML = ' <form  id="edit" action="#"> <input type="text" name="item" id="editItem" placeholder="Edit Item" /> </form>';
+    t.addEventListener('submit', function(e) {
+    
+      store();
+    })
+    
+  }
+
   getValues();
+
+  
 })();
 
