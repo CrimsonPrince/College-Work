@@ -45,6 +45,7 @@ function displayTable() {
 }
 
 function addContact() {
+    validateInput();
     let contact = new Contact();
     let contacts = retrieveContacts();
     contacts.push(contact)
@@ -73,14 +74,12 @@ function toTableRow(contact) {
 }
 
 function search() {
-    let tr, td, i, txtValue;
+    let tr, td;
     tr = table.querySelectorAll("tr");
-  
-    for (i = 0; i < tr.length; i++) {
+    for (let i = 0; i < tr.length; i++) {
       td = tr[i].querySelectorAll("td")[1];
       if (td) {
-        txtValue = td.textContent || td.innerText;
-        if (txtValue.indexOf(searchBar.value) > -1) {
+        if (td.textContent.indexOf(searchBar.value) > -1) {
           tr[i].style.display = "";
         } else {
           tr[i].style.display = "none";
