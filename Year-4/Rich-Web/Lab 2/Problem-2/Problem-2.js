@@ -14,7 +14,7 @@ fetch(request)
     console.log(sixPostArray);
 
     var output = {};
-    response.map( item => {item.body.split(' ').map(word => output[word]? output[word]++ : output[word] = 1) });
+    response.map(item => {item.body.split(' ').map(word => output[word]? output[word]++ : output[word] = 1) });
     console.log(output);
     
   }).catch(error => {
