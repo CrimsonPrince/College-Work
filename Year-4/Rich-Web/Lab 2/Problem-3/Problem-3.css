@@ -1,0 +1,48 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+#main {
+  height: 80%;
+  width: 70%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: red;
+}
+
+#searchForm {
+  grid-column: 1 / 2;
+  text-align: center;
+}
+
+#infoDiv {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+#avatar {
+  width: 50%;
+  height: 45%;
+}
+#name,
+#userName,
+#email,
+#location,
+#gists {
+  width: 50%;
+  height: 10%;
+}
+
+#repoInfo {
+  overflow: auto;
+}
+
+#repoInfo div {
+  height: 20%;
+}
