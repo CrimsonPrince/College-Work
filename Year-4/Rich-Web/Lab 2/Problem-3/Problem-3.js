@@ -1,5 +1,15 @@
-let token = "2f7a36c0a4db21f9bf7f25de5d4d00988edbbba7";
+let token = "71ca45af9396e9169fa75c17467b561f6e41460f";
 let headers = { "Content-Type": "application/json", "Authorization": `Token ${token}` };
+let form = document.querySelector('form');
+let input = document.querySelector('#input');
+
+form.addEventListener('submit', function (e) {
+    getUserAsync(input.value)
+        .then(data => displayUser(data));
+
+    getRepositoryAsync(input.value)
+        .then(data => displayRepositories(data));
+})
 
 async function getUserAsync(name) {
     try {
@@ -28,17 +38,11 @@ function displayUser(data) {
     document.querySelector('#gists').innerHTML = data.public_gists;
 }
 
-function displayRepos(data) {
+function displayRepositories(data) {
     let repoInfo = document.querySelector("#repoInfo");
-    data.forEach(function(repo) {
+    data.forEach(function (repo) {
         let repository = document.createElement("div");
         repository.innerHTML = repo.name;
         repoInfo.appendChild(repository);
     });
 }
-
-getUserAsync('scottdono')
-    .then(data => displayUser(data));
-
-getRepositoryAsync('scottdono')
-    .then(datas => displayRepos(datas));
