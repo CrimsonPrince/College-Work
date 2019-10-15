@@ -6,22 +6,23 @@
     <noscript>Sorry, your browser does not support JavaScript!</noscript>
   </head>
   <body>
+    <h3> GitHub User Search</h3>
+      <form id="searchForm" action="#"> <input id="input" type="text"> <input type="submit" value="Search"> </form>
     <div id="main">
-      <form id="searchForm" action="#"> <input id="input" type="text"> <input type="submit" value="Submit"> </form>
-      <div id="infoDiv"> 
-      <div id="profileInfo">
-        <img id="avatar"></img>
+      <div id="infoDiv" class="row"> 
+      <div id="profileInfo" class="col">
+        <img id="avatar" src='avatar.png'></img>
         <div id="name"></div>
 
         <div id="username"></div>
-        <div id="emailDiv"></div>
+          <div id="email"></div>
 
         <div id="location"></div>
 
         <div id="gists"></div>
       </div>
 
-      <div id="repoInfo"></div>
+      <div id="repoInfo" class="col"></div>
     </div>
   </div>
   </body>
