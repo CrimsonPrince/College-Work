@@ -2,23 +2,27 @@
 <html>
 <head>
 <title>Problem 1</title>
-<Link src="Problem-1.css">
+<link rel="stylesheet" type="text/css" href="Problem-1.css" />
 <noscript>Sorry, your browser does not support JavaScript!</noscript>
 </head>
 <body>
 
-<form action="#">
-    <input type="text" id="name">
-    <input type="text" id="number">
-    <input type="email" id="email">
+<div id="main"> 
+    <h1> Phone Book Application </h1>
+<form action="#" id="addForm">
+    <h2> Add a Contact</h2>
+    <input type="text" id="name" placeholder="Name">
+    <input type="text" id="number" placeholder="Phone">
+    <input type="email" id="email" placeholder="email">
     <input type="submit" value="Submit">
 </form> 
 
-<form action="#">
-    <input type="text" id="search">
+<form action="#" id="searchForm">
+    <h2> Search Phone Number </h2>
+    <input type="text" id="search" placeholder="086">
 </form>
 
-<table border="1" cellpadding="10" cellspacing="0" style="border-collapse:collapse;">
+<table id="displayTable" border="1" cellpadding="10" cellspacing="0" style="border-collapse:collapse;">
     <thead>
     <tr>
     <th><a href="javascript:sortTable(-1);">Name</a></th>
@@ -30,7 +34,7 @@
 
     </tbody>
     </table>
-    
+</div>
 
     
 </body>

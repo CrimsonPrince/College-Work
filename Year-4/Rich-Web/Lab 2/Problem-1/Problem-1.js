@@ -20,12 +20,19 @@ class Contact {
 
 
 form.addEventListener('submit', function (e) {
-  addContact();
+  if(validateInput()) { addContact(); }
 })
 
 searchBar.addEventListener('keyup', function (e) {
   search();
 })
+
+function validateInput() {
+  //https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
+  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if(!re.test(email) ) { return false; }
+
+}
 
 function sortTable() {
   contacts = retrieveContacts();
@@ -44,7 +51,6 @@ function displayTable() {
 }
 
 function addContact() {
-  validateInput();
   let contact = new Contact();
   let contacts = retrieveContacts();
   contacts.push(contact)
