@@ -1,0 +1,32 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: #eee;
+  color: #444;
+  font-family: 'Helvetica', arial, sans-serif;
+}
+
+#main {
+    text-align: center;
+    height: 80%;
+    width: 60%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+#searchForm, #addForm{
+    text-align: center;
+    padding: 10px;
+}
+
+#displayTable {
+    text-align: center;
+    left: 50%;
+    -ms-transform: translate(-50%);
+    transform: translate(-50%);  
+    position: absolute;
+}
