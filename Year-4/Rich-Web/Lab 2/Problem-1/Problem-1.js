@@ -28,9 +28,17 @@ searchBar.addEventListener('keyup', function (e) {
 })
 
 function validateInput() {
-  //https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
-  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if(!re.test(email) ) { return false; }
+
+  if(email.value.length > 40 || !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email.value)) {
+    console.log("Please enter a  valid email");
+    return false
+  }
+  if(name.value.length > 20 || !/^[a-z\s]*$/.test(name.value))
+  {
+    console.log("Please Enter a valid Name");
+    return false;
+  }
+  return true;
 
 }
 
@@ -45,8 +53,8 @@ function sortTable() {
 function displayTable() {
   tableBody.innerHTML = "";
   let contacts = retrieveContacts();
-  contacts.forEach(element => {
-    tableBody.appendChild(toTableRow(element));
+  contacts.forEach(function(element, i) {
+    tableBody.appendChild(toTableRow(element, i)); 
   });
 }
 
@@ -66,7 +74,7 @@ function retrieveContacts() {
   return contacts;
 }
 
-function toTableRow(contact) {
+function toTableRow(contact, i) {
   let row = document.createElement("tr");
   let nameCol = document.createElement("td");
   let numberCol = document.createElement("td");
@@ -75,6 +83,7 @@ function toTableRow(contact) {
   numberCol.innerHTML = contact.number;
   emailCol.innerHTML = contact.email;
   row.append(nameCol, numberCol, emailCol);
+  if(i == 2) { row.setAttribute("style", "background-color:#f2f2f2;"); }
   return row;
 }
 
