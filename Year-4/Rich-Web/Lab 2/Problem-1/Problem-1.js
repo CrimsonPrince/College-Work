@@ -38,6 +38,12 @@ function validateInput() {
     console.log("Please Enter a valid Name");
     return false;
   }
+  console.log(number.value.length)
+  if(number.value.length > 10 || number.value.length < 10)
+  {
+    console.log("Please Enter Valid Phone Number")
+    return false;
+  }
   return true;
 
 }
