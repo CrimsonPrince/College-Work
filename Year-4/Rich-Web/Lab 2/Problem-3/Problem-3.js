@@ -1,4 +1,4 @@
-const token = '71ca45af9396e9169fa75c17467b561f6e41460f'
+const token = '96ec351eadb722a907a52f32c8052d855c9f9a41'
 const headers = { 'Content-Type': 'application/json', 'Authorization': `Token ${token}` }
 const form = document.querySelector('form')
 const input = document.querySelector('#input')
@@ -17,7 +17,7 @@ async function getUserAsync (name) {
         let response = await fetch(`https://api.github.com/users/${name}`, { headers, })
         return await response.json();
     } catch (err) {
-        console.error(err);
+        console.error(err)
     }
 }
 
