@@ -1,3 +1,9 @@
+const source = fromEvent(document, 'click');
+//map to string with given event timestamp
+const example = source.pipe(map(event => `Event time: ${event.timeStamp}`));
+//output (example): 'Event time: 7276.390000000001'
+const subscribe = example.subscribe(val => console.log(val));
+
 (function(){
   
   let  list = document.querySelector('#list');
@@ -66,7 +72,7 @@
 
   function editNote(e) {
     var t = e.target;
-    t.parentNode.innerHTML = ' <form  id="edit" action="#"> <input type="text" name="item" id="editItem" placeholder="Edit Item" /> </form>';
+    t.parentNode.contentEditable = "true"
     t.addEventListener('submit', function(e) {
     
       store();
