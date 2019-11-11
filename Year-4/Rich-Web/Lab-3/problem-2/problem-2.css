@@ -1,7 +1,6 @@
-    body {
-      background-color: #efefef;
-    }
+
   .container {
+    background: #fff;
     max-width: 600px;
     width: 100%;
     display: table;
@@ -10,24 +9,19 @@
     border: 1px solid #cfcbcc;
   }
   
-  #inputText {
+  input {
     border: none;
-    width: 90%;
+    width: 98.4%;
     line-height: 1.5;
     padding: 8px 0 8px 10px;
     border-bottom: 1px solid #cfcbcc;
     outline: 0;
   }
 
-  .editButton {
+  .editButton, .deleteButton {
       width:10%;
       float: right;
       margin-right: 5px;  
-  }
-  
-  .deleteButton {
-    float: right;
-    cursor: pointer;
   }
  
 
@@ -47,6 +41,7 @@
     padding: 0;
   }
   ul li {
+    color: #899098;
     font-weight: 400;
     border-bottom: 1px solid #cfcbcc;
     line-height: 1.5;
