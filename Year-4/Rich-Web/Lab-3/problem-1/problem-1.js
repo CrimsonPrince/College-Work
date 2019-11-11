@@ -1,87 +1,80 @@
-const source = fromEvent(document, 'click');
-//map to string with given event timestamp
-const example = source.pipe(map(event => `Event time: ${event.timeStamp}`));
-//output (example): 'Event time: 7276.390000000001'
-const subscribe = example.subscribe(val => console.log(val));
+// Helper Selectors
+const list = document.querySelector('#list')
+const inputText = document.querySelector('#inputText')
+const inputColor = document.querySelector('#inputColor')
 
-(function(){
-  
-  let  list = document.querySelector('#list');
-  let  form = document.querySelector('#add');
-  let  item = document.querySelector('#item');
-  
-  form.addEventListener('submit', function(e) {
-    addNote(e);
+// Notes Class for Cleaner data handling
+class Note {
+  constructor (value, color) {
+    this.value = value
+    this.color = color
+  }
+}
+
+// Add's Observable to be triggered on Submit Of the Form
+Rx.Observable.fromEvent(document, 'submit')
+  .subscribe(e => addNote())
+
+// Helper Function to retrieve notes from local storage, returns notes array
+function retrieveNotes () {
+  let notes = JSON.parse(localStorage.getItem('notes'))
+  if (notes === null) {
+    notes = []
+  }
+  return notes
+}
+
+// Function to Add the Note to LocalStorage
+function addNote () {
+  const note = new Note(inputText.value, inputColor.value)
+  const notes = retrieveNotes()
+  notes.push(note)
+  localStorage.setItem('notes', JSON.stringify(notes))
+  displayNotes()
+}
+
+// Function for Displaying the Notes
+function displayNotes () {
+  list.innerHTML = ''
+  const notes = retrieveNotes()
+  notes.forEach(function (note, i) {
+    // Element Creation
+    const listItem = document.createElement('li')
+    const deleteButton = document.createElement('span')
+    deleteButton.className = 'deleteButton'
+    deleteButton.textContent = 'x'
+    const editButton = document.createElement('button')
+    editButton.className = 'editButton'
+    editButton.textContent = 'Edit'
+    listItem.style.setProperty('background-color', note.color)
+    listItem.innerHTML = note.value
+    listItem.appendChild(deleteButton)
+    listItem.appendChild(editButton)
+    list.appendChild(listItem)
+
+    // Observables to add onclick functionality for the buttons
+    Rx.Observable.fromEvent(deleteButton, 'click')
+      .subscribe(e => deleteNote(i))
+    Rx.Observable.fromEvent(editButton, 'click')
+      .subscribe(e => editNote(i))
   })
+}
 
+// Function to Delete the Note from Notes Array in LocalStorage
+function deleteNote (i) {
+  const notes = retrieveNotes()
+  notes.splice(i, 1)
+  localStorage.setItem('notes', JSON.stringify(notes))
+  displayNotes()
+}
 
+// Function to edit the Notes Array in Local Storage, displays prompt
+function editNote (i) {
+  const notes = retrieveNotes() // eslint-disable-line
+  notes[i].value = window.prompt('Edit Note', notes[i].value)
+  localStorage.setItem('notes', JSON.stringify(notes))
+  displayNotes()
+}
 
-  function store() {
-    window.localStorage.myitems = list.innerHTML;
-    getValues();
-  }
-  
-  function getValues() {
-    var storedValues = window.localStorage.myitems;
-    if(!storedValues) {
-      list.innerHTML = "";
-    }
-    else{
-      list.innerHTML = storedValues; 
-    }
-      addListeners();
-  }
-
-  function addListeners()
-  {
-    let deleteButtons = document.querySelectorAll('.deleteButton');
-    let deleteButtonItems = [].slice.call(deleteButtons);
-  
-    deleteButtonItems.forEach(function (item) {
-      item.addEventListener('click', function (e) {
-          removeNote(e);
-      });
-  });
-
-    let editButtons = document.querySelectorAll('.editButton');
-    let editButtonItems = [].slice.call(editButtons);
-  
-    editButtonItems.forEach(function (item) {
-      item.addEventListener('click', function (e) {
-          editNote(e);
-      });
-  });
-  }
-
-  function addNote(e){
-    if(item.value === "") { return; }
-    e.preventDefault();
-    list.innerHTML += '<li>' + item.value + '<input type="button" class="editButton" value="Edit">' + '<input type="button" class="deleteButton" value="Delete">' + '</li>';
-    store();
-    item.value = "";
-  }
-
-  
-
-  function removeNote(e){
-    var t = e.target;
-    t = t.parentNode;
-    t.parentNode.removeChild(t);
-    store();
-  }
-
-  function editNote(e) {
-    var t = e.target;
-    t.parentNode.contentEditable = "true"
-    t.addEventListener('submit', function(e) {
-    
-      store();
-    })
-    
-  }
-
-  getValues();
-
-  
-})();
-
+// Initial Display notes call, to init application
+displayNotes()
