@@ -1,6 +1,15 @@
 const startButton = document.querySelector('#start')
-Rx.Observable.fromEvent(startButton, 'click')
+const toggle = Rx.Observable.fromEvent(startButton, 'click')
+
+Rx.Observable.fromEvent(document, 'submit')
   .subscribe(e => start())
+
+toggle
+  .subscribe(
+    () => { start() },
+    (error) => console.error(error),
+    () => console.log('Click listener completed')
+  )
 
 function start () {
   const hour = document.querySelector('#hour')
@@ -14,6 +23,7 @@ function start () {
   console.log('Total Seconds: ' + seconds)
   const source = Rx.Observable.timer(0, 1000)
     .take(seconds)
+    .takeUntil(toggle)
 
   source.subscribe(
     function (x) {
