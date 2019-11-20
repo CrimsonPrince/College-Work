@@ -58,3 +58,13 @@
   input[type=number] {
       -moz-appearance:textfield; /* Firefox */
   }
+
+  #start {
+    width: 100%;
+
+  }
+
+  #countdown {
+    text-align: center;
+    font-size: 3em;
+  }
