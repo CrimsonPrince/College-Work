@@ -56,7 +56,8 @@ list-style: none;
 margin: 0;
 padding: 0;
 }
-ul li {
+
+.notes {
 font-weight: 400;
 border-bottom: 1px solid #cfcbcc;
 line-height: 1.5;

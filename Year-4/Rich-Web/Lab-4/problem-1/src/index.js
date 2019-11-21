@@ -2,119 +2,161 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 
-// function Square (props) {
-//   return (
-//     <button className='square' onClick={() => props.onClick()}>
-//       {props.value}
-//     </button>
-//   )
-// }
-
-// class Board extends React.Component {
-//   constructor (props) {
-//     super(props)
-//     this.state = {
-//       squares: Array(9).fill(null),
-//       xIsNext: true
-//     }
-//   }
-
-//   handleClick (i) {
-//     const squares = this.state.squares.slice()
-//     squares[i] = this.state.xIsNext ? 'X' : 'O'
-//     this.setState({ squares: squares, xIsNext: !this.state.xIsNext })
-//   }
-
-//   renderSquare (i) {
-//     return <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)} />
-//   }
-
-//   render () {
-//     const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O')
-
-//     return (
-//       <div>
-//         <div className='status'>{status}</div>
-//         <div className='board-row'>
-//           {this.renderSquare(0)}
-//           {this.renderSquare(1)}
-//           {this.renderSquare(2)}
-//         </div>
-//         <div className='board-row'>
-//           {this.renderSquare(3)}
-//           {this.renderSquare(4)}
-//           {this.renderSquare(5)}
-//         </div>
-//         <div className='board-row'>
-//           {this.renderSquare(6)}
-//           {this.renderSquare(7)}
-//           {this.renderSquare(8)}
-//         </div>
-//       </div>
-//     )
-//   }
-// }
-
-// class Game extends React.Component {
-//   render () {
-//     return (
-//       <div className='game'>
-//         <div className='game-board'>
-//           <Board />
-//         </div>
-//         <div className='game-info'>
-//           <div>{/* status */}</div>
-//           <ol>{/* TODO */}</ol>
-//         </div>
-//       </div>
-//     )
-//   }
-// }
-
-// ========================================
-
-function note (props) {
-  return (
-    <li>
-      {props.value}
-      <button id='editButton'> </button>
-      <button id='deleteButton'> </button>
-    </li>
-  )
-}
-
-class NotesEditor extends React.Component {
+class Note extends React.Component {
   render () {
+    const style = { backgroundColor: this.props.color }
     return (
-      <div class='noteEditor'>
-        <input type='text' id='inputText' placeholder='Add New' />
-        <input type='color' id='inputColor' value='#0000ff' />
+      <div className='notes' style={style}>
+        {this.props.children}
+        <span className='deleteButton' onClick={this.props.onDelete}>×</span>
+        <span className='editButton' onClick={this.props.onEdit}>Edit</span>
       </div>
     )
   }
 }
 
-class NoteList extends React.Component {
+class NotesEditor extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      value: '',
+      color: ''
+    }
+    this.handleTextChange = this.handleTextChange.bind(this)
+    this.handleColorChange = this.handleColorChange.bind(this)
+    this.handleNoteAdd = this.handleNoteAdd.bind(this)
+  }
+
+  handleTextChange (e) {
+    this.setState({
+      value: e.target.value
+    })
+  }
+
+  handleColorChange (e) {
+    this.setState({
+      color: e.target.value
+    })
+  }
+
+  handleNoteAdd () {
+    if (this.state.value.length) {
+      const newNote = {
+        value: this.state.value,
+        color: this.state.color,
+        id: new Date()
+      }
+      this.props.onNoteAdd(newNote)
+      this.setState({
+        value: '',
+        color: '',
+        checked: false
+      })
+    }
+  }
+
   render () {
     return (
-      <ul id='list' />
+      <div className='noteEditor'>
+        <input
+          type='text' id='inputText' placeholder='Add New'
+          value={this.state.value}
+          onChange={this.handleTextChange}
+        />
+        <input type='color' id='inputColor' onChange={this.handleColorChange} value='#fdffff' />
+        <button className='addButton' onClick={this.handleNoteAdd}>Add</button>
+      </div>
+    )
+  }
+}
+
+class NotesList extends React.Component {
+  render () {
+    const displayedNotes = this.props.notes
+    return (
+      displayedNotes.map((note) => {
+        return (
+          <Note
+            key={note.id}
+            color={note.color}
+            onDelete={this.props.onNoteDelete.bind(null, note)}
+            onEdit={this.props.onNoteEdit.bind(null, note)}
+          >{note.value}
+          </Note>
+        )
+      })
     )
   }
 }
 
 class NotesApp extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = { notes: [] }
+    this.handleAddNote = this.handleAddNote.bind(this)
+    this.handleDeleteNote = this.handleDeleteNote.bind(this)
+    this.handleEditNote = this.handleEditNote.bind(this)
+  }
+
+  componentDidMount () {
+    const localNotes = JSON.parse(localStorage.getItem('notes'))
+    if (localNotes) {
+      this.setState({
+        notes: localNotes
+      })
+    }
+  }
+
+  componentDidUpdate () {
+    this.updateNotes()
+  }
+
+  handleDeleteNote (note) {
+    const noteId = note.id
+    const newNotes = this.state.notes.filter(function (note) {
+      return note.id !== noteId
+    })
+    this.setState({
+      notes: newNotes
+    })
+  }
+
+  handleEditNote (note) {
+    const noteId = note.id
+    const oldNote = this.state.notes.filter(function (note) {
+      return note.id === noteId
+    })
+    const newNotes = this.state.notes.filter(function (note) {
+      return note.id !== noteId
+    })
+    oldNote[0].value = window.prompt('Edit Note', oldNote[0].children)
+    this.setState({
+      notes: [oldNote[0], ...newNotes]
+    })
+  }
+
+  handleAddNote (newNote) {
+    this.setState({
+      notes: [newNote, ...this.state.notes]
+    })
+  }
+
+  updateNotes () {
+    const notes = JSON.stringify(this.state.notes)
+    localStorage.setItem('notes', notes)
+  }
+
   render () {
     return (
-      <div class='container'>
-        <NotesEditor />
-        <NoteList />
+      <div className='container'>
+        <NotesEditor onNoteAdd={this.handleAddNote} />
+        <NotesList notes={this.state.notes} onNoteDelete={this.handleDeleteNote} onNoteEdit={this.handleEditNote} />
       </div>
     )
   }
 }
 
 ReactDOM.render(
-//   <Game />,
   <NotesApp />,
   document.getElementById('root')
 )
