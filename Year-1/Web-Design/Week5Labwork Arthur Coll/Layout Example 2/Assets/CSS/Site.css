@@ -1,0 +1,55 @@
+body {
+	background-color: white;
+}
+
+#main {
+	background-color: white;
+	width: 70%;
+	margin: auto;
+	border: 1px black solid;
+
+}
+
+header, footer { 
+background-color: grey;
+height: 10%;
+text-align: center;
+color: white;
+}
+
+#content {
+position: relative;
+min-height: 70%;
+}
+
+#subcontainer { 
+width: 90%;
+height: 70%;
+margin: auto;
+margin-top: 10px;
+margin-bottom: 10px;
+border: 0px black solid;
+	}
+	
+#rightmenu {
+		float: left;
+		position: absolute;
+		right: 0px;
+		width: 25%;
+		height: 95%;
+		border-left: 1px grey solid;
+		margin: 0px;
+}
+
+#main h3 {
+	margin: 1em;
+	margin-top: 2px;
+}
+
+#leftcontent {
+	vertical-align: top;
+	float: left;
+	width: 75%;
+	height: 95%;
+	margin: 0px;
+}

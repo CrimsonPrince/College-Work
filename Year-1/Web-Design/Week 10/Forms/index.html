@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jon's Quiz Page</title>
+  <script src="Assets/JavaScript/site.js"></script>
+  <link rel="stylesheet" href="Assets/CSS/site.css">
+</head>
+<body>
+	<div id="main">
+		<header>
+		</header>
+		
+		<nav>
+			<ul>
+			  <li><a class="active" href="index.html">Home</a></li>
+			  <li><a href="news.html">News</a></li>
+			  <li><a href="contact.html">Contact</a></li>
+			  <li><a href="about.html">About</a></li>
+			</ul>
+		</nav>
+
+		<div id="content">
+			
+		<h1> Jono's Super Quiz Page </h1>
+		<button onclick="setQuestion(0);">Q1</button>
+		<button onclick="setQuestion(1);">Q2</button>
+		<button onclick="setQuestion(2);">Q3</button>
+		
+		<h2>Question </h2>
+		<h3 id="question"></h3>
+		
+		<label>
+		<span> Enter your answer</span>
+		<input class="generalInput" type="text" id="answer" required>
+		</label>
+		
+		<h3 id="correct"></h3>
+		<button onclick="checkAnswer();">Submit</button>
+
+		</div>
+		
+		<footer>
+		</footer>
+	</div>
+</body>
+</html>

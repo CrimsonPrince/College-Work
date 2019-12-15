@@ -1,0 +1,6 @@
+Blog post
+The very first thing I did as part of our Week 2 Lab work for web development was create this blog, I then surmised the work from week 1 in a short blog post.
+The second problem compleed was creating a home page for the DIT 228/282 computer science courses, the website consisted of 4 pages a "home" page, about page, modules and timetable page.
+The pages were linked together and stock images of DIT were inserted, content was taken from Lipsum.org and I used css to change the colour of the page to match the DIT logo.
+Finally the last problem I undertook was creating a simple website detailing the history of the internet, using information gathered from the lecture and wikipedia, I created a small
+website which described the early internet and it's growth into the current network.

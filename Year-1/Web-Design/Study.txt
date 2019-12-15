@@ -1,0 +1,13 @@
+!DOCTYPE HTML
+<html>
+	<head>
+	 <title>Things</title>
+	 </head>
+	 
+	 <body>
+	 
+		<div id="Mid">
+		
+		</div>
+	</body>
+</html>
