@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Jon's Garden Centre</title>
+	<link rel="stylesheet" type="text/css" href="Assets/CSS/site.css">
+	<meta charset="UTF-8">
+
+</head>
+
+<body>
+	<div id="main">
+		<header>
+			<div>
+			</div>
+			<nav>
+				<ul>
+				  <li><a class="active" href="#home">Home</a></li>
+				  <li><a href="#about">About</a></li>
+				  <li><a href="#news">News</a></li>
+				  <li><a href="#Calander">Calander</a></li>
+				  <li><a href="#contact">Contact</a></li>
+				</ul>
+			</nav>	
+			<h1>DIT Physics Society</h1>
+		</header>
+		
+		<section id="content" style="margin-top: 40px;">
+
+		
+		<a class="twitter-timeline" href="https://twitter.com/ditofficial">Tweets by ditofficial</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+		<iframe src="https://twitter.com/ditofficial"></iframe>
+
+		</section>
+		
+		<footer>
+			<p>Site by: Arthur Coll &copy; 2016</p>
+		</footer>
+	</div>
+</body>
+</html>

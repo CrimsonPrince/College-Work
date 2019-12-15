@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jon's Golf Page</title>
+  <link rel="stylesheet" href="Assets/CSS/site.css">
+</head>
+<body>
+	<div id="main">
+		<header><!-- comment here -->
+		</header>
+		
+		<nav>
+			<ul>
+			  <li><a class="active" href="index.html">Home</a></li>
+			  <li><a href="news.html">News</a></li>
+			  <li><a href="contact.html">Contact</a></li>
+			  <li><a href="about.html">About</a></li>
+			</ul>
+		</nav>
+
+		<div id="content">
+			<h3>Registration page</h3>
+			<form action="server-script-url" name="regForm">
+			<label><span>Firstname</span><input class="generalInput" type="text" name="firstname"></label>
+			<label><span>Lastname</span><input class="generalInput" type="text" name="Lastnamename"></label>
+			<label><span>Address</span><input class="generalInput" type="text" name="Addressname"></label>
+			<label><span>Password</span><input class="generalInput" type="text" name="Password"></label>
+			<label><span>Password</span><input class="generalInput" type="text" name="Password2"></label>
+			<label><span>Class:</span>
+			<select class="generalInput">
+			<option value="dt228">DT228</option>
+			<option value="dt282">DT282</option>
+			<option value="dt211">DT211</option>
+			<option value="dt265">DT265</option>
+			<select></label>
+			
+			<label>Gender</label><br>
+			<input class="clickInput" type="radio" name="Gender" value="male" checked> Male <br>
+			<input class="clickInput" type="radio" name="Gender" value="Female" checked> Female <br>
+			<label>Travel</label><br>
+			<input class="clickInput" type="checkbox" name="vehicle" value="walk"> Walk <br>
+			<input class="clickInput" type="checkbox" name="vehicle" value="bus"> bus <br>
+			<input class="clickInput" type="checkbox" name="vehicle" value="car"> car <br>
+			<input class="clickInput" type="checkbox" name="vehicle" value="train"> train <br>
+			<input  class="clickInput"type="checkbox" name="vehicle" value="Helicopter"> Helicopter<br>
+			<input class="clickInput" type="checkbox" name="vehicle" value="Jet"> Jet <br>
+			<button type="sumbit"> Submit </button>
+			</form>
+		</div>
+		
+		<footer>
+		</footer>
+	</div>
+</body>
+</html>

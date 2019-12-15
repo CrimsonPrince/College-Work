@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+		
+		
+<body>
+	
+	<table border=1>
+		
+		<tr>
+			<td colspan="5"> Header  </td>
+		</tr>
+		
+		<tr>
+			<td rowspan="2"> Adverts </td>
+			<td colspan="4"> Menu </td>
+		</tr>
+		
+		<tr>
+			<td colspan="3" rowspan="2"> Main content area </td>
+			<td rowspan="2"> Blog links </td>
+		</tr>
+	
+		
+		<tr>
+			<td colspan="5"> Footer </td>
+		</tr>
+	
+	
+	
+	</table>
+
+	
+</body>
+		
+</html>

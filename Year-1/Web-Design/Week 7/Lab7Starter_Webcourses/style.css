@@ -1,0 +1,155 @@
+html, body {
+  font-family: "Open Sans", sans-serif;
+  background-color: #DDD;
+  height: 100%;
+  font-size: 16px;
+}
+
+#main {
+  position: relative;
+  width: 80%;
+  margin: auto;
+  min-height: 800px;
+  height: 100%;
+}
+
+header {
+  background-image: url(https://thimbleprojects.org/jonmcire/74340/AungierStreet2_v2.jpg);
+  height: 20%;
+  min-height: 150px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#headerText {
+  padding-top: 3vh;
+  text-align: center;
+  vertical-align: bottom;
+  color: yellow;
+  font-size: 2rem;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+nav li {
+  float: left;
+}
+
+nav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 15px 30px;
+  text-decoration: none;
+  /*font-size: 20px;*/
+}
+
+nav li a:hover {
+  background-color: #111;
+}
+
+section {
+  min-height: 300px;
+  background-color: white;
+}
+
+footer {
+  text-align: center;
+  min-height: 20px;
+  background-color: #777;
+  color: white;
+  font-size: 0.8em;
+}
+
+.contentSection {
+  padding-top: 10px;
+}
+
+.contentSection h2 {
+  color: darkgreen;
+  margin-left: 20px;
+}
+
+.contentSection p {
+  color: dimgray;
+  margin-left: 30px;
+  font-size: 1rem;
+}
+
+#textImg {
+  float: right;
+  width: 20%;
+  padding: 10px;
+}
+
+ .floating-box {
+  clear: right;
+  display: inline-block;
+  width: 20%;
+  margin: auto;
+  margin-bottom: 20px;
+  margin: 2%;
+}
+
+.floating-box img {
+  width: 100%;
+}
+
+
+
+/* Wide Screens */
+    @media only screen and (max-width : 1200px) {
+      html, body {
+        font-family: "Open Sans", sans-serif;
+        background-color: #DDD;
+        height: 100%;
+        font-size: 20px;
+      }
+    }
+
+    /* Desktops */
+    @media only screen and (max-width : 992px) {
+      html, body {
+        font-family: "Open Sans", sans-serif;
+        background-color: #DDD;
+        height: 100%;
+        font-size: 16px;
+      }
+    }
+
+    /* Tablets */
+    @media only screen and (max-width : 768px) {
+      html, body {
+        font-family: "Open Sans", sans-serif;
+        background-color: #DDD;
+        height: 100%;
+        font-size: 12px;
+      }
+    }
+
+    /* Phones */ 
+    @media only screen and (max-width : 480px) {
+      html, body {
+        font-family: "Open Sans", sans-serif;
+        background-color: #DDD;
+        height: 100%;
+        font-size: 10px;
+      }
+    }
+
+    /* Custom */ 
+    @media only screen and (max-width : 320px) {
+      html, body {
+        font-family: "Open Sans", sans-serif;
+        background-color: #DDD;
+        height: 100%;
+        font-size: 8px;
+      }
+    }
+
