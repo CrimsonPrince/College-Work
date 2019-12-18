@@ -1,0 +1,11 @@
+Ca assignment
+
+(1) Make a word
+(2) 9 random letters + display
+(3) Use each letters only once
+(4) Score calculation
+(5) 5 rounds
+(7) keep score for 5 rounds
+(8) Remember best word
+(9) At end display score
+(10) Ask play again
