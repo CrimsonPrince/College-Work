@@ -1,0 +1,42 @@
+name,known,size,orbital_period,climate,terrain,population,rotation_period
+Polis Massa,0,10000,590,Artificial Temperate,Airless Asteriod,1000000,24
+Utapau,0,12900,351,"Arid, Temperate, Windy","Canyons, Savannah, Scrublands, Sinkholes",95000000,27
+Dagobah,1,8900,341,Murky,"Jungles, Swamps",,23
+Hoth,1,7200,349,Frozen,"Ice Caves, Mountain Ranges, Tundra",,23
+Bespin,0,23600,5110,Temperate,Gas Giant,6000000,12
+Eriadu,0,13490,360,Polluted,Cityscape,22000000000,24
+Cerea,0,10000,386,Temperate,Verdant,450000000,27
+Haruun Kal,0,10120,383,Temperate,"Plateaus, Toxic Cloud Sea, Volcanoes",705300,25
+Malastare,0,18880,201,"Arid, Temperate, Tropical","Deserts, Jungles, Mountains, Swamps",22000000000,24
+Sullust,0,12780,263,Superheated,"Mountains, Rocky Deserts, Volcanoes",18500000000,20
+Iktotch,0,10000,481,"Arid, Windy",Rocky,,22
+Dorin,0,13400,409,Temperate,,,22
+Champala,0,10000,318,Temperate,"Oceans, Rainforests, Plateaus",3500000000,27
+Mirial,0,10000,,,Deserts,,24
+Alderaan,1,12500,364,Temperate,"Grasslands, Mountains",2000000000,24
+Yavin IV,0,10200,4818,"Temperate, Tropical","Jungles, Rainforests",1000,24
+Coruscant,1,12240,368,Temperate,"Cityscape, Mountains",1000000000000,24
+Kamino,0,19720,463,Temperate,Oceans,1000000000,24
+Geonesis,0,11370,256,"Arid, Temperate","Barren, Deserts, Mountains, Rocky",100000000000,30
+Rodia,0,7549,305,Hot,"Jungles, Oceans, Swamps, Urban",1300000000,29
+Ojom,0,10000,,Frigid,"Glaciers, Oceans",500000000,24
+Corellia,0,11000,329,Temperate,"Forests, Hills, Plains, Urban",3000000000,25
+Cato Neimoidia,0,10000,278,"Moist, Temperate","Fields, Forests, Mountains, Rock Arches",10000000,25
+Vulpter,0,14900,391,"Arctic, Temperate","Barren, Urban",421000000,22
+Skako,0,10000,384,Temperate,"Vines, Urban",500000000000,27
+Chandrila,0,13500,368,Temperate,"Forests, Plains",1200000000,20
+Glee Anselm,0,15600,206,"Temperate, Tropical","Islands, Lakes, Seas, Swamps",500000000,33
+Shili,0,10000,,Temperate,"Cities, Plains, Savannas, Seas",,24
+Iridonia,0,10000,413,,"Acid Pools, Rocky Canyons",,29
+Ord Mantell,0,14050,334,Temperate,"Mesas, Plains, Seas",4000000000,26
+Kashyyyk,0,12765,381,Tropical,"Forests, Jungles, Lakes, Rivers",45000000,26
+Trandosha,0,10000,371,Arid,"Deserts, Grasslands, Mountains, Seas",42000,25
+Kalee,0,13850,378,"Arid, Temperate, Tropical","Canyons, Cliffs, Rainforests, Seas",4000000000,23
+Mygeeto,0,10088,167,Frigid,"Glaciers, Ice Canyons, Mountains",19000000,12
+Muunilinst,0,13800,412,Temperate,"Forests, Hills, Mountains, Plains",5000000000,28
+Dantooine,0,9830,378,Temperate,"Grasslands, Mountains, Oceans, Savannas",1000,25
+Concord Dawn,0,10000,,,"Deserts, Forests, Jungles",,24
+Dathomir,0,10480,491,Temperate,"Deserts, Forests, Savannas",5200,24
+Tatooine,1,10465,304,"Arid, Hot","Canyons, Deserts, Rocky Bluffs",200000,
+Mustafar,0,4200,412,Searing,"Lava Rivers, Volcanoes",20000,
+Saleucami,0,14920,392,Hot,"Caves, Deserts, Mountains, Volcanoes",1400000000,26
