@@ -52,6 +52,7 @@ void * socketThread(void *arg) {
   seteuid(atoi(strtok(permissions, ":")));
   setegid(atoi(permissions));
   sprintf(command, "cp %s %s", fileName, filePath);
+  printf("Running Command %s", command);
   bzero(response, 2000);
   if(system(command) != 0) {
     strcpy(response, "Failed: Permission Denied"); 
