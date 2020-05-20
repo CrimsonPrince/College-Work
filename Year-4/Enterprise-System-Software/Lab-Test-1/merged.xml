@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<invoice_document>
+   <invoice_number>1</invoice_number>
+   <invoice_date>2011-02-17</invoice_date>
+   <issued_by>Mark</issued_by>
+   <parties>
+      <bill_to>
+         <surname>Phelan</surname>
+         <address>
+            <number>1</number>
+            <street>Main St</street>
+            <city>Dundalk</city>
+         </address>
+      </bill_to>
+   </parties>
+   <items>
+      <item>
+         <item_name>Jacket</item_name>
+         <item_price>45.00</item_price>
+         <item_quantity>3</item_quantity>
+      </item>
+      <item>
+         <item_name>Jeans</item_name>
+         <item_price>40.00</item_price>
+         <item_quantity>3</item_quantity>
+      </item>
+   </items>
+   <payment_info>No additional info</payment_info>
+   <quantity_total>2</quantity_total>
+   <invoice_total>85</invoice_total>
+</invoice_document>
+
