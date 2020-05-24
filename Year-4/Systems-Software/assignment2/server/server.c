@@ -1,20 +1,12 @@
-#include<stdio.h>
-
-#include<stdlib.h>
-
-#include<sys/socket.h>
-
-#include<netinet/in.h>
-
-#include<string.h>
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <string.h>
 #include <arpa/inet.h>
-
 #include <fcntl.h> // for open
-
 #include <unistd.h> // for close
-
-#include<pthread.h>
+#include <pthread.h>
 
 char fileBuffer[2000];
 char fileName[2000];
@@ -35,54 +27,57 @@ void * socketThread(void *arg) {
   send(threadSocket, response, strlen(response), 0);
   recv(threadSocket , fileName , 2000 , 0);
 
-
+  pthread_mutex_lock(&lock);
+  
   fp = fopen(fileName, "w+");
-  fprintf(fp,"%s",fileBuffer);
-  printf("File Name %s Wrote", fileName);
+  fprintf(fp, "%s", fileBuffer);
+  printf("File Name %s Wrote \n", fileName);
+  fflush(stdout);
   
 
   bzero(response, 2000);
   strcpy(response, "Success: File Saved"); 
-  send(threadSocket,response,strlen(response),0);
 
-  recv(threadSocket , permissions , 2000 , 0);
-  recv(threadSocket , filePath , 2000 , 0);
+  send(threadSocket, response, strlen(response), 0);
+  recv(threadSocket, permissions, 2000, 0);
 
-  pthread_mutex_lock(&lock);
+  strcpy(response, "Success: Permission Received");
+  send(threadSocket, response, strlen(response), 0);
+  recv(threadSocket, filePath, 2000, 0);
+
+
   seteuid(atoi(strtok(permissions, ":")));
   setegid(atoi(permissions));
-  sprintf(command, "cp %s %s", fileName, filePath);
-  printf("Running Command %s", command);
-  bzero(response, 2000);
-  if(system(command) != 0) {
-    strcpy(response, "Failed: Permission Denied"); 
-  } else {
-    strcpy(response, "Success: File Moved");
-  }
-  send(threadSocket,response,strlen(response),0);
+  printf("File Path %s \n", filePath);
+  fflush(stdout);
 
+  sprintf(command, "cp %s %s", fileName, filePath);
+  printf("Running Command %s \n", command);
+  fflush(stdout);
+  bzero(response, 2000);
+
+  if(system(command) != 0) {
+    strcpy(response, "Failed: Permission Denied \n"); 
+  } else {
+    strcpy(response, "Success: File Moved \n");
+  }
+  send(threadSocket, response, strlen(response), 0);
 
   pthread_mutex_unlock(&lock);
   
-
   fclose(fp);
   close(threadSocket);
   pthread_exit(NULL);
-
 }
 
 int main(){
 
   int serverSocket, threadSocket;
-
   struct sockaddr_in serverAddr;
-
   struct sockaddr_storage serverStorage;
-
   socklen_t addr_size;
 
   serverSocket = socket(PF_INET, SOCK_STREAM, 0);
-
   serverAddr.sin_family = AF_INET;
   serverAddr.sin_addr.s_addr = INADDR_ANY;
   serverAddr.sin_port = htons(8000);
@@ -102,6 +97,7 @@ int main(){
   } else {
     printf("Error\n");
   }
+  fflush(stdout);
 
   pthread_t tid[60];
   int i = 0;

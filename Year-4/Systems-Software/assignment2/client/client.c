@@ -60,10 +60,6 @@ int main (int argc, char **argv) {
         printf("Send Failed");
         return 1;
     }
-    if(recv(SID, response, 500, 0) < 0) {
-        printf("IO ERROR");
-        return 0;
-    }
 
     printf("File %s Sent \n", file_name);
     if(strstr(response, "Success: File Received") != NULL) {
@@ -73,28 +69,24 @@ int main (int argc, char **argv) {
         }
     }
 
-    if(recv(SID, response, 500, 0) < 0) {
-        printf("IO ERROR");
-        return 0;
-    }
-
     sprintf(buffer, "%d:%d", getuid(), getgid());
 
     if(strstr(response, "Success: File Saved") != NULL) {
         if(send(SID, buffer, strlen(buffer), 0) < 0) {
-            printf("Send Failed");
+            printf("Send Failed \n");
             return 1;
         }
-        printf("Transmitted User Information: %s", buffer);
+        printf("Transmitted User Information: %s \n", buffer);
     }
-
-    sprintf(buffer, "%s", file_path);
-    printf(buffer);
-    if(send(SID, buffer, strlen(buffer), 0) < 0) {
-        printf("Send Failed");
-        return 1;
+    
+    if(strstr(response, "Success: Permission Received") != NULL) {
+        if(send(SID, file_path, strlen(file_path), 0) < 0) {
+            printf("Send Failed \n");
+            return 1;
+        }
+        printf("Transmitted File Path: %s \n", buffer);
     }
-
+    printf("Sent FilePath %s \n", file_path);
 
     close(SID);
 
