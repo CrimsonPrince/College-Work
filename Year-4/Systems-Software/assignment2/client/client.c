@@ -61,6 +61,12 @@ int main (int argc, char **argv) {
         return 1;
     }
 
+    if(recv(SID, response, 500, 0) < 0) {
+        printf("IO ERROR");
+        return 0;
+    }
+
+
     printf("File %s Sent \n", file_name);
     if(strstr(response, "Success: File Received") != NULL) {
         if(send(SID, file_name, strlen(file_name), 0) < 0) {
@@ -68,6 +74,13 @@ int main (int argc, char **argv) {
             return 1;
         }
     }
+
+    if(recv(SID, response, 500, 0) < 0) {
+        printf("IO ERROR");
+        return 0;
+    }
+
+
 
     sprintf(buffer, "%d:%d", getuid(), getgid());
 
@@ -78,6 +91,13 @@ int main (int argc, char **argv) {
         }
         printf("Transmitted User Information: %s \n", buffer);
     }
+
+    if(recv(SID, response, 500, 0) < 0) {
+        printf("IO ERROR");
+        return 0;
+    }
+
+
     
     if(strstr(response, "Success: Permission Received") != NULL) {
         if(send(SID, file_path, strlen(file_path), 0) < 0) {

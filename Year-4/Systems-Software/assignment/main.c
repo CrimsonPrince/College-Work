@@ -89,7 +89,7 @@ int main (int argc, char **argv) {
                 case 0:
                     syslog(LOG_INFO, "Initiating Backup from Target: %s to %s", LIVE_PATH, BACKUP_PATH);
                     directoryLocked = 1;
-                    backup(LIVE_PATH, BACKUP_PATH);
+                    backup(LIVE_BACKUP_PATH, BACKUP_PATH);
                     break;
                 case -1:
                     syslog(LOG_ERR,"Cannot Fork, Backup Failed");
