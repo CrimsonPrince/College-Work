@@ -8,11 +8,6 @@
 #include <unistd.h> // for close
 #include <pthread.h>
 
-char fileBuffer[2000];
-char fileName[2000];
-char permissions[2000];
-char response[2000];
-char buffer[4096];
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 
 void * socketThread(void *arg) {
@@ -20,18 +15,31 @@ void * socketThread(void *arg) {
   FILE *fp;
   char command[2000];
   char filePath[2000];
+  char fileBuffer[2000];
+  char fileName[2000];
+  char tempPath[2000] = "/tmp/";
+  char permissions[2000];
+  char response[2000];
+  char buffer[4096];
+  int groupid;
+  int userid;
 
   int threadSocket = *((int *)arg);
   recv(threadSocket , fileBuffer , 2000 , 0);
   strcpy(response, "Success: File Received"); 
   send(threadSocket, response, strlen(response), 0);
   recv(threadSocket , fileName , 2000 , 0);
+  strcat(tempPath, fileName);
 
   pthread_mutex_lock(&lock);
-  
-  fp = fopen(fileName, "w+");
+  fp = fopen(tempPath, "w");
+  if (fp == NULL) {
+      perror("Failed: ");
+      return 1;
+  }
   fprintf(fp, "%s", fileBuffer);
-  printf("File Name %s Wrote \n", fileName);
+  fclose(fp);  
+  printf("File Name %s Wrote to %s \n", fileName, tempPath);
   fflush(stdout);
   
 
@@ -45,17 +53,19 @@ void * socketThread(void *arg) {
   send(threadSocket, response, strlen(response), 0);
   recv(threadSocket, filePath, 2000, 0);
 
-
-  seteuid(atoi(strtok(permissions, ":")));
-  setegid(atoi(permissions));
+  printf("Permission %s Received \n", permissions);
+  fflush(stdout);
+  userid = atoi(strtok(permissions, ":"));
+  groupid = atoi(permissions);
+  setegid(groupid);
+  seteuid(userid);
   printf("File Path %s \n", filePath);
   fflush(stdout);
 
-  sprintf(command, "cp %s %s", fileName, filePath);
-  printf("Running Command %s \n", command);
+  sprintf(command, "cp %s %s", tempPath, filePath);
+  printf("Running Command %s with permissions %d : %d \n", command, geteuid(), getegid());
   fflush(stdout);
   bzero(response, 2000);
-
   if(system(command) != 0) {
     strcpy(response, "Failed: Permission Denied \n"); 
   } else {
@@ -65,7 +75,6 @@ void * socketThread(void *arg) {
 
   pthread_mutex_unlock(&lock);
   
-  fclose(fp);
   close(threadSocket);
   pthread_exit(NULL);
 }
